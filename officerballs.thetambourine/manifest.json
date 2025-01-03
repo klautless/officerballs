@@ -1,0 +1,9 @@
+{
+  "name": "the tambourine",
+  "version_number": "1.0.2",
+  "website_url": "https://github.com/klautless/officerballs",
+  "description": "multipurpose spawner",
+  "dependencies": [
+    "NotNet-GDWeave-2.0.14"
+  ]
+}
