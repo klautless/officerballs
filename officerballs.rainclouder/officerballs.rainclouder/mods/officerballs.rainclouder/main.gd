@@ -19,6 +19,7 @@ func _process(delta):
 	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0 or get_tree().get_nodes_in_group("controlled_player").size() == 0:
 		loadedin = false
 		plactor = null
+		rainToggle = false
 		return
 	
 	if timecheck > 0:
