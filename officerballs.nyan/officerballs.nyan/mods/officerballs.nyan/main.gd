@@ -18,6 +18,7 @@ func _process(delta):
 		timecheck = 60
 		if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0:
 			loadedin = false
+			colorspin = false
 			plactor = null
 			return
 		for actor in get_tree().get_nodes_in_group("controlled_player"):
@@ -39,7 +40,7 @@ func _process(delta):
 func _get_input():
 	if not loadedin: return
 	var helditem = plactor.held_item
-	if Input.is_action_just_pressed("interact") and Input.is_action_pressed("move_sneak") and plactor.held_item["id"] == "chalk_special":
+	if Input.is_action_just_pressed("interact") and Input.is_action_pressed("move_sneak") and Input.is_action_pressed("move_sprint") and plactor.held_item["id"] == "chalk_special":
 		colorspin = not colorspin
 		if not colorspin:
 			var new = PlayerData.cosmetics_equipped.duplicate()
