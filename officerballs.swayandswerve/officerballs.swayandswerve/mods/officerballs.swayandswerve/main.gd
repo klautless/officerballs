@@ -48,14 +48,3 @@ func _process(delta):
 			plactor.rotation.z = lerp_angle(plactor.rotation.z, deg2rad(sway), delta * 8)
 		else:
 			plactor.rotation.z = lerp_angle(plactor.rotation.z, deg2rad(0), delta * 2)
-		
-		var _speed = 6.4
-		if plactor.sprinting: _speed = _speed * plactor.sprint_speed * plactor.boost_mult
-
-		if plactor.direction != Vector3.ZERO and plactor.diving and plactor.is_on_floor():
-			var snap_vec = Vector3(0, - 0.4, 0)
-			var speed_mult = 1.0
-			var _accel = 72
-			speed_mult = clamp(speed_mult - ((plactor.held_item_weight / 25.0) * 0.05), 0.15, 1.0)
-			plactor.velocity = plactor.velocity.move_toward(plactor.direction.normalized() * _speed * speed_mult, delta * _accel)
-			plactor.move_and_slide_with_snap(plactor.velocity + plactor.gravity_vec, snap_vec, Vector3.UP)
