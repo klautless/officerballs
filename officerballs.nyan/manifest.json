@@ -1,0 +1,9 @@
+{
+  "name": "nyan",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/klautless/officerballs",
+  "description": "nyan",
+  "dependencies": [
+    "NotNet-GDWeave-2.0.14"
+  ]
+}
