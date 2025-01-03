@@ -182,7 +182,7 @@ func _process(delta):
 					rippleHatTime = 0
 		
 func _get_input():
-	if plactor.held_item["id"] == "fishing_rod_simple":#"tambourine":
+	if plactor.held_item["id"] == "tambourine":
 		if Input.is_action_just_pressed("primary_action") and Input.is_action_pressed("move_walk"):
 			_tool(choice)
 		if Input.is_action_just_pressed("interact") and Input.is_action_pressed("move_walk"):
