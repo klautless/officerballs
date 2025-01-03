@@ -1,5 +1,7 @@
 # the tambourine
-a collection of several spawners which will respawn at fixed positions indefinitely.
+a collection of several spawners which will respawn at fixed positions indefinitely.  
+other players will not see these spawns unless you are host.  
+caution:  you WILL be kicked from cove (dedicated) lobbies using this as non-host. don't enable these there!  
 ## instructions
 equip a tambourine-  
 alt + scroll wheel will select from spawns  
