@@ -3,13 +3,13 @@ extends Node
 var timecheck = 0
 var loadedin = false
 var plactor
+var punchenabled = false
 
 var play_options = []
 var playable = 0
 var playindex = 0
 var playhighlighted = -1
 
-func _ready(): pass
 
 func _process(delta):
 	
@@ -34,17 +34,22 @@ func _process(delta):
 		_get_input()
 
 func _get_input():
-	pass
+	if Input.is_action_pressed("move_walk") and Input.is_action_pressed("move_sneak") and Input.is_action_just_pressed("secondary_action"):
+		punchenabled = not punchenabled
+		if punchenabled:
+			PlayerData._send_notification("punching enabled")
+		else:
+			PlayerData._send_notification("punching disabled")
 	if Input.is_action_pressed("move_sneak") and Input.is_action_just_pressed("interact") and not Input.is_action_pressed("move_sprint"):
 		if play_options.size() > 0:
 			for i in play_options:
 				if i["index"] == playindex:
 					_teleport(i["id"])
 	if Input.is_action_pressed("move_sneak") and Input.is_action_just_pressed("move_down"):
-		if play_options.size() > 0:
-				for i in play_options:
-					if i["index"] == playindex:
-						_psyblast(i["id"])
+		if play_options.size() > 0 and punchenabled:
+			for i in play_options:
+				if i["index"] == playindex:
+					_psyblast(i["id"])
 	if Input.is_action_just_released("zoom_in") and Input.is_action_pressed("move_sneak"):
 		_player_selector(true)
 		plactor.camera_zoom += 0.5
@@ -115,7 +120,6 @@ func _teleport(id):
 				PlayerData.player_saved_zone = zone
 				PlayerData.player_saved_zone_owner = zone_owner
 				plactor.last_valid_pos = plactor.global_transform.origin
-				#PlayerData._send_notification("teleport request sent")
 				return
 			else:
 				PlayerData._send_notification("they haven't loaded!")
