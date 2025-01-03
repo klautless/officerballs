@@ -52,7 +52,7 @@ func _process(delta):
 
 func _get_input():
 	if not loadedin: return
-	if Input.is_action_just_pressed("alt_primary") and Input.is_action_pressed("move_sneak"): 
+	if Input.is_action_just_pressed("move_jump") and Input.is_action_pressed("move_sneak"): 
 		rainToggle = not rainToggle
 		rainPos = plactor.global_transform.origin + Vector3(0,4.5,0)
 		if rainToggle:
