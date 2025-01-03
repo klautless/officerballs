@@ -14,6 +14,8 @@ var choice = 0
 var spawnID = []
 
 
+var timeTarget = 0
+
 var voidToggle = false
 var voidID = []
 var voidTimer = 0
@@ -67,12 +69,12 @@ func _process(delta):
 					loadedin = true
 	if loadedin:
 		_get_input()
-		if voidTimer > 0:
-			voidTimer -= 1
-		if voidTimer <= 0:
+		timeTarget = Time.get_unix_time_from_system()
+			
+		if timeTarget >= voidTimer:
 			if voidToggle:
 				if spawnID.size() > 0:
-					voidTimer = 60
+					voidTimer = Time.get_unix_time_from_system() + 1
 					for voidy in spawnID:
 						if voidy.type == "void":
 							plactor._wipe_actor(voidy.id)
@@ -81,14 +83,13 @@ func _process(delta):
 								spawnID.erase(voidy)
 								continue
 				else:
-					voidTimer = 34000
+					voidTimer = Time.get_unix_time_from_system() + 566
 					var newVoid = Network._sync_create_actor("void_portal", voidPos, "main_zone", - 1, Network.STEAM_ID)
 					spawnID.append({"id": newVoid, "type": "void"})
 		
-		if tbaitTimer > 0:
-			tbaitTimer -= 1
-		if tbaitTimer <= 0:
-			tbaitTimer = 840
+
+		if timeTarget >= tbaitTimer:
+			tbaitTimer = Time.get_unix_time_from_system() + 14
 			if tbaitToggle:
 				if spawnID.size() > 0:
 					for bait in spawnID:
@@ -99,10 +100,9 @@ func _process(delta):
 				var baity = Network._sync_create_actor("portable_bait", tbaitPos, tbaitZone, - 1, Network.STEAM_ID, tbaitRot, tbaitZoneOwner)
 				spawnID.append({"id": baity, "type":"bait"})
 				
-		if autoMeteorTime > 0:
-			autoMeteorTime -= 1
-		if autoMeteorTime <= 0:
-			autoMeteorTime = 14280
+
+		if timeTarget >= autoMeteorTime:
+			autoMeteorTime = Time.get_unix_time_from_system() + 238
 			if meteored:
 				if spawnID.size() > 0:
 					for meteor in spawnID:
@@ -131,13 +131,12 @@ func _process(delta):
 			dedilatch = true
 			rippleHatTime = 0
 		
-		if rippleHatTime > 0:
-			rippleHatTime -= 1
-		if rippleHatTime <= 0:
+		
+		if timeTarget >= rippleHatTime:
 			if not plactor.is_on_floor() and not lockHatPos:
 				pass
 			elif dedilatch and rippleHat and not hatDisable:
-				rippleHatTime = 3450
+				rippleHatTime = Time.get_unix_time_from_system() + 55
 				for i in 3:
 					if spawnID.size() > 0:
 						for hat in spawnID:
