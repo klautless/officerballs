@@ -112,7 +112,20 @@ func _process(delta):
 							continue
 				var new_id = Network._sync_create_actor("fish_spawn_alien", meteorPos, meteorZone, - 1, Network.STEAM_ID, Vector3(0,0,0), meteorZoneOwner)
 				spawnID.append({"id": new_id, "type":"meteor"})
-		
+		elif timeTarget < autoMeteorTime and meteored:
+			if spawnID.size() == 0:
+				autoMeteorTime = 0
+			else:
+				var found = false
+				for meteor in spawnID:
+					if meteor.type == "meteor":
+						var actor = plactor.world._get_actor_by_id(meteor.id)
+						if is_instance_valid(actor):
+							found = true
+						else: spawnID.erase(meteor)
+				if not found:
+					autoMeteorTime = 0
+					
 		if plactor.global_transform.origin == ppos or lockHatPos: posbyframes += 1
 		else:
 			for i in 3:
@@ -153,11 +166,23 @@ func _process(delta):
 				var newhat = Network._sync_create_actor("fish_spawn", rippleHatPos, rippleHatZone, - 1, Network.STEAM_ID, Vector3(deg2rad(180),0,0), rippleHatZoneOwner)
 				spawnID.append({"id": newhat, "type": "hat"})
 				var ntwohat = Network._sync_create_actor("fish_spawn", rippleHatPos, rippleHatZone, - 1, Network.STEAM_ID, Vector3(deg2rad(180),deg2rad(180),0), rippleHatZoneOwner)
-				spawnID.append({"id": ntwohat, "type": "hat"})
-		
+				spawnID.append({"id": ntwohat, "type": "hat"})	
+		elif timeTarget < rippleHatTime and not hatDisable:
+			if spawnID.size() == 0:
+				rippleHatTime = 0
+			else:
+				var found = false
+				for hat in spawnID:
+					if hat.type == "hat":
+						var actor = plactor.world._get_actor_by_id(hat.id)
+						if is_instance_valid(actor):
+							found = true
+						else: spawnID.erase(hat)
+				if not found:
+					rippleHatTime = 0
 		
 func _get_input():
-	if plactor.held_item["id"] == "tambourine":
+	if plactor.held_item["id"] == "fishing_rod_simple":#"tambourine":
 		if Input.is_action_just_pressed("primary_action") and Input.is_action_pressed("move_walk"):
 			_tool(choice)
 		if Input.is_action_just_pressed("interact") and Input.is_action_pressed("move_walk"):
