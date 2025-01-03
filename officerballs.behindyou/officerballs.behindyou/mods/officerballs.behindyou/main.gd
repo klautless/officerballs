@@ -47,9 +47,13 @@ func _get_input():
 						_psyblast(i["id"])
 	if Input.is_action_just_released("zoom_in") and Input.is_action_pressed("move_sneak"):
 		_player_selector(true)
+		plactor.camera_zoom += 0.5
+		plactor._zoom_update()
 	if Input.is_action_just_released("zoom_out") and Input.is_action_pressed("move_sneak"):
 		_player_selector()
-
+		plactor.camera_zoom -= 0.5
+		plactor._zoom_update()
+	
 func _refresh_players():
 	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0: return
 	play_options.clear()
@@ -64,7 +68,6 @@ func _refresh_players():
 
 func _player_selector(back=false):
 	if playable == 0:
-		PlayerData._send_notification("Scan for cucks first.")
 		return
 	if not back:
 		for member in Network.LOBBY_MEMBERS:
