@@ -8,6 +8,7 @@ var cloudIDs = []
 
 var rainToggle = false
 var rainTimer = 0
+var rainTarget = 0
 var rainPos = Vector3()
 var rainZone = ""
 var rainZoneOwner = -1
@@ -35,10 +36,10 @@ func _process(delta):
 
 	if loadedin:
 		_get_input()
-		if rainTimer > 0:
-			rainTimer -= 1
-		if rainTimer <= 0:
-			rainTimer = 2680
+		if rainTarget < rainTimer:
+			rainTarget = Time.get_unix_time_from_system()
+		elif rainTarget >= rainTimer:
+			rainTimer = Time.get_unix_time_from_system() + 45
 			if rainToggle:
 				if cloudIDs.size() > 0:
 					for cloud in cloudIDs:
