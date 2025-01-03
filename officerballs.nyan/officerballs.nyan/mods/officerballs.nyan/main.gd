@@ -4,6 +4,8 @@ var timecheck = 0
 var loadedin = false
 var plactor
 
+var timeTarget = 0
+
 var colorindex = 0
 var colortime = 0
 var colorspin = false
@@ -30,12 +32,13 @@ func _process(delta):
 					loadedin = true
 					
 	if loadedin:
+		
 		_get_input()
+		timeTarget = Time.get_unix_time_from_system()
+		
 		if colorspin:
-			if colortime > 0:
-				colortime -=1
-			elif colortime <= 0:
-				colortime = 9
+			if timeTarget >= colortime:
+				colortime = Time.get_unix_time_from_system() + 0.15
 				_rainbow_skinner()
 			
 
