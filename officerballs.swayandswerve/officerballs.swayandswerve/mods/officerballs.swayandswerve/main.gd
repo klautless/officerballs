@@ -32,7 +32,8 @@ func _process(delta):
 					
 	if loadedin:
 		if Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_back") or Input.is_action_pressed("move_right"):
-			swaying = true
+			if not plactor.busy: swaying = true
+			else: swaying = false
 		else:
 			swaying = false
 		if swaying:
