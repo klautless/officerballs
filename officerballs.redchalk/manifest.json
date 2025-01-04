@@ -1,0 +1,10 @@
+{
+  "name": "redchalk",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/klautless/officerballs",
+  "description": "adds a buff menu to red chalk. equip, then alt+scroll for options, alt+e and alt+q to apply.",
+  "dependencies": [
+    "NotNet-GDWeave-2.0.14",
+    "officer_balls-nyan-1.0.6"
+  ]
+}
