@@ -84,10 +84,10 @@ func _process(delta):
 func _get_input():
 	if not loadedin: return
 	var helditem = plactor.held_item
+	if not Input.is_action_pressed("move_walk") and not Input.is_action_pressed("move_sneak"): plactor.nyan_zoomlock = false
 	
 	if plactor.held_item["id"] == "chalk_special":
-		if Input.is_action_pressed("move_walk"): plactor.nyan_zoomlock = true
-		else: plactor.nyan_zoomlock = false
+		if Input.is_action_just_pressed("move_walk"): plactor.nyan_zoomlock = true
 		if Input.is_action_just_pressed("interact") and Input.is_action_pressed("move_sneak") and Input.is_action_pressed("move_sprint"):
 			colorspin = not colorspin
 			if not colorspin:
