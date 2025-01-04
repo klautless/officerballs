@@ -34,6 +34,8 @@ func _process(delta):
 		_get_input()
 
 func _get_input():
+	if Input.is_action_just_pressed("move_sneak"): plactor.nyan_zoomlock = true
+	if not Input.is_action_pressed("move_walk") and not Input.is_action_pressed("move_sneak"): plactor.nyan_zoomlock = false
 	if Input.is_action_pressed("move_walk") and Input.is_action_pressed("move_sneak") and Input.is_action_just_pressed("secondary_action"):
 		punchenabled = not punchenabled
 		if punchenabled:
@@ -52,12 +54,8 @@ func _get_input():
 					_psyblast(i["id"])
 	if Input.is_action_just_released("zoom_in") and Input.is_action_pressed("move_sneak"):
 		_player_selector(true)
-		plactor.camera_zoom += 0.5
-		plactor._zoom_update()
 	if Input.is_action_just_released("zoom_out") and Input.is_action_pressed("move_sneak"):
 		_player_selector()
-		plactor.camera_zoom -= 0.5
-		plactor._zoom_update()
 	
 func _refresh_players():
 	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0: return
