@@ -182,19 +182,17 @@ func _process(delta):
 					rippleHatTime = 0
 		
 func _get_input():
+	if not Input.is_action_pressed("move_walk") and not Input.is_action_pressed("move_sneak"): plactor.nyan_zoomlock = false
 	if plactor.held_item["id"] == "tambourine":
+		if Input.is_action_just_pressed("move_walk"): plactor.nyan_zoomlock = true
 		if Input.is_action_just_pressed("primary_action") and Input.is_action_pressed("move_walk"):
 			_tool(choice)
 		if Input.is_action_just_pressed("interact") and Input.is_action_pressed("move_walk"):
 			_tool(choice,false,true)
-		if Input.is_action_just_released("zoom_in") and Input.is_action_pressed("move_walk"):
+		if Input.is_action_just_released("zoom_in") and Input.is_action_pressed("move_walk") and not Input.is_action_pressed("move_sneak"):
 			_tool(-1,true)
-			plactor.camera_zoom += 0.5
-			plactor._zoom_update()
-		if Input.is_action_just_released("zoom_out") and Input.is_action_pressed("move_walk"):
+		if Input.is_action_just_released("zoom_out") and Input.is_action_pressed("move_walk") and not Input.is_action_pressed("move_sneak"):
 			_tool(-5,true)
-			plactor.camera_zoom -= 0.5
-			plactor._zoom_update()
 
 func _tool(number,selecting=false,alt=false):
 	if selecting:
