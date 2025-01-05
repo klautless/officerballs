@@ -182,7 +182,7 @@ func _gamba_stats(id):
 		randomize()
 		var letter_id = randi()
 		var ref = randi()
-		var returndata = {"letter_id": letter_id, "header": "Letter", "closing": "From, ", "body": stats, "items": [], "to": str(id), "from": str(Network.STEAM_ID), "user": str(Network.STEAM_USERNAME)}
+		var returndata = {"letter_id": letter_id, "header": "gamba", "closing": "From, ", "body": stats, "items": [], "to": str(id), "from": str(Network.STEAM_ID), "user": str(Network.STEAM_USERNAME)}
 		if id != Network.STEAM_ID:
 			Network._send_P2P_Packet({"type": "letter_recieved", "data": returndata, "to": str(id)}, str(id), 2, Network.CHANNELS.GAME_STATE)
 		else :
