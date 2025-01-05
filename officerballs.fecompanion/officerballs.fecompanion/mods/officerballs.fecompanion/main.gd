@@ -44,24 +44,26 @@ func _process(delta):
 		timetarget = Time.get_unix_time_from_system()
 		
 		if timetarget > mailcheck:
-			mailcheck = Time.get_unix_time_from_system() + 1
+			mailcheck = Time.get_unix_time_from_system() + 1.3
 			_mailtime()
 
 func _get_input():
 	if not loadedin: return
 	if not Input.is_action_pressed("move_walk") and not Input.is_action_pressed("move_sneak"): plactor.nyan_zoomlock = false
-	if plactor.held_item["id"] == "hand_labeler" and not plactor.busy and not plactor.freecamming:
+	if plactor.held_item["id"] == "hand_labeler" and not plactor.busy and not plactor.freecamming and not Input.is_action_pressed("move_sneak"):
 		if Input.is_action_just_pressed("move_walk") or Input.is_action_just_pressed("move_down"): plactor.nyan_zoomlock = true
-		if not Input.is_action_pressed("move_down") and Input.is_action_is_pressed("move_walk") and Input.is_action_just_released("zoom_in"):
+		if not Input.is_action_pressed("move_down") and Input.is_action_pressed("move_walk") and Input.is_action_just_released("zoom_in"):
 			_quant_pool(true)
-		if not Input.is_action_pressed("move_down") and Input.is_action_is_pressed("move_walk") and Input.is_action_just_released("zoom_out"):
+		if not Input.is_action_pressed("move_down") and Input.is_action_pressed("move_walk") and Input.is_action_just_released("zoom_out"):
 			_quant_pool()
-		if Input.is_action_pressed("move_down") and Input.is_action_is_pressed("move_walk") and Input.is_action_just_released("zoom_in"):
-			_player_selector()
-		if Input.is_action_pressed("move_down") and Input.is_action_is_pressed("move_walk") and Input.is_action_just_released("zoom_out"):
+		if Input.is_action_pressed("move_down") and Input.is_action_pressed("move_walk") and Input.is_action_just_released("zoom_in"):
 			_player_selector(true)
-		if Input.is_action_pressed("interact") and Input.is_action_just_pressed("secondary_action"):
+		if Input.is_action_pressed("move_down") and Input.is_action_pressed("move_walk") and Input.is_action_just_released("zoom_out"):
+			_player_selector()
+		if Input.is_action_pressed("interact") and not Input.is_action_pressed("move_walk") and Input.is_action_just_pressed("secondary_action"):
 			_roll()
+		elif Input.is_action_pressed("interact") and Input.is_action_pressed("move_walk") and Input.is_action_just_pressed("secondary_action"):
+			_stats()
 
 func _refresh_players():
 	if not loadedin: return
@@ -86,7 +88,7 @@ func _player_selector(back=false):
 			for i in play_options:
 				if int(i["index"]) == int(playindex):
 					if not PlayerData.players_hidden.has(i["id"]):# and not PlayerData.players_muted.has(i["id"]):
-						var thestring = "fish exchange companion: " + str(i["name"]) + " selected for mailouts."
+						var thestring = "fish exchange companion: " + str(i["name"]) + " selected as fish exchange host."
 						playhighlighted = i["id"]
 						PlayerData._send_notification(str(thestring))
 						return
@@ -97,7 +99,7 @@ func _player_selector(back=false):
 			for i in play_options:
 				if int(i["index"]) == int(playindex):
 					if not PlayerData.players_hidden.has(i["id"]):# and not PlayerData.players_muted.has(i["id"]):
-						var thestring = "fish exchange companion: " + str(i["name"]) + " selected for mailouts."
+						var thestring = "fish exchange companion: " + str(i["name"]) + " selected as fish exchange host."
 						playhighlighted = i["id"]
 						PlayerData._send_notification(str(thestring))
 						return
@@ -138,7 +140,21 @@ func _mailtime():
 			plactor.hud._on_inbox__read_letter(letter)
 			return
 
-
+func _stats():
+	if not loadedin: return
+	if playhighlighted == -1:
+		PlayerData._send_notification("you have to select a valid fish exchange host first!")
+		return
+	var found = false
+	for member in Network.LOBBY_MEMBERS:
+		if member["steam_id"] == playhighlighted:
+			found = true
+	if not found:
+		PlayerData._send_notification("the fish exchange host you had selected is no longer in the lobby.")
+		return
+	PlayerData._send_letter(int(playhighlighted), "gamba", "From, ", "stats", [])
+	mailcheck = Time.get_unix_time_from_system() + 1.3
+	
 func _roll():
 	if not loadedin: return
 	if playhighlighted == -1:
@@ -199,4 +215,4 @@ func _roll():
 	
 	
 	PlayerData._send_letter(int(playhighlighted), "gamba", "From, ", "", mailouts)
-	
+	mailcheck = Time.get_unix_time_from_system() + 1.3
