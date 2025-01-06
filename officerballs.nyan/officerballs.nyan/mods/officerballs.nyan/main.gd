@@ -10,11 +10,6 @@ var colorindex = 0
 var colortime = 0
 var colorspin = false
 
-var spinang = 0
-var spinfactor = 0
-var helishut = false
-var helitiming = 0
-
 func _ready(): pass
 
 func _process(delta):
@@ -45,41 +40,7 @@ func _process(delta):
 			if timeTarget >= colortime:
 				colortime = Time.get_unix_time_from_system() + 0.15
 				_rainbow_skinner()
-				
-		if plactor.spinnies:
-			spinfactor -= spinang
-			if spinfactor < 0: spinfactor += 360
-			if spinfactor > 360: spinfactor -= 360
-			plactor.rotation.y = lerp_angle(plactor.rotation.y, deg2rad(spinfactor), 0.05)
 		
-		
-		if helishut and timeTarget > helitiming:
-			helitiming = Time.get_unix_time_from_system() + 0.05
-			if spinang > 100:
-				spinang -= 1
-			elif spinang > 50:
-				spinang -= 0.5
-			elif spinang > 25:
-				spinang -= 0.25
-			elif spinang > 0:
-				spinang -= 0.125
-				
-			if spinang < -100:
-				spinang += 1
-			elif spinang < -50:
-				spinang += 0.5
-			elif spinang < -25:
-				spinang += 0.25
-			elif spinang < 0:
-				spinang += 0.125
-				
-			var thestring = str(abs(spinang)) + " spinnies per hour. safe landing."
-			PlayerData.emit_signal("_help_update", thestring)
-			
-			if spinang == 0:
-				spinfactor = rad2deg(plactor.rotation.y)
-				plactor.spinnies = false
-				helishut = false
 
 func _get_input():
 	if not loadedin: return
@@ -95,38 +56,38 @@ func _get_input():
 				Network._send_actor_action(plactor.actor_id, "_update_cosmetics", [new])
 				plactor._update_cosmetics(new)
 		if Input.is_action_just_pressed("interact") and Input.is_action_pressed("move_walk"):
-			helishut = not helishut
+			plactor.helishut = not plactor.helishut
 		if Input.is_action_pressed("move_walk") and Input.is_action_just_released("zoom_in"):
-			if spinang == 0: spinfactor = rad2deg(plactor.rotation.y) 
-			if abs(spinang) < 1.25: spinang += 0.125
-			elif abs(spinang) < 5: spinang += 0.25
-			elif abs(spinang) < 10: spinang += 0.5
-			elif abs(spinang) < 25: spinang += 1
-			elif abs(spinang) < 75: spinang += 2.5
-			elif abs(spinang) < 130: spinang += 5
-			else: spinang += 10
-			if spinang > 300: spinang = 300
-			var thestring = str(abs(spinang)) + " spinnies per hour. safe flying."
+			if plactor.spinang == 0: plactor.spinfactor = rad2deg(plactor.rotation.y) 
+			if abs(plactor.spinang) < 1.25: plactor.spinang += 0.125
+			elif abs(plactor.spinang) < 5: plactor.spinang += 0.25
+			elif abs(plactor.spinang) < 10: plactor.spinang += 0.5
+			elif abs(plactor.spinang) < 25: plactor.spinang += 1
+			elif abs(plactor.spinang) < 75: plactor.spinang += 2.5
+			elif abs(plactor.spinang) < 130: plactor.spinang += 5
+			else: plactor.spinang += 10
+			if plactor.spinang > 300: plactor.spinang = 300
+			var thestring = str(abs(plactor.spinang)) + " spinnies per hour. safe flying."
 			PlayerData.emit_signal("_help_update", thestring)
 			#plactor.camera_zoom += 0.5
 			#plactor._zoom_update()
-			if abs(spinang) > 0: plactor.spinnies = true
+			if abs(plactor.spinang) > 0: plactor.spinnies = true
 		
 		if Input.is_action_pressed("move_walk") and Input.is_action_just_released("zoom_out"):
-			if spinang == 0: spinfactor = rad2deg(plactor.rotation.y) 
-			if abs(spinang) < 1.25: spinang -= 0.125
-			elif abs(spinang) < 5: spinang -= 0.25
-			elif abs(spinang) < 10: spinang -= 0.5
-			elif abs(spinang) < 25: spinang -= 1
-			elif abs(spinang) < 75: spinang -= 2.5
-			elif abs(spinang) < 130: spinang -= 5
-			else: spinang -= 10
-			if spinang < -300: spinang = -300
-			var thestring = str(abs(spinang)) + " spinnies per hour. safe flying."
+			if plactor.spinang == 0: plactor.spinfactor = rad2deg(plactor.rotation.y) 
+			if abs(plactor.spinang) < 1.25: plactor.spinang -= 0.125
+			elif abs(plactor.spinang) < 5: plactor.spinang -= 0.25
+			elif abs(plactor.spinang) < 10: plactor.spinang -= 0.5
+			elif abs(plactor.spinang) < 25: plactor.spinang -= 1
+			elif abs(plactor.spinang) < 75: plactor.spinang -= 2.5
+			elif abs(plactor.spinang) < 130: plactor.spinang -= 5
+			else: plactor.spinang -= 10
+			if plactor.spinang < -300: plactor.spinang = -300
+			var thestring = str(abs(plactor.spinang)) + " spinnies per hour. safe flying."
 			PlayerData.emit_signal("_help_update", thestring)
 			#plactor.camera_zoom -= 0.5
 			#plactor._zoom_update()
-			if abs(spinang) > 0: plactor.spinnies = true
+			if abs(plactor.spinang) > 0: plactor.spinnies = true
 	
 func _rainbow_skinner():
 	if not loadedin: return
