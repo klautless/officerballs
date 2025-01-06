@@ -7,8 +7,6 @@ var plactor
 var cloudIDs = []
 
 var rainToggle = false
-var rainTimer = 0
-var rainTarget = 0
 var rainPos = Vector3()
 var rainZone = ""
 var rainZoneOwner = -1
@@ -36,19 +34,6 @@ func _process(delta):
 
 	if loadedin:
 		_get_input()
-		if rainTarget < rainTimer:
-			rainTarget = Time.get_unix_time_from_system()
-		elif rainTarget >= rainTimer:
-			rainTimer = Time.get_unix_time_from_system() + 45
-			if rainToggle:
-				if cloudIDs.size() > 0:
-					for cloud in cloudIDs:
-						if cloud.yes == "rainmain":
-							plactor._wipe_actor(cloud.id)
-							cloudIDs.erase(cloud)
-							continue
-				var newCloud = Network._sync_create_actor("raincloud_tiny", rainPos, rainZone, - 1, Network.STEAM_ID, Vector3.ZERO, rainZoneOwner)
-				cloudIDs.append({"id": newCloud, "yes": "rainmain"})
 
 func _get_input():
 	if not loadedin: return
@@ -59,7 +44,18 @@ func _get_input():
 			PlayerData._send_notification("rain position updated")
 			rainZone = plactor.current_zone
 			rainZoneOwner = plactor.current_zone_owner if plactor.current_zone == "island_tiny_zone" or plactor.current_zone == "island_med_zone" or plactor.current_zone == "island_big_zone" else -1
-			rainTimer = 0
+			if cloudIDs.size() > 0:
+				for cloud in cloudIDs:
+					if cloud.yes == "rainmain":
+						plactor._wipe_actor(cloud.id)
+						cloudIDs.erase(cloud)
+						continue
+			var newCloud = Network._sync_create_actor("raincloud_tiny", rainPos, rainZone, - 1, Network.STEAM_ID, Vector3.ZERO, rainZoneOwner)
+			cloudIDs.append({"id": newCloud, "yes": "rainmain"})
+			for cloudy in cloudIDs:
+				if cloudy.yes == "rainmain":
+					var actor = plactor.world._get_actor_by_id(cloudy.id)
+					actor.decay = false
 		if not rainToggle:
 			PlayerData._send_notification("auto-rainer disabled")
 			if cloudIDs.size() > 0:
