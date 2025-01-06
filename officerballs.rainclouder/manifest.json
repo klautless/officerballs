@@ -1,9 +1,10 @@
 {
   "name": "rainclouder",
-  "version_number": "1.0.5",
+  "version_number": "1.0.7",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "spawnable rain, even when you're not host",
   "dependencies": [
-    "NotNet-GDWeave-2.0.14"
+    "NotNet-GDWeave-2.0.14",
+    "officer_balls-thetambourine-1.0.9"
   ]
 }
