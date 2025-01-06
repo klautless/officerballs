@@ -1,10 +1,10 @@
 {
   "name": "thetambourine",
-  "version_number": "1.0.6",
+  "version_number": "1.0.8",
   "website_url": "https://github.com/klautless/officerballs",
-  "description": "multipurpose spawner *for hosts*",
+  "description": "multipurpose spawner",
   "dependencies": [
     "NotNet-GDWeave-2.0.14",
-    "officer_balls-nyan-1.0.6"
+    "officer_balls-nyan-1.0.7"
   ]
 }

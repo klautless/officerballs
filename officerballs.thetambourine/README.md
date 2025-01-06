@@ -1,7 +1,8 @@
 # the tambourine
-a collection of several spawners for hosts which will respawn at fixed positions indefinitely.  
-  
-caution: you WILL be kicked from cove (dedicated) lobbies using this as non-host. don't enable these there!  
+a collection of several *permanent* spawners which will respawn at fixed positions indefinitely.  
+if you're host, they're shared. elsewhere, they're private to you.  
+can now be used safely in cove servers (no longer sending spawns to other players when not host)  
+
   
 spawners included: meteor, ripple, permanent bait, void portal.
 ## instructions
