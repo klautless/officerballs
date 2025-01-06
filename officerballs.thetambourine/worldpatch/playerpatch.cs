@@ -1,4 +1,4 @@
-﻿using GDWeave.Godot;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -62,6 +62,32 @@ public class ActorWipePatch : IScriptMod
             t => t is IdentifierToken {Name: "prop"},
             t => t.Type is TokenType.Period,
             t => t is IdentifierToken {Name: "id"},
+            t => t.Type is TokenType.ParenthesisClose,
+
+
+        ]);
+
+        var wipesub3 = new MultiTokenWaiter([
+            t => t is ConstantToken {Value: StringVariant{Value:"undo prop"}},
+            t => t.Type is TokenType.Comma,
+            t => t is ConstantToken {Value:IntVariant{Value:0}},
+            t => t.Type is TokenType.ParenthesisClose,
+            t => t.Type is TokenType.Newline,
+            t => t is IdentifierToken {Name: "_wipe_actor"},
+            t => t.Type is TokenType.ParenthesisOpen,
+            t => t is IdentifierToken {Name: "prop_ids"},
+            t => t.Type is TokenType.BracketOpen,
+            t => t is IdentifierToken {Name: "prop_ids"},
+            t => t.Type is TokenType.Period,
+            t => t is IdentifierToken {Name: "size"},
+            t => t.Type is TokenType.ParenthesisOpen,
+            t => t.Type is TokenType.ParenthesisClose,
+            t => t.Type is TokenType.OpSub,
+            t => t is ConstantToken {Value:IntVariant{Value:1}},
+            t => t.Type is TokenType.BracketClose,
+            t => t.Type is TokenType.BracketOpen,
+            t => t is ConstantToken {Value:IntVariant{Value:0}},
+            t => t.Type is TokenType.BracketClose,
             t => t.Type is TokenType.ParenthesisClose,
 
 
@@ -152,6 +178,28 @@ public class ActorWipePatch : IScriptMod
                 yield return new IdentifierToken("id");
                 yield return new Token(TokenType.Comma);
                 yield return new ConstantToken(new BoolVariant(true));
+                yield return new Token(TokenType.ParenthesisClose);
+
+            }
+            else if (wipesub3.Check(token))
+            {
+                yield return token;
+                yield return new Token(TokenType.Newline, 1);
+                yield return new IdentifierToken("_wipe_alt");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("prop_ids");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new IdentifierToken("prop_ids");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("size");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpSub);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new IntVariant(0));
+                yield return new Token(TokenType.BracketClose);
                 yield return new Token(TokenType.ParenthesisClose);
 
             }
