@@ -1,12 +1,10 @@
 {
-  "Id": "officerballs.thetambourine",
-  "PackPath": "officerballs.thetambourine.pck",
-  "AssemblyPath": "worldpatch.dll",
-  "Dependencies": ["officerballs.nyan"],
-  "Metadata": {
-    "Name": "the tambourine",
-    "Author": "officer balls",
-    "Version": "1.1.0",
-    "Description": "multipurpose permanent spawner. equip a tambourine! alt+scroll selects what to spawn, alt + left click places it. alt+e to enable rippler / alt+left click to lock its position.",
-    "Homepage": "https://github.com/klautless/officerballs/tree/main/officerballs.thetambourine"}
+  "name": "thetambourine",
+  "version_number": "1.1.1",
+  "website_url": "https://github.com/klautless/officerballs",
+  "description": "multipurpose spawner",
+  "dependencies": [
+    "NotNet-GDWeave-2.0.14",
+    "officer_balls-nyan-1.0.7"
+  ]
 }
