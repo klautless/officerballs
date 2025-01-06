@@ -7,11 +7,28 @@ var plactor
 
 var choice = -8
 
-func _ready(): pass
+func _ready(): get_tree().connect("node_added", self, "_loadcheck")
+
+func _loadcheck(node: Node):
+	var scene: Node = get_tree().current_scene
+	if scene.name == "world":
+		for i in 5:
+			if loadedin: break
+			yield (get_tree().create_timer(1),"timeout")
+			if get_tree().get_nodes_in_group("controlled_player").size() > 0:
+				for actor in get_tree().get_nodes_in_group("controlled_player"):
+					if not is_instance_valid(actor): return
+					else:
+						if not loadedin:
+							plactor = actor
+							loadedin = true
+	else:
+		loadedin = false
+		plactor = null
 
 func _process(delta):
 	
-	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0:
+	if get_tree().get_nodes_in_group("controlled_player").size() == 0:
 		loadedin = false
 		plactor = null
 		return
