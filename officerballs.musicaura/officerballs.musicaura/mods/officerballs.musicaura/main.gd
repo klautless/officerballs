@@ -19,6 +19,9 @@ func _loadcheck(node: Node):
 						if not loadedin:
 							plactor = actor
 							loadedin = true
+	else:
+		loadedin = false
+		plactor = null
 
 func _process(delta):
 	
