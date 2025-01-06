@@ -84,7 +84,12 @@ func _process(delta):
 								continue
 				else:
 					voidTimer = Time.get_unix_time_from_system() + 566
-					var newVoid = Network._sync_create_actor("void_portal", voidPos, "main_zone", - 1, Network.STEAM_ID)
+					var newVoid
+					if Network.GAME_MASTER: newVoid = Network._sync_create_actor("void_portal", voidPos, "main_zone", - 1, Network.STEAM_ID)
+					else:
+						newVoid = {"actor_type": "void_portal", "at": voidPos, "zone": "main_zone", "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3.ZERO, "zone_owner": -1}
+						plactor.world._instance_actor(newVoid)
+						newVoid = newVoid["actor_id"]
 					spawnID.append({"id": newVoid, "type": "void"})
 		
 
@@ -110,8 +115,14 @@ func _process(delta):
 							plactor._wipe_actor(meteor.id)
 							spawnID.erase(meteor)
 							continue
-				var new_id = Network._sync_create_actor("fish_spawn_alien", meteorPos, meteorZone, - 1, Network.STEAM_ID, Vector3(0,0,0), meteorZoneOwner)
+				var new_id
+				if Network.GAME_MASTER: new_id = Network._sync_create_actor("fish_spawn_alien", meteorPos, meteorZone, - 1, Network.STEAM_ID, Vector3(0,0,0), meteorZoneOwner)
+				else:
+					new_id = {"actor_type": "fish_spawn_alien", "at": meteorPos, "zone": meteorZone, "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3.ZERO, "zone_owner": meteorZoneOwner}
+					plactor.world._instance_actor(new_id)
+					new_id = new_id["actor_id"]
 				spawnID.append({"id": new_id, "type":"meteor"})
+				
 		elif timeTarget < autoMeteorTime and meteored:
 			if spawnID.size() == 0:
 				autoMeteorTime = 0
@@ -162,11 +173,20 @@ func _process(delta):
 					rippleHatZone = plactor.current_zone
 					rippleHatZoneOwner = plactor.current_zone_owner if plactor.current_zone == "island_tiny_zone" or plactor.current_zone == "island_med_zone" or plactor.current_zone == "island_big_zone" else -1
 					rippleHatPos = plactor.global_transform.origin + (Vector3(0, 1.0, 0) * (1.0 - plactor.player_scale))+Vector3(0,rippleHeightOffset,0)
-					
-				var newhat = Network._sync_create_actor("fish_spawn", rippleHatPos, rippleHatZone, - 1, Network.STEAM_ID, Vector3(deg2rad(180),0,0), rippleHatZoneOwner)
-				spawnID.append({"id": newhat, "type": "hat"})
-				var ntwohat = Network._sync_create_actor("fish_spawn", rippleHatPos, rippleHatZone, - 1, Network.STEAM_ID, Vector3(deg2rad(180),deg2rad(180),0), rippleHatZoneOwner)
-				spawnID.append({"id": ntwohat, "type": "hat"})	
+				var new_id
+				var two_id
+				if Network.GAME_MASTER:
+					new_id = Network._sync_create_actor("fish_spawn", rippleHatPos, rippleHatZone, - 1, Network.STEAM_ID, Vector3(deg2rad(180),0,0), rippleHatZoneOwner)
+					two_id = Network._sync_create_actor("fish_spawn", rippleHatPos, rippleHatZone, - 1, Network.STEAM_ID, Vector3(deg2rad(180),deg2rad(180),0), rippleHatZoneOwner)
+				else:
+					new_id = {"actor_type": "fish_spawn", "at": rippleHatPos, "zone": rippleHatZone, "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3(deg2rad(180),0,0), "zone_owner": rippleHatZoneOwner}
+					two_id = {"actor_type": "fish_spawn", "at": rippleHatPos, "zone": rippleHatZone, "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3(deg2rad(180),deg2rad(180),0), "zone_owner": rippleHatZoneOwner}
+					plactor.world._instance_actor(new_id)
+					plactor.world._instance_actor(two_id)
+					new_id = new_id["actor_id"]
+					two_id = two_id["actor_id"]
+				spawnID.append({"id": new_id, "type": "hat"})
+				spawnID.append({"id": two_id, "type": "hat"})
 		elif timeTarget < rippleHatTime and not hatDisable:
 			if spawnID.size() == 0:
 				rippleHatTime = 0
