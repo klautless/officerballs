@@ -40,11 +40,33 @@ var rippleHeightOffset = -0.32
 var rippleHatZone = ""
 var rippleHatZoneOwner = -1
 
-func _ready(): pass
+func _ready(): get_tree().connect("node_added", self, "_loadcheck")
+
+func _loadcheck(node: Node):
+	var scene: Node = get_tree().current_scene
+	if scene.name == "world":
+		for i in 5:
+			if loadedin: break
+			yield (get_tree().create_timer(1),"timeout")
+			if get_tree().get_nodes_in_group("controlled_player").size() > 0:
+				for actor in get_tree().get_nodes_in_group("controlled_player"):
+					if not is_instance_valid(actor): return
+					else:
+						if not loadedin:
+							plactor = actor
+							loadedin = true
+	else:
+		loadedin = false
+		plactor = null
+		hatDisable = false
+		meteored = false
+		tbaitToggle = false
+		voidToggle = false
+		
 
 func _process(delta):
 	
-	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0 or get_tree().get_nodes_in_group("controlled_player").size() == 0:
+	if get_tree().get_nodes_in_group("controlled_player").size() == 0:
 		loadedin = false
 		plactor = null
 		hatDisable = false
@@ -68,7 +90,7 @@ func _process(delta):
 
 
 		
-		if plactor.direction != Vector3.ZERO:
+		if plactor.direction != Vector3.ZERO and not lockHatPos:
 			for i in 3:
 				if spawnID.size() > 0:
 					for hat in spawnID:
@@ -81,14 +103,14 @@ func _process(delta):
 			internallatch = false
 			ppos = plactor.global_transform.origin
 			
-		if not lockHatPos and plactor.is_on_floor() and plactor.velocity == Vector3.ZERO and plactor.dive_vec == Vector3.ZERO and not hatDisable and dedilatch==false and abs(plactor.spinang) < 50 and not internallatch:
+		if plactor.is_on_floor() and plactor.velocity == Vector3.ZERO and plactor.dive_vec == Vector3.ZERO and not hatDisable and dedilatch==false and abs(plactor.spinang) < 50 and not internallatch:
 			dedilatch = true
 			if internallatch == false: _ripple()
 
 func _ripple():
 	if internallatch: return
 	internallatch = true
-	if not plactor.is_on_floor() and not lockHatPos:
+	if not plactor.is_on_floor():
 		pass
 	elif dedilatch and rippleHat and not hatDisable:
 		for i in 3:
