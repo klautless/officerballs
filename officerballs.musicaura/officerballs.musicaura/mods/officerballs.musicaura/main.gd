@@ -27,6 +27,7 @@ func _process(delta):
 	
 	if get_tree().get_nodes_in_group("controlled_player").size() == 0:
 		loadedin = false
+		plactor = null
 		return
 	
 	if timecheck > 0:
