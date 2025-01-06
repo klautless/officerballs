@@ -47,7 +47,7 @@ func _get_input():
 			if cloudIDs.size() > 0:
 				for cloud in cloudIDs:
 					if cloud.yes == "rainmain":
-						plactor._wipe_actor(cloud.id)
+						plactor._wipe_alt(cloud.id, true)
 						cloudIDs.erase(cloud)
 						continue
 			var newCloud = Network._sync_create_actor("raincloud_tiny", rainPos, rainZone, - 1, Network.STEAM_ID, Vector3.ZERO, rainZoneOwner)
@@ -61,6 +61,6 @@ func _get_input():
 			if cloudIDs.size() > 0:
 					for cloud in cloudIDs:
 						if cloud.yes == "rainmain":
-							plactor._wipe_actor(cloud.id)
+							plactor._wipe_alt(cloud.id, true)
 							cloudIDs.erase(cloud)
 							continue
