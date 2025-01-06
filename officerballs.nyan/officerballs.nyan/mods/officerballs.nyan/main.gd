@@ -10,11 +10,33 @@ var colorindex = 0
 var colortime = 0
 var colorspin = false
 
-func _ready(): pass
+var rollOver = false
+var unlatched = true
+
+
+func _ready(): get_tree().connect("node_added", self, "_loadcheck")
+
+func _loadcheck(node: Node):
+	var scene: Node = get_tree().current_scene
+	if scene.name == "world":
+		for i in 5:
+			if loadedin: break
+			yield (get_tree().create_timer(1),"timeout")
+			if get_tree().get_nodes_in_group("controlled_player").size() > 0:
+				for actor in get_tree().get_nodes_in_group("controlled_player"):
+					if not is_instance_valid(actor): return
+					else:
+						if not loadedin:
+							plactor = actor
+							loadedin = true
+	else:
+		loadedin = false
+		colorspin = false
+		plactor = null
 
 func _process(delta):
 	
-	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0:
+	if get_tree().get_nodes_in_group("controlled_player").size() == 0:
 		loadedin = false
 		colorspin = false
 		plactor = null
@@ -40,8 +62,11 @@ func _process(delta):
 			if timeTarget >= colortime:
 				colortime = Time.get_unix_time_from_system() + 0.15
 				_rainbow_skinner()
+		if rollOver:
+			plactor.rotation.x = lerp_angle(plactor.rotation.x, deg2rad(75), delta * 7.5)	
+		else:
+			plactor.rotation.x = lerp_angle(plactor.rotation.x, deg2rad(0), delta * 7.5)
 		
-
 func _get_input():
 	if not loadedin: return
 	var helditem = plactor.held_item
@@ -55,6 +80,11 @@ func _get_input():
 				var new = PlayerData.cosmetics_equipped.duplicate()
 				Network._send_actor_action(plactor.actor_id, "_update_cosmetics", [new])
 				plactor._update_cosmetics(new)
+		if Input.is_action_just_pressed("secondary_action") and Input.is_action_pressed("move_walk") and Input.is_action_pressed("move_sprint") and unlatched:
+			rollOver = not rollOver
+			unlatched = false
+			yield (get_tree().create_timer(0.7), "timeout")
+			unlatched = true
 		if Input.is_action_just_pressed("interact") and Input.is_action_pressed("move_walk"):
 			plactor.helishut = not plactor.helishut
 		if Input.is_action_pressed("move_walk") and Input.is_action_just_released("zoom_in"):
