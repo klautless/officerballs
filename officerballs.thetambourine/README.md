@@ -1,5 +1,5 @@
 # the tambourine
-a collection of several *permanent* spawners which will respawn at fixed positions indefinitely.  
+a collection of several *permanent* spawners which will last until you remove them.  
 if you're host, they're shared. elsewhere, they're private to you.  
 can now be used safely in cove servers (no longer sending spawns to other players when not host)  
 
