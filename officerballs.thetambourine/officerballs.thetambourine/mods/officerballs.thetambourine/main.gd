@@ -68,8 +68,7 @@ func _process(delta):
 
 
 		
-		if plactor.global_transform.origin == ppos or lockHatPos: posbyframes += 1
-		else:
+		if plactor.direction != Vector3.ZERO:
 			for i in 3:
 				if spawnID.size() > 0:
 					for hat in spawnID:
@@ -80,10 +79,9 @@ func _process(delta):
 								spawnID.erase(hat)
 			dedilatch = false
 			internallatch = false
-			posbyframes = 0
 			ppos = plactor.global_transform.origin
-		
-		if posbyframes >= 4 and dedilatch == false:
+			
+		if not lockHatPos and plactor.is_on_floor() and plactor.velocity == Vector3.ZERO and plactor.dive_vec == Vector3.ZERO and not hatDisable and dedilatch==false and abs(plactor.spinang) < 50 and not internallatch:
 			dedilatch = true
 			if internallatch == false: _ripple()
 
