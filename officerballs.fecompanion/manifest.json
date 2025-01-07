@@ -1,10 +1,11 @@
 {
   "name": "fecompanion",
-  "version_number": "1.0.1",
+  "version_number": "1.0.3",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "a companion mod for fish exchange to make gamba'ing faster. please view readme for hotkeys. selects randomly! favorite any fish you want to keep!",
   "dependencies": [
     "NotNet-GDWeave-2.0.14",
-    "officer_balls-nyan-1.0.6"
+    "officer_balls-nyan-1.0.9",
+    "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"
   ]
 }
