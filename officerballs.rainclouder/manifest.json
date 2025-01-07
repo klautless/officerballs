@@ -1,10 +1,11 @@
 {
   "name": "rainclouder",
-  "version_number": "1.0.9",
+  "version_number": "1.1.0",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "spawnable rain, even when you're not host",
   "dependencies": [
     "NotNet-GDWeave-2.0.14",
-    "officer_balls-thetambourine-1.1.2"
+    "officer_balls-thetambourine-1.1.2",
+    "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"
   ]
 }
