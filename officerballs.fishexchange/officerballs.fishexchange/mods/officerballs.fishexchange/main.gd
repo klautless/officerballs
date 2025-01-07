@@ -10,59 +10,35 @@ var temprollog = []
 var temprolltotal = 0
 var gambaautosavetimer = 3600
 var gambaleaderboard = []
+var maillock = false
+var internal = 0
 
 var timeTarget = 0
 
+var PlayerAPI
 
-func _ready(): pass
+func _ready():
+	PlayerAPI = get_node_or_null("/root/BlueberryWolfiAPIs/PlayerAPI")
+	PlayerAPI.connect("_player_added", self, "init_player")
+	PlayerData.connect("_letter_update", self, "_gamba_proxy")
+
+	
+func init_player(player: Actor):
+	if not loadedin:
+		loadedin = true
+		_load_gambadata()
 
 
 func _process(delta):
-	
-	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0:
+	if not PlayerAPI.in_game and loadedin:
 		loadedin = false
 		return
+	elif not PlayerAPI.in_game: return
 	
 	timeTarget = Time.get_unix_time_from_system()
-	
-	if gambascanner:
-		gambascanner -= 1
-	elif gambascanner <= 0:
-		gambascanner = 60
-		for actor in get_tree().get_nodes_in_group("controlled_player"):
-			if not is_instance_valid(actor): return
-			else:
-				if not loadedin:
-					loadedin = true
-					_load_gambadata()
-				_gamba()
-
-	if loadedin:
-		
-		if timeTarget > gambaautosavetimer:
-			gambaautosavetimer = Time.get_unix_time_from_system() + 60
-			if temprollog != []:
-				var ourstring = ""
-				var lobbynet = 0
-				for roll in temprollog:
-					var cheeser = int(roll[1])
-					lobbynet += int(cheeser)
-					ourstring = ourstring + "roll: " + str(roll[0]) + " - $" + str(roll[3]) + " gamba'd / $" + str(roll[4]) + " returned - quality weight: " + str(roll[2]) + " - payout differential " + str(roll[1]) + "\n"
-				ourstring = ourstring + "\npity reported: " + str(globalpity) + " - actual lobby net: " + str(lobbynet)
-				var gSAVE_PATH = "user://gambling_readout.txt"
-				var gsave = File.new()
-				gsave.open(gSAVE_PATH, File.WRITE)
-				gsave.store_string(ourstring)
-				gsave.close()
-				yield (get_tree().create_timer(0.25), "timeout")
-				
-				var gNewSAVE_PATH = "user://gambling_leaderboard.sav"
-				var gNewsave = File.new()
-				gNewsave.open(gNewSAVE_PATH, File.WRITE)
-				gNewsave.store_var(gambaleaderboard)
-				gNewsave.close()
-				yield (get_tree().create_timer(0.25), "timeout")
-				PlayerData._send_notification("gambling leaderboard auto-saved")
+	if timeTarget > gambaautosavetimer:
+		gambaautosavetimer = Time.get_unix_time_from_system() + 60
+		_autosave()
 
 func _load_gambadata():
 	
@@ -86,115 +62,46 @@ func _load_gambadata():
 		PlayerData._send_notification("gambling leaderboard loaded!")
 	else: pass
 
-func _gamba_stats(id):
-	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0: return
-	
-	var hero = id
-	
-	var stats = ""
-	var lbs = ""
-	var herofound = false
-	var anychecked = false
-	if gambaleaderboard != []:
-		var firstpass = true
-		
-		var _tot_dolla_in
-		var _tot_dolla_out
-		var _tot_dolla_net
-		var _tot_jackpots
-		
-		var _top_jackpot
-		
-		var _tot_fish_in
-		var _tot_fish_out
-		var _tot_fish_net
-		var tiniest_ever = true
-		var _tiniest_yet
-		var lorgest_ever = true
-		var _lorgest_yet
-		
-		var _jackpotrank = 1
-		var _topjackpotrank = 1
-		var _donorrank = 1
-		var _dollarrank = 1
-		var _fishdonorrank = 1
-		var _fishearnerrank = 1
-		
-		for i in 2:
-			for competition in gambaleaderboard:
-				if competition["id"] != hero and firstpass: continue
-				elif firstpass and competition["id"] == hero:
-					herofound = true
-					firstpass = false
-					_tot_dolla_in = competition["tot_dolla_in"]
-					_tot_dolla_out = competition["tot_dolla_out"]
-					_tot_dolla_net = competition["tot_dolla_net"]
-					_tot_jackpots = competition["tot_jackpots"]
-					_top_jackpot = competition["highest_jackpot"]
-					_tot_fish_in = competition["tot_fish_in"]
-					_tot_fish_out = competition["tot_fish_out"]
-					_tot_fish_net = competition["tot_fish_net"]
-					_tiniest_yet = competition["tiniest_yet"]
-					_lorgest_yet = competition["lorgest_yet"]
-					break
-				anychecked = true
-				var tot_dolla_in = competition["tot_dolla_in"]
-				var tot_dolla_out = competition["tot_dolla_out"]
-				var tot_dolla_net = competition["tot_dolla_net"]
-				var tot_jackpots = competition["tot_jackpots"]
-				var top_jackpot = competition["highest_jackpot"]
-				var tot_fish_in = competition["tot_fish_in"]
-				var tot_fish_out = competition["tot_fish_out"]
-				var tot_fish_net = competition["tot_fish_net"]
-				var tiniest_yet = competition["tiniest_yet"]
-				var lorgest_yet = competition["lorgest_yet"]
-				if tot_jackpots > _tot_jackpots: _jackpotrank +=1
-				if top_jackpot > _top_jackpot: _topjackpotrank += 1
-				if tot_dolla_in > _tot_dolla_in: _donorrank += 1
-				if tot_dolla_net > _tot_dolla_net: _dollarrank += 1
-				if tot_fish_in > _tot_fish_in: _fishdonorrank += 1
-				if tot_fish_net > _tot_fish_net: _fishearnerrank += 1
-				if tiniest_yet < _tiniest_yet and tiniest_yet != 0: tiniest_ever = false
-				if lorgest_yet > _lorgest_yet: lorgest_ever = false
-		if anychecked:
-			lbs = lbs + "#" + str(_topjackpotrank) + " in highest jackpot won. #" + str(_jackpotrank) + " in most jackpots won. #" + str(_donorrank) + " in most dollars gamba'd. #" + str(_dollarrank) + " in net dollars earned. #" + str(_fishdonorrank) + " in most fish gamba'd. #" + str(_fishearnerrank) + " in net fish earned. " 
-			if tiniest_ever: lbs = lbs + "winner of the tiniest fish from fish exchange. "
-			if lorgest_ever: lbs = lbs + "winner of the lorgest fish from fish exchange."
-		if herofound:
-			var flipnet3 = ""
-			var flipnet4 = ""
+func _autosave():
+	if temprollog != []:
+		var ourstring = ""
+		var lobbynet = 0
+		for roll in temprollog:
+			var cheeser = int(roll[1])
+			lobbynet += int(cheeser)
+			ourstring = ourstring + "roll: " + str(roll[0]) + " - $" + str(roll[3]) + " gamba'd / $" + str(roll[4]) + " returned - quality weight: " + str(roll[2]) + " - payout differential " + str(roll[1]) + "\n"
+		ourstring = ourstring + "\npity reported: " + str(globalpity) + " - actual lobby net: " + str(lobbynet)
+		var gSAVE_PATH = "user://gambling_readout.txt"
+		var gsave = File.new()
+		gsave.open(gSAVE_PATH, File.WRITE)
+		gsave.store_string(ourstring)
+		gsave.close()
+		yield (get_tree().create_timer(0.25), "timeout")
 
-			if _tot_dolla_net < 0:
-				_tot_dolla_net = abs(_tot_dolla_net)
-				flipnet3 = "-"
-			if _tot_fish_net < 0:
-				_tot_fish_net = abs(_tot_fish_net)
-				flipnet4 = "-"
-			
-			stats = "lifetime stats: " + str(_tot_jackpots) + " jackpots, highest jackpot $" + str(_top_jackpot) + ". $" + str(_tot_dolla_in) + " gamba'd, " + flipnet3 + "$" + str(_tot_dolla_net) + " net earnings - " + str(_tot_fish_in) + " fish gamba'd, " + flipnet4 + str(_tot_fish_net) + " earned."
-	
-	if herofound:
-		var mname = ""
-		for member in Network.LOBBY_MEMBERS:
-			if int(id) == int(member["steam_id"]):
-				mname = "stats mail delivered to " + member["steam_name"]
-		stats = stats + "\n" + lbs
-		randomize()
-		var letter_id = randi()
-		var ref = randi()
-		var returndata = {"letter_id": letter_id, "header": "gamba", "closing": "From, ", "body": stats, "items": [], "to": str(id), "from": str(Network.STEAM_ID), "user": str(Network.STEAM_USERNAME)}
-		if id != Network.STEAM_ID:
-			Network._send_P2P_Packet({"type": "letter_recieved", "data": returndata, "to": str(id)}, str(id), 2, Network.CHANNELS.GAME_STATE)
-		else :
-			PlayerData._recieved_letter(returndata)
-		
-		PlayerData._send_notification(str(mname))
+		var gNewSAVE_PATH = "user://gambling_leaderboard.sav"
+		var gNewsave = File.new()
+		gNewsave.open(gNewSAVE_PATH, File.WRITE)
+		gNewsave.store_var(gambaleaderboard)
+		gNewsave.close()
+		yield (get_tree().create_timer(0.25), "timeout")
+		PlayerData._send_notification("gambling leaderboard auto-saved")
 
+func _gamba_proxy():
+	if timeTarget > internal:
+		internal = Time.get_unix_time_from_system() + 1
+		maillock = false
+		yield (get_tree().create_timer(1), "timeout")
+		_gamba()
+	else:
+		yield (get_tree().create_timer(1), "timeout")
+		_gamba_proxy()
+	
 func _gamba():
-	
 	if PlayerData.inbound_mail.size() < 1: return
 	
 	for letter in PlayerData.inbound_mail:
+		if maillock: return
+		maillock = true
 		var actualitems = 0
 		var getlucky = false
 		var items = []
@@ -939,5 +846,112 @@ func _gamba():
 			else:
 				PlayerData._send_notification("error? letter not sent.")
 		else:
+			maillock = false
 			PlayerData._send_notification("letter items are not an array, perhaps!")
 		return
+	maillock = false
+	return
+
+func _gamba_stats(id):
+	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0: return
+	
+	var hero = id
+	
+	var stats = ""
+	var lbs = ""
+	var herofound = false
+	var anychecked = false
+	if gambaleaderboard != []:
+		var firstpass = true
+		
+		var _tot_dolla_in
+		var _tot_dolla_out
+		var _tot_dolla_net
+		var _tot_jackpots
+		
+		var _top_jackpot
+		
+		var _tot_fish_in
+		var _tot_fish_out
+		var _tot_fish_net
+		var tiniest_ever = true
+		var _tiniest_yet
+		var lorgest_ever = true
+		var _lorgest_yet
+		
+		var _jackpotrank = 1
+		var _topjackpotrank = 1
+		var _donorrank = 1
+		var _dollarrank = 1
+		var _fishdonorrank = 1
+		var _fishearnerrank = 1
+		
+		for i in 2:
+			for competition in gambaleaderboard:
+				if competition["id"] != hero and firstpass: continue
+				elif firstpass and competition["id"] == hero:
+					herofound = true
+					firstpass = false
+					_tot_dolla_in = competition["tot_dolla_in"]
+					_tot_dolla_out = competition["tot_dolla_out"]
+					_tot_dolla_net = competition["tot_dolla_net"]
+					_tot_jackpots = competition["tot_jackpots"]
+					_top_jackpot = competition["highest_jackpot"]
+					_tot_fish_in = competition["tot_fish_in"]
+					_tot_fish_out = competition["tot_fish_out"]
+					_tot_fish_net = competition["tot_fish_net"]
+					_tiniest_yet = competition["tiniest_yet"]
+					_lorgest_yet = competition["lorgest_yet"]
+					break
+				anychecked = true
+				var tot_dolla_in = competition["tot_dolla_in"]
+				var tot_dolla_out = competition["tot_dolla_out"]
+				var tot_dolla_net = competition["tot_dolla_net"]
+				var tot_jackpots = competition["tot_jackpots"]
+				var top_jackpot = competition["highest_jackpot"]
+				var tot_fish_in = competition["tot_fish_in"]
+				var tot_fish_out = competition["tot_fish_out"]
+				var tot_fish_net = competition["tot_fish_net"]
+				var tiniest_yet = competition["tiniest_yet"]
+				var lorgest_yet = competition["lorgest_yet"]
+				if tot_jackpots > _tot_jackpots: _jackpotrank +=1
+				if top_jackpot > _top_jackpot: _topjackpotrank += 1
+				if tot_dolla_in > _tot_dolla_in: _donorrank += 1
+				if tot_dolla_net > _tot_dolla_net: _dollarrank += 1
+				if tot_fish_in > _tot_fish_in: _fishdonorrank += 1
+				if tot_fish_net > _tot_fish_net: _fishearnerrank += 1
+				if tiniest_yet < _tiniest_yet and tiniest_yet != 0: tiniest_ever = false
+				if lorgest_yet > _lorgest_yet: lorgest_ever = false
+		if anychecked:
+			lbs = lbs + "#" + str(_topjackpotrank) + " in highest jackpot won. #" + str(_jackpotrank) + " in most jackpots won. #" + str(_donorrank) + " in most dollars gamba'd. #" + str(_dollarrank) + " in net dollars earned. #" + str(_fishdonorrank) + " in most fish gamba'd. #" + str(_fishearnerrank) + " in net fish earned. " 
+			if tiniest_ever: lbs = lbs + "winner of the tiniest fish from fish exchange. "
+			if lorgest_ever: lbs = lbs + "winner of the lorgest fish from fish exchange."
+		if herofound:
+			var flipnet3 = ""
+			var flipnet4 = ""
+
+			if _tot_dolla_net < 0:
+				_tot_dolla_net = abs(_tot_dolla_net)
+				flipnet3 = "-"
+			if _tot_fish_net < 0:
+				_tot_fish_net = abs(_tot_fish_net)
+				flipnet4 = "-"
+			
+			stats = "lifetime stats: " + str(_tot_jackpots) + " jackpots, highest jackpot $" + str(_top_jackpot) + ". $" + str(_tot_dolla_in) + " gamba'd, " + flipnet3 + "$" + str(_tot_dolla_net) + " net earnings - " + str(_tot_fish_in) + " fish gamba'd, " + flipnet4 + str(_tot_fish_net) + " earned."
+	
+	if herofound:
+		var mname = ""
+		for member in Network.LOBBY_MEMBERS:
+			if int(id) == int(member["steam_id"]):
+				mname = "stats mail delivered to " + member["steam_name"]
+		stats = stats + "\n" + lbs
+		randomize()
+		var letter_id = randi()
+		var ref = randi()
+		var returndata = {"letter_id": letter_id, "header": "gamba", "closing": "From, ", "body": stats, "items": [], "to": str(id), "from": str(Network.STEAM_ID), "user": str(Network.STEAM_USERNAME)}
+		if id != Network.STEAM_ID:
+			Network._send_P2P_Packet({"type": "letter_recieved", "data": returndata, "to": str(id)}, str(id), 2, Network.CHANNELS.GAME_STATE)
+		else :
+			PlayerData._recieved_letter(returndata)
+		
+		PlayerData._send_notification(str(mname))
