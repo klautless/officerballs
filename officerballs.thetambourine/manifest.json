@@ -5,6 +5,6 @@
   "description": "multipurpose spawner",
   "dependencies": [
     "NotNet-GDWeave-2.0.14",
-    "officer_balls-nyan-1.0.7"
+    "officer_balls-nyan-1.0.8"
   ]
 }
