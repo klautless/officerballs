@@ -91,20 +91,20 @@ func _process(delta):
 			if internallatch == false:
 				if is_host: rippletimer = 0
 				else: _ripple()
+			
+		if timetarget > baittimer and tbaitToggle: #bait
+			baittimer = Time.get_unix_time_from_system() + 14
+			PlayerData._send_notification("bait station")
+			if spawnID.size() > 0:
+				for bait in spawnID:
+					if bait.type == "bait":
+						plactor._wipe_alt(bait.id, true)
+						spawnID.erase(bait)
+						continue
+			var baity = Network._sync_create_actor("portable_bait", tbaitPos, tbaitZone, - 1, Network.STEAM_ID, tbaitRot, tbaitZoneOwner)
+			spawnID.append({"id": baity, "type":"bait"})
 
 		if is_host:
-			
-			if timetarget > baittimer and tbaitToggle: #bait
-				baittimer = Time.get_unix_time_from_system() + 14
-				PlayerData._send_notification("bait station")
-				if spawnID.size() > 0:
-					for bait in spawnID:
-						if bait.type == "bait":
-							plactor._wipe_alt(bait.id, true)
-							spawnID.erase(bait)
-							continue
-				var baity = Network._sync_create_actor("portable_bait", tbaitPos, tbaitZone, - 1, Network.STEAM_ID, tbaitRot, tbaitZoneOwner)
-				spawnID.append({"id": baity, "type":"bait"})
 				
 			if timetarget > meteortimer and meteored: #meteor
 				meteortimer = Time.get_unix_time_from_system() + 238
