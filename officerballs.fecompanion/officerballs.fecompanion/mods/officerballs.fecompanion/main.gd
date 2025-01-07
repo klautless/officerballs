@@ -2,50 +2,67 @@ extends Node
 
 var timecheck = 0
 var loadedin = false
-var plactor
+var plactor = null
 
-var timetarget = 0
+var timeTarget = 0
 var mailcheck = 0
+var maillock = false
 
 var play_options = []
 var playable = 0
 var playindex = 0
 var playhighlighted = -1
 
+var internal = 0
 
 var quantcheck = -3
 var inventory = []
 var mailouts = []
 
 
-func _ready(): pass
+var PlayerAPI
+
+func _ready():
+	PlayerAPI = get_node_or_null("/root/BlueberryWolfiAPIs/PlayerAPI")
+	PlayerAPI.connect("_player_added", self, "init_player")
+	PlayerAPI.connect("_player_removed", self, "init_player")
+	PlayerData.connect("_letter_update", self, "_mail_proxy")
+
+func init_player(player: Actor):
+	if not loadedin: for i in 5:
+		if loadedin: break
+		yield (get_tree().create_timer(1),"timeout")
+		if get_tree().get_nodes_in_group("controlled_player").size() > 0:
+			for actor in get_tree().get_nodes_in_group("controlled_player"):
+				if not is_instance_valid(actor): return
+				else:
+					if not loadedin:
+						plactor = actor
+						_refresh_players()
+						loadedin = true
+	else:
+		yield (get_tree().create_timer(10),"timeout")
+		_refresh_players()
 
 func _process(delta):
-
-	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0:
+	if not PlayerAPI.in_game and loadedin:
 		loadedin = false
 		plactor = null
 		return
-
-	if timecheck > 0:
-		timecheck -= 1
-	elif timecheck <= 0:
-		timecheck = 60 if not loadedin else 300
-		for actor in get_tree().get_nodes_in_group("controlled_player"):
-			if not is_instance_valid(actor): return
-			else:
-				if not loadedin:
-					plactor = actor
-					loadedin = true
-		if loadedin:
-			_refresh_players()
-	if loadedin:
+	elif not PlayerAPI.in_game: return
+	elif PlayerAPI.in_game and plactor != null:
 		_get_input()
-		timetarget = Time.get_unix_time_from_system()
-		
-		if timetarget > mailcheck:
-			mailcheck = Time.get_unix_time_from_system() + 1.3
-			_mailtime()
+		timeTarget = Time.get_unix_time_from_system()
+
+func _mail_proxy():
+	if timeTarget > internal:
+		internal = Time.get_unix_time_from_system() + 1
+		maillock = false
+		yield (get_tree().create_timer(1), "timeout")
+		_mailtime()
+	else:
+		yield (get_tree().create_timer(1), "timeout")
+		_mail_proxy()
 
 func _get_input():
 	if not loadedin: return
@@ -66,7 +83,7 @@ func _get_input():
 			_stats()
 
 func _refresh_players():
-	if not loadedin: return
+	if not PlayerAPI.in_game: return
 	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0: return
 	play_options.clear()
 	playindex = -1
@@ -152,8 +169,8 @@ func _stats():
 	if not found:
 		PlayerData._send_notification("the fish exchange host you had selected is no longer in the lobby.")
 		return
-	PlayerData._send_letter(int(playhighlighted), "gamba", "From, ", "stats", [])
-	mailcheck = Time.get_unix_time_from_system() + 1.3
+	PlayerData._send_letter(int(playhighlighted), "mailer", "From, ", "stats", [])
+	mailcheck = Time.get_unix_time_from_system() + 1.5
 	
 func _roll():
 	if not loadedin: return
@@ -214,5 +231,5 @@ func _roll():
 				return
 	
 	
-	PlayerData._send_letter(int(playhighlighted), "gamba", "From, ", "", mailouts)
-	mailcheck = Time.get_unix_time_from_system() + 1.3
+	PlayerData._send_letter(int(playhighlighted), "mailer", "From, ", "", mailouts)
+	mailcheck = Time.get_unix_time_from_system() + 1
