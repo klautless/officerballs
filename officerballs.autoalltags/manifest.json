@@ -1,0 +1,9 @@
+{
+  "name": "autoalltags",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/klautless/officerballs",
+  "description": "automatically marks all tags and 'hide full' on launch.",
+  "dependencies": [
+    "NotNet-GDWeave-2.0.14"
+  ]
+}
