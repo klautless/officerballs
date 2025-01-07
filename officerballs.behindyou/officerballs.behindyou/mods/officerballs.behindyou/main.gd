@@ -37,6 +37,7 @@ func _process(delta):
 	if not PlayerAPI.in_game and loadedin:
 		loadedin = false
 		plactor = null
+		punchenabled = false
 		return
 	elif not PlayerAPI.in_game: return
 	
