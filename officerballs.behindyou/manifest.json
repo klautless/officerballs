@@ -1,10 +1,11 @@
 {
   "name": "behindyou",
-  "version_number": "1.0.5",
+  "version_number": "1.0.6",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "teleportation and psychic punches",
   "dependencies": [
     "NotNet-GDWeave-2.0.14",
-    "officer_balls-nyan-1.0.6"
+    "officer_balls-nyan-1.0.9",
+    "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"
   ]
 }
