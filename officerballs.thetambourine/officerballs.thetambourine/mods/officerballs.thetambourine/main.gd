@@ -67,6 +67,10 @@ func _process(delta):
 	if not PlayerAPI.in_game and loadedin:
 		loadedin = false
 		plactor = null
+		hatDisable = true
+		meteored = false
+		tbaitToggle = false
+		voidToggle = false
 		return
 	elif not PlayerAPI.in_game: return
 
@@ -94,7 +98,6 @@ func _process(delta):
 			
 		if timetarget > baittimer and tbaitToggle: #bait
 			baittimer = Time.get_unix_time_from_system() + 14
-			PlayerData._send_notification("bait station")
 			if spawnID.size() > 0:
 				for bait in spawnID:
 					if bait.type == "bait":
