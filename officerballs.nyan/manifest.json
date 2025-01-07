@@ -1,9 +1,10 @@
 {
   "name": "nyan",
-  "version_number": "1.0.8",
+  "version_number": "1.0.9",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "nyan",
   "dependencies": [
-    "NotNet-GDWeave-2.0.14"
+    "NotNet-GDWeave-2.0.14",
+    "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"
   ]
 }
