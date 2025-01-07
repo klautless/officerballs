@@ -10,27 +10,37 @@ var playable = 0
 var playindex = 0
 var playhighlighted = -1
 
+var PlayerAPI
+
+func _ready():
+	PlayerAPI = get_node_or_null("/root/BlueberryWolfiAPIs/PlayerAPI")
+	PlayerAPI.connect("_player_added", self, "init_player")
+	PlayerAPI.connect("_player_removed", self, "init_player")
+
+func init_player(player: Actor):
+	if not loadedin: for i in 5:
+		if loadedin: break
+		yield (get_tree().create_timer(1),"timeout")
+		if get_tree().get_nodes_in_group("controlled_player").size() > 0:
+			for actor in get_tree().get_nodes_in_group("controlled_player"):
+				if not is_instance_valid(actor): return
+				else:
+					if not loadedin:
+						plactor = actor
+						_refresh_players()
+						loadedin = true
+	else:
+		yield (get_tree().create_timer(10),"timeout")
+		_refresh_players()
 
 func _process(delta):
-	
-	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0:
+	if not PlayerAPI.in_game and loadedin:
 		loadedin = false
 		plactor = null
 		return
-		
-	if timecheck > 0:
-		timecheck -= 1
-	elif timecheck <= 0:
-		timecheck = 60 if not loadedin else 300
-		for actor in get_tree().get_nodes_in_group("controlled_player"):
-			if not is_instance_valid(actor): return
-			else:
-				if not loadedin:
-					plactor = actor
-					loadedin = true
-		if loadedin:
-			_refresh_players()
-	if loadedin:
+	elif not PlayerAPI.in_game: return
+	
+	elif PlayerAPI.in_game:
 		_get_input()
 
 func _get_input():
