@@ -1,9 +1,10 @@
 {
   "name": "musicaura",
-  "version_number": "1.0.3",
+  "version_number": "1.0.4",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "an aura of musical notes",
   "dependencies": [
-    "NotNet-GDWeave-2.0.14"
+    "NotNet-GDWeave-2.0.14",
+    "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"
   ]
 }
