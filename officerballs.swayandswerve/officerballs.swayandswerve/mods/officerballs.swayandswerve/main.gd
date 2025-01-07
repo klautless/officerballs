@@ -3,51 +3,38 @@ extends Node
 
 var timecheck = 0
 var loadedin = false
-var plactor
 
 var swaying = false
 var swayflipflop = false
 var sway = 0
 
-func _ready(): get_tree().connect("node_added", self, "_loadcheck")
+var plactor = null
 
-func _loadcheck(node: Node):
-	var scene: Node = get_tree().current_scene
-	if scene.name == "world":
-		for i in 5:
-			if loadedin: break
-			yield (get_tree().create_timer(1),"timeout")
-			if get_tree().get_nodes_in_group("controlled_player").size() > 0:
-				for actor in get_tree().get_nodes_in_group("controlled_player"):
-					if not is_instance_valid(actor): return
-					else:
-						if not loadedin:
-							plactor = actor
-							loadedin = true
-	else:
-		loadedin = false
-		plactor = null
+var PlayerAPI
 
+func _ready():
+	PlayerAPI = get_node_or_null("/root/BlueberryWolfiAPIs/PlayerAPI")
+	PlayerAPI.connect("_player_added", self, "init_player")
+
+func init_player(player: Actor):
+	if not loadedin: for i in 5:
+		if loadedin: break
+		yield (get_tree().create_timer(1),"timeout")
+		if get_tree().get_nodes_in_group("controlled_player").size() > 0:
+			for actor in get_tree().get_nodes_in_group("controlled_player"):
+				if not is_instance_valid(actor): return
+				else:
+					if not loadedin:
+						plactor = actor
+						loadedin = true
 func _process(delta):
-	
-	if get_tree().get_nodes_in_group("controlled_player").size() == 0:
+	if not PlayerAPI.in_game and loadedin:
 		loadedin = false
 		plactor = null
 		return
+	elif not PlayerAPI.in_game: return
 	
-	
-	if timecheck > 0:
-		timecheck -= 1
-	elif timecheck <= 0:
-		timecheck = 60
-		for actor in get_tree().get_nodes_in_group("controlled_player"):
-			if not is_instance_valid(actor): return
-			else:
-				if not loadedin:
-					loadedin = true
-					plactor = actor
-					
-	if loadedin:
+	elif PlayerAPI.in_game and plactor != null:
 		if Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_left") or Input.is_action_pressed("move_back") or Input.is_action_pressed("move_right"):
 			if not plactor.busy and not plactor.freecamming: swaying = true
 			else: swaying = false
