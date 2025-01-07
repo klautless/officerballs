@@ -6,15 +6,10 @@ var internallatch = false
 
 var timecheck = 0
 var loadedin = false
-var plactor
 
-var posbyframes = 0
-var ppos = Vector3()
 var choice = 0
 
 var spawnID = []
-
-
 
 var voidToggle = false
 var voidID = []
@@ -32,7 +27,7 @@ var meteorPos = Vector3()
 var meteorZone = ""
 var meteorZoneOwner = -1
 
-var hatDisable = false
+var hatDisable = true
 var rippleHat = true
 var lockHatPos = false
 var rippleHatPos = Vector3()
@@ -40,56 +35,45 @@ var rippleHeightOffset = -0.32
 var rippleHatZone = ""
 var rippleHatZoneOwner = -1
 
-func _ready(): get_tree().connect("node_added", self, "_loadcheck")
+var plactor = null
 
-func _loadcheck(node: Node):
-	var scene: Node = get_tree().current_scene
-	if scene.name == "world":
-		for i in 5:
-			if loadedin: break
-			yield (get_tree().create_timer(1),"timeout")
-			if get_tree().get_nodes_in_group("controlled_player").size() > 0:
-				for actor in get_tree().get_nodes_in_group("controlled_player"):
-					if not is_instance_valid(actor): return
-					else:
-						if not loadedin:
-							plactor = actor
-							loadedin = true
-	else:
-		loadedin = false
-		plactor = null
-		hatDisable = false
-		meteored = false
-		tbaitToggle = false
-		voidToggle = false
-		
+var is_host = false
+var timetarget = 0
+var rippletimer = 0
+var meteortimer = 0
+var baittimer = 0
+var voidtimer = 0
+
+var PlayerAPI
+
+func _ready():
+	PlayerAPI = get_node_or_null("/root/BlueberryWolfiAPIs/PlayerAPI")
+	PlayerAPI.connect("_player_added", self, "init_player")
+
+func init_player(player: Actor):
+	if not loadedin: for i in 5:
+		if loadedin: break
+		yield (get_tree().create_timer(1),"timeout")
+		if get_tree().get_nodes_in_group("controlled_player").size() > 0:
+			for actor in get_tree().get_nodes_in_group("controlled_player"):
+				if not is_instance_valid(actor): return
+				else:
+					if not loadedin:
+						plactor = actor
+						is_host = Network.GAME_MASTER
+						loadedin = true
 
 func _process(delta):
-	
-	if get_tree().get_nodes_in_group("controlled_player").size() == 0:
+	if not PlayerAPI.in_game and loadedin:
 		loadedin = false
 		plactor = null
-		hatDisable = false
-		meteored = false
-		tbaitToggle = false
-		voidToggle = false
 		return
-	
-	if timecheck > 0:
-		timecheck -= 1
-	elif timecheck <= 0:
-		timecheck = 60
-		for actor in get_tree().get_nodes_in_group("controlled_player"):
-			if not is_instance_valid(actor): return
-			else:
-				if not loadedin:
-					plactor = actor
-					loadedin = true
-	if loadedin:
+	elif not PlayerAPI.in_game: return
+
+	elif PlayerAPI.in_game and plactor != null:
+		timetarget = Time.get_unix_time_from_system()
 		_get_input()
 
-
-		
 		if plactor.direction != Vector3.ZERO and not lockHatPos:
 			for i in 3:
 				if spawnID.size() > 0:
@@ -101,11 +85,72 @@ func _process(delta):
 								spawnID.erase(hat)
 			dedilatch = false
 			internallatch = false
-			ppos = plactor.global_transform.origin
-			
+
 		if plactor.is_on_floor() and plactor.velocity == Vector3.ZERO and plactor.dive_vec == Vector3.ZERO and not hatDisable and dedilatch==false and abs(plactor.spinang) < 50 and not internallatch:
 			dedilatch = true
-			if internallatch == false: _ripple()
+			if internallatch == false:
+				if is_host: rippletimer = 0
+				else: _ripple()
+
+		if is_host:
+			
+			if timetarget > baittimer and tbaitToggle: #bait
+				baittimer = Time.get_unix_time_from_system() + 14
+				PlayerData._send_notification("bait station")
+				if spawnID.size() > 0:
+					for bait in spawnID:
+						if bait.type == "bait":
+							plactor._wipe_alt(bait.id, true)
+							spawnID.erase(bait)
+							continue
+				var baity = Network._sync_create_actor("portable_bait", tbaitPos, tbaitZone, - 1, Network.STEAM_ID, tbaitRot, tbaitZoneOwner)
+				spawnID.append({"id": baity, "type":"bait"})
+				
+			if timetarget > meteortimer and meteored: #meteor
+				meteortimer = Time.get_unix_time_from_system() + 238
+				if spawnID.size() > 0:
+					for meteor in spawnID:
+						if meteor.type == "meteor":
+							plactor._wipe_alt(meteor.id, true)
+							spawnID.erase(meteor)
+							continue
+				var new_id = Network._sync_create_actor("fish_spawn_alien", meteorPos, meteorZone, - 1, Network.STEAM_ID, Vector3(0,0,0), meteorZoneOwner)
+				spawnID.append({"id": new_id, "type":"meteor"})
+			
+			if timetarget > voidtimer and voidToggle: #void
+				if spawnID.size() > 0:
+					voidtimer = Time.get_unix_time_from_system() + 1.3
+					for voidy in spawnID:
+						if voidy.type == "void":
+							plactor._wipe_alt(voidy.id, true)
+							var actor = plactor.world._get_actor_by_id(voidy.id)
+							if not is_instance_valid(actor):
+								spawnID.erase(voidy)
+								continue
+				else:
+					voidtimer = Time.get_unix_time_from_system() + 566
+					var newVoid = Network._sync_create_actor("void_portal", voidPos, "main_zone", - 1, Network.STEAM_ID)
+					spawnID.append({"id": newVoid, "type": "void"})
+			
+			if dedilatch and not hatDisable and timetarget > rippletimer: #ripples
+				rippletimer = Time.get_unix_time_from_system() + 55
+				if dedilatch and rippleHat and not hatDisable:
+					for i in 3:
+						if spawnID.size() > 0:
+							for hat in spawnID:
+								if hat.type == "hat":
+									plactor._wipe_alt(hat.id, true)
+									var actor = plactor.world._get_actor_by_id(hat.id)
+									if not is_instance_valid(actor):
+										spawnID.erase(hat)
+					if not lockHatPos:
+						rippleHatZone = plactor.current_zone
+						rippleHatZoneOwner = plactor.current_zone_owner if plactor.current_zone == "island_tiny_zone" or plactor.current_zone == "island_med_zone" or plactor.current_zone == "island_big_zone" else -1
+						rippleHatPos = plactor.global_transform.origin + (Vector3(0, 1.0, 0) * (1.0 - plactor.player_scale))+Vector3(0,rippleHeightOffset,0)
+					var new_id = Network._sync_create_actor("fish_spawn", rippleHatPos, rippleHatZone, - 1, Network.STEAM_ID, Vector3(deg2rad(180),0,0), rippleHatZoneOwner)
+					var two_id = Network._sync_create_actor("fish_spawn", rippleHatPos, rippleHatZone, - 1, Network.STEAM_ID, Vector3(deg2rad(180),deg2rad(180),0), rippleHatZoneOwner)
+					spawnID.append({"id": new_id, "type": "hat"})
+					spawnID.append({"id": two_id, "type": "hat"})
 
 func _ripple():
 	if internallatch: return
@@ -124,27 +169,20 @@ func _ripple():
 		if not lockHatPos:
 			rippleHatZone = plactor.current_zone
 			rippleHatZoneOwner = plactor.current_zone_owner if plactor.current_zone == "island_tiny_zone" or plactor.current_zone == "island_med_zone" or plactor.current_zone == "island_big_zone" else -1
-			rippleHatPos = plactor.global_transform.origin + (Vector3(0, 1.0, 0) * (1.0 - plactor.player_scale))+Vector3(0,rippleHeightOffset,0)
-		var new_id
-		var two_id
-		if Network.GAME_MASTER:
-			new_id = Network._sync_create_actor("fish_spawn", rippleHatPos, rippleHatZone, - 1, Network.STEAM_ID, Vector3(deg2rad(180),0,0), rippleHatZoneOwner)
-			two_id = Network._sync_create_actor("fish_spawn", rippleHatPos, rippleHatZone, - 1, Network.STEAM_ID, Vector3(deg2rad(180),deg2rad(180),0), rippleHatZoneOwner)
-		else:
-			new_id = {"actor_type": "fish_spawn", "at": rippleHatPos, "zone": rippleHatZone, "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3(deg2rad(180),0,0), "zone_owner": rippleHatZoneOwner}
-			two_id = {"actor_type": "fish_spawn", "at": rippleHatPos, "zone": rippleHatZone, "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3(deg2rad(180),deg2rad(180),0), "zone_owner": rippleHatZoneOwner}
-			plactor.world._instance_actor(new_id)
-			plactor.world._instance_actor(two_id)
-			new_id = new_id["actor_id"]
-			two_id = two_id["actor_id"]
+			rippleHatPos = plactor.global_transform.origin + (Vector3(0, 1.0, 0) * (1.0 - plactor.player_scale))+Vector3(0,rippleHeightOffset,0)	
+		var new_id = {"actor_type": "fish_spawn", "at": rippleHatPos, "zone": rippleHatZone, "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3(deg2rad(180),0,0), "zone_owner": rippleHatZoneOwner}
+		var two_id = {"actor_type": "fish_spawn", "at": rippleHatPos, "zone": rippleHatZone, "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3(deg2rad(180),deg2rad(180),0), "zone_owner": rippleHatZoneOwner}
+		plactor.world._instance_actor(new_id)
+		plactor.world._instance_actor(two_id)
+		new_id = new_id["actor_id"]
+		two_id = two_id["actor_id"]
 		spawnID.append({"id": new_id, "type": "hat"})
 		spawnID.append({"id": two_id, "type": "hat"})
 		for hat in spawnID:
 			if hat.type == "hat":
 				var actor = plactor.world._get_actor_by_id(hat.id)
 				actor.decay = false
-		
-		
+
 func _get_input():
 	if not Input.is_action_pressed("move_walk") and not Input.is_action_pressed("move_sneak"): plactor.nyan_zoomlock = false
 	if plactor.held_item["id"] == "tambourine":
@@ -195,12 +233,10 @@ func _tool(number,selecting=false,alt=false):
 								plactor._wipe_alt(meteor.id, true)
 								spawnID.erase(meteor)
 								continue
-					var new_id
-					if Network.GAME_MASTER: new_id = Network._sync_create_actor("fish_spawn_alien", meteorPos, meteorZone, - 1, Network.STEAM_ID, Vector3(0,0,0), meteorZoneOwner)
-					else:
-						new_id = {"actor_type": "fish_spawn_alien", "at": meteorPos, "zone": meteorZone, "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3.ZERO, "zone_owner": meteorZoneOwner}
-						plactor.world._instance_actor(new_id)
-						new_id = new_id["actor_id"]
+					if is_host: return
+					var new_id = {"actor_type": "fish_spawn_alien", "at": meteorPos, "zone": meteorZone, "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3.ZERO, "zone_owner": meteorZoneOwner}
+					plactor.world._instance_actor(new_id)
+					new_id = new_id["actor_id"]
 					spawnID.append({"id": new_id, "type":"meteor"})
 					for meteor in spawnID:
 						if meteor.type == "meteor":
@@ -229,6 +265,7 @@ func _tool(number,selecting=false,alt=false):
 								plactor._wipe_alt(bait.id, true)
 								spawnID.erase(bait)
 								continue
+					if is_host: return
 					var baity = Network._sync_create_actor("portable_bait", tbaitPos, tbaitZone, - 1, Network.STEAM_ID, tbaitRot, tbaitZoneOwner)
 					spawnID.append({"id": baity, "type":"bait"})
 					for bait in spawnID:
@@ -257,12 +294,10 @@ func _tool(number,selecting=false,alt=false):
 								if not is_instance_valid(actor):
 									spawnID.erase(voidy)
 									continue
-					var newVoid
-					if Network.GAME_MASTER: newVoid = Network._sync_create_actor("void_portal", voidPos, "main_zone", - 1, Network.STEAM_ID)
-					else:
-						newVoid = {"actor_type": "void_portal", "at": voidPos, "zone": "main_zone", "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3.ZERO, "zone_owner": -1}
-						plactor.world._instance_actor(newVoid)
-						newVoid = newVoid["actor_id"]
+					if is_host: return
+					var newVoid = {"actor_type": "void_portal", "at": voidPos, "zone": "main_zone", "actor_id": randi(), "creator_id": Network.STEAM_ID, "rot": Vector3.ZERO, "zone_owner": -1}
+					plactor.world._instance_actor(newVoid)
+					newVoid = newVoid["actor_id"]
 					spawnID.append({"id": newVoid, "type": "void"})
 					for voidy in spawnID:
 						if voidy.type == "void":
