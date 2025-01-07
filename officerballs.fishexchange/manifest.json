@@ -1,9 +1,10 @@
 {
   "name": "fishexchange",
-  "version_number": "1.0.0",
+  "version_number": "1.0.2",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "a full fledged custom gambling minigame in your inbox. please view the readme for full instructions.",
   "dependencies": [
-    "NotNet-GDWeave-2.0.14"
+    "NotNet-GDWeave-2.0.14",
+    "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"
   ]
 }
