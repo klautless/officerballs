@@ -2,7 +2,6 @@ extends Node
 
 var timecheck = 0
 var loadedin = false
-var plactor
 
 var timeTarget = 0
 
@@ -14,47 +13,33 @@ var rollOver = false
 var unlatched = true
 
 
-func _ready(): get_tree().connect("node_added", self, "_loadcheck")
+var plactor = null
 
-func _loadcheck(node: Node):
-	var scene: Node = get_tree().current_scene
-	if scene.name == "world":
-		for i in 5:
-			if loadedin: break
-			yield (get_tree().create_timer(1),"timeout")
-			if get_tree().get_nodes_in_group("controlled_player").size() > 0:
-				for actor in get_tree().get_nodes_in_group("controlled_player"):
-					if not is_instance_valid(actor): return
-					else:
-						if not loadedin:
-							plactor = actor
-							loadedin = true
-	else:
-		loadedin = false
-		colorspin = false
-		plactor = null
+var PlayerAPI
 
+func _ready():
+	PlayerAPI = get_node_or_null("/root/BlueberryWolfiAPIs/PlayerAPI")
+	PlayerAPI.connect("_player_added", self, "init_player")
+
+func init_player(player: Actor):
+	if not loadedin: for i in 5:
+		if loadedin: break
+		yield (get_tree().create_timer(1),"timeout")
+		if get_tree().get_nodes_in_group("controlled_player").size() > 0:
+			for actor in get_tree().get_nodes_in_group("controlled_player"):
+				if not is_instance_valid(actor): return
+				else:
+					if not loadedin:
+						plactor = actor
+						loadedin = true
 func _process(delta):
-	
-	if get_tree().get_nodes_in_group("controlled_player").size() == 0:
+	if not PlayerAPI.in_game and loadedin:
 		loadedin = false
-		colorspin = false
 		plactor = null
 		return
+	elif not PlayerAPI.in_game: return
 	
-	if timecheck > 0:
-		timecheck -= 1
-	elif timecheck <= 0:
-		timecheck = 60
-		for actor in get_tree().get_nodes_in_group("controlled_player"):
-			if not is_instance_valid(actor): return
-			else:
-				if not loadedin:
-					plactor = actor
-					loadedin = true
-					
-	if loadedin:
-		
+	elif PlayerAPI.in_game and plactor != null:
 		_get_input()
 		timeTarget = Time.get_unix_time_from_system()
 		
