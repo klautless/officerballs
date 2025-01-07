@@ -1,10 +1,11 @@
 {
   "name": "thetambourine",
-  "version_number": "1.1.2",
+  "version_number": "1.1.3",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "multipurpose spawner",
   "dependencies": [
     "NotNet-GDWeave-2.0.14",
-    "officer_balls-nyan-1.0.8"
+    "officer_balls-nyan-1.0.9",
+    "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"
   ]
 }
