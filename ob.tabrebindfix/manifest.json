@@ -1,0 +1,9 @@
+{
+  "name": "tabrebindfix",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/klautless/officerballs",
+  "description": "(request) simple fix so inventory won't popup from chat if hotkey is changed.",
+  "dependencies": [
+    "NotNet-GDWeave-2.0.14"
+  ]
+}
