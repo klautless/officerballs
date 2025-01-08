@@ -4,6 +4,6 @@
   "website_url": "https://github.com/klautless/officerballs",
   "description": "sorts fish in your inventory by type and size.",
   "dependencies": [
-    "NotNet-GDWeave-2.0.14",
+    "NotNet-GDWeave-2.0.14"
   ]
 }
