@@ -13,13 +13,10 @@ public class ActorWipePatch : IScriptMod
     {
         // wait for any newline after any reference to "_ready"
         var funcstop = new MultiTokenWaiter([
-            t => t.Type is TokenType.PrFunction,
-            t => t is IdentifierToken {Name: "_wipe_actor"},
+            t => t is IdentifierToken {Name: "_get_actor_by_id"},
             t => t.Type is TokenType.ParenthesisOpen,
             t => t is IdentifierToken {Name: "id"},
             t => t.Type is TokenType.ParenthesisClose,
-            t => t.Type is TokenType.Colon,
-            t => t.Type is TokenType.Newline,
         ]);
 
         var wipeadd = new MultiTokenWaiter([
@@ -32,67 +29,7 @@ public class ActorWipePatch : IScriptMod
 
         ]);
 
-        var wipesub1 = new MultiTokenWaiter([
-            t => t.Type is TokenType.CfIf,
-            t => t is IdentifierToken {Name: "prop"},
-            t => t.Type is TokenType.Period,
-            t => t is IdentifierToken {Name: "ref"},
-            t => t.Type is TokenType.OpEqual,
-            t => t is IdentifierToken {Name: "ref"},
-            t => t.Type is TokenType.Colon,
-            t => t.Type is TokenType.Newline,
-            t => t is IdentifierToken {Name: "_wipe_actor"},
-            t => t.Type is TokenType.ParenthesisOpen,
-            t => t is IdentifierToken {Name: "prop"},
-            t => t.Type is TokenType.Period,
-            t => t is IdentifierToken {Name: "id"},
-            t => t.Type is TokenType.ParenthesisClose,
-
-        ]);
-
-        var wipesub2 = new MultiTokenWaiter([
-            t => t.Type is TokenType.CfFor,
-            t => t is IdentifierToken {Name: "prop"},
-            t => t.Type is TokenType.OpIn,
-            t => t is IdentifierToken {Name: "prop_ids"},
-            t => t.Type is TokenType.Colon,
-            t => t.Type is TokenType.Newline,
-            t => t is IdentifierToken {Name: "_wipe_actor"},
-            t => t.Type is TokenType.ParenthesisOpen,
-            t => t is IdentifierToken {Name: "prop"},
-            t => t.Type is TokenType.Period,
-            t => t is IdentifierToken {Name: "id"},
-            t => t.Type is TokenType.ParenthesisClose,
-
-
-        ]);
-
-        var wipesub3 = new MultiTokenWaiter([
-            t => t is ConstantToken {Value: StringVariant{Value:"undo prop"}},
-            t => t.Type is TokenType.Comma,
-            t => t is ConstantToken {Value:IntVariant{Value:0}},
-            t => t.Type is TokenType.ParenthesisClose,
-            t => t.Type is TokenType.Newline,
-            t => t is IdentifierToken {Name: "_wipe_actor"},
-            t => t.Type is TokenType.ParenthesisOpen,
-            t => t is IdentifierToken {Name: "prop_ids"},
-            t => t.Type is TokenType.BracketOpen,
-            t => t is IdentifierToken {Name: "prop_ids"},
-            t => t.Type is TokenType.Period,
-            t => t is IdentifierToken {Name: "size"},
-            t => t.Type is TokenType.ParenthesisOpen,
-            t => t.Type is TokenType.ParenthesisClose,
-            t => t.Type is TokenType.OpSub,
-            t => t is ConstantToken {Value:IntVariant{Value:1}},
-            t => t.Type is TokenType.BracketClose,
-            t => t.Type is TokenType.BracketOpen,
-            t => t is ConstantToken {Value:IntVariant{Value:0}},
-            t => t.Type is TokenType.BracketClose,
-            t => t.Type is TokenType.ParenthesisClose,
-
-
-        ]);
-
+   
 
 
         // loop through all tokens in the script
@@ -104,6 +41,28 @@ public class ActorWipePatch : IScriptMod
                 yield return token;
 
                 yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.CfIf);
+                yield return new IdentifierToken("actor");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("actor_type");
+                yield return new Token(TokenType.OpNotEqual);
+                yield return new ConstantToken(new StringVariant("fish_spawn"));
+                yield return new Token(TokenType.OpAnd);
+                yield return new IdentifierToken("actor");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("actor_type");
+                yield return new Token(TokenType.OpNotEqual);
+                yield return new ConstantToken(new StringVariant("fish_spawn_alien"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("_wipe_alt");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("id");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new BoolVariant(true));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.CfElse);
+                yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.CfReturn);
                 yield return new Token(TokenType.Newline, 1);
 
@@ -153,55 +112,6 @@ public class ActorWipePatch : IScriptMod
                 yield return new ConstantToken(new BoolVariant(true));
                 yield return new Token(TokenType.ParenthesisClose);
                 yield return new Token(TokenType.Newline);
-            }
-            else if (wipesub1.Check(token))
-            {
-                yield return token;
-                yield return new Token(TokenType.Newline, 3);
-                yield return new IdentifierToken("_wipe_alt");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new IdentifierToken("prop");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("id");
-                yield return new Token(TokenType.Comma);
-                yield return new ConstantToken(new BoolVariant(true));
-                yield return new Token(TokenType.ParenthesisClose);
-            }
-            else if (wipesub2.Check(token))
-            {
-                yield return token;
-                yield return new Token(TokenType.Newline, 2);
-                yield return new IdentifierToken("_wipe_alt");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new IdentifierToken("prop");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("id");
-                yield return new Token(TokenType.Comma);
-                yield return new ConstantToken(new BoolVariant(true));
-                yield return new Token(TokenType.ParenthesisClose);
-
-            }
-            else if (wipesub3.Check(token))
-            {
-                yield return token;
-                yield return new Token(TokenType.Newline, 1);
-                yield return new IdentifierToken("_wipe_alt");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new IdentifierToken("prop_ids");
-                yield return new Token(TokenType.BracketOpen);
-                yield return new IdentifierToken("prop_ids");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("size");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
-                yield return new Token(TokenType.OpSub);
-                yield return new ConstantToken(new IntVariant(1));
-                yield return new Token(TokenType.BracketClose);
-                yield return new Token(TokenType.BracketOpen);
-                yield return new ConstantToken(new IntVariant(0));
-                yield return new Token(TokenType.BracketClose);
-                yield return new Token(TokenType.ParenthesisClose);
-
             }
             else
             {
