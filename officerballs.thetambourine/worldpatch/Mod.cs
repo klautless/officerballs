@@ -9,6 +9,7 @@ public class Mod : IMod {
         this.Config = modInterface.ReadConfig<Config>();
         modInterface.RegisterScriptMod(new WorldInstanceMod());
         modInterface.RegisterScriptMod(new ActorWipePatch());
+        modInterface.RegisterScriptMod(new RipplePatch());
         modInterface.Logger.Information("Hello, world!");
     }
 
