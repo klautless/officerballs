@@ -73,7 +73,9 @@ func _get_input():
 		if Input.is_action_just_pressed("interact") and Input.is_action_pressed("move_walk"):
 			plactor.helishut = not plactor.helishut
 		if Input.is_action_pressed("move_walk") and Input.is_action_just_released("zoom_in"):
-			if plactor.spinang == 0: plactor.spinfactor = rad2deg(plactor.rotation.y) 
+			if plactor.spinang == 0:
+				plactor.spinfactor = rad2deg(plactor.rotation.y)
+				plactor.spinnies = false
 			if abs(plactor.spinang) < 1.25: plactor.spinang += 0.125
 			elif abs(plactor.spinang) < 5: plactor.spinang += 0.25
 			elif abs(plactor.spinang) < 10: plactor.spinang += 0.5
@@ -89,7 +91,9 @@ func _get_input():
 			if abs(plactor.spinang) > 0: plactor.spinnies = true
 		
 		if Input.is_action_pressed("move_walk") and Input.is_action_just_released("zoom_out"):
-			if plactor.spinang == 0: plactor.spinfactor = rad2deg(plactor.rotation.y) 
+			if plactor.spinang == 0:
+				plactor.spinfactor = rad2deg(plactor.rotation.y)
+				plactor.spinnies = false
 			if abs(plactor.spinang) < 1.25: plactor.spinang -= 0.125
 			elif abs(plactor.spinang) < 5: plactor.spinang -= 0.25
 			elif abs(plactor.spinang) < 10: plactor.spinang -= 0.5
