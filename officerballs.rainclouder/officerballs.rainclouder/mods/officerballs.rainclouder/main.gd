@@ -43,7 +43,7 @@ func _process(delta):
 	elif PlayerAPI.in_game and plactor != null:
 		raintimer = Time.get_unix_time_from_system()
 		_get_input()
-		if raintimer > raintarget:
+		if raintimer > raintarget and rainToggle:
 			raintarget = Time.get_unix_time_from_system() + 45
 			if cloudIDs.size() > 0:
 				for cloud in cloudIDs:
