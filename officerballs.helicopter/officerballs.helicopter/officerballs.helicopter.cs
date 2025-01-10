@@ -1,4 +1,4 @@
-﻿using GDWeave.Godot;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 using System.Numerics;
@@ -137,6 +137,17 @@ public class HelicopterMod : IScriptMod
             t => t.Type is TokenType.ParenthesisClose,
             t => t.Type is TokenType.Newline,
             t => t.Type is TokenType.CfReturn,
+
+
+        ]);
+
+        var fixdives = new MultiTokenWaiter([
+
+            t => t is IdentifierToken {Name: "diving"},
+            t => t.Type is TokenType.OpAnd,
+            t => t is IdentifierToken {Name: "jump_bonus"},
+            t => t.Type is TokenType.OpLessEqual,
+            t => t is ConstantToken {Value: RealVariant{Value: 1.0 }},
 
 
         ]);
@@ -1351,9 +1362,25 @@ public class HelicopterMod : IScriptMod
                 yield return new Token(TokenType.OpNot);
                 yield return new IdentifierToken("rollOver");
 
-            }
-            else
-            {
+            } else if (fixdives.Check(token)) {
+
+                yield return token;
+                yield return new Token(TokenType.OpAnd);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.BuiltInFunc, 17);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("spinang");
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpLess);
+                yield return new ConstantToken(new IntVariant(50));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpAnd);
+                yield return new Token(TokenType.OpNot);
+                yield return new IdentifierToken("spinnies");
+                yield return new Token(TokenType.OpAnd);
+                yield return new IdentifierToken("rollOverLatch");
+
+            } else {
                 yield return token;
             }
         }
