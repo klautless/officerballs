@@ -26,16 +26,6 @@ public class NyanMod : IScriptMod
             t => t.Type is TokenType.Newline,
         ]);
 
-
-        var spineyes = new MultiTokenWaiter([
-            t => t.Type is TokenType.CfIf,
-            t => t is IdentifierToken {Name: "direction"},
-            t => t.Type is TokenType.OpNotEqual,
-            t => t.Type is TokenType.BuiltInType,
-            t => t.Type is TokenType.Period,
-            t => t is IdentifierToken {Name: "ZERO"},
-        ]);
-
         var spinassist = new MultiTokenWaiter([
             t => t is IdentifierToken {Name: "y"},
             t => t.Type is TokenType.ParenthesisClose,
@@ -92,6 +82,21 @@ public class NyanMod : IScriptMod
             t => t is IdentifierToken {Name: "camera_zoom"},
         ]);
 
+        var facing1 = new MultiTokenWaiter([
+            t => t is IdentifierToken {Name: "rot_help"},
+            t => t.Type is TokenType.Period,
+            t => t is IdentifierToken {Name: "global_transform"},
+            t => t.Type is TokenType.Period,
+            t => t is IdentifierToken {Name: "origin"},
+            t => t.Type is TokenType.OpAssign,
+            t => t is IdentifierToken {Name: "global_transform"},
+            t => t.Type is TokenType.Period,
+            t => t is IdentifierToken {Name: "origin"},
+            t => t.Type is TokenType.Newline,
+            t => t.Type is TokenType.Newline,
+            t => t.Type is TokenType.CfIf,
+        ]);
+
         // loop through all tokens in the script
         foreach (var token in tokens)
         {
@@ -134,15 +139,6 @@ public class NyanMod : IScriptMod
                 yield return token;
                 yield return new IdentifierToken("busyblock");
                 yield return new Token(TokenType.OpAnd);
-            }
-            else if (spineyes.Check(token))
-            {
-                yield return token;
-
-                yield return new Token(TokenType.OpAnd);
-                yield return new Token(TokenType.OpNot);
-                yield return new IdentifierToken("spinnies");
-
             }
             else if(shutoffvalve.Check(token))
             {
@@ -366,9 +362,72 @@ public class NyanMod : IScriptMod
                 yield return new Token(TokenType.OpMul);
                 yield return new IdentifierToken("dive_bonus");
                 yield return new Token(TokenType.Newline, 3);
-            }
-            else
-            {
+
+            } else if (facing1.Check(token)) {
+
+                yield return token;
+
+                yield return new IdentifierToken("mouse_look");
+                yield return new Token(TokenType.OpAnd);
+                yield return new Token(TokenType.OpNot);
+                yield return new IdentifierToken("busy");
+                yield return new Token(TokenType.Colon);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("rot_help");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("look_at");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("mouse_world_pos");
+                yield return new Token(TokenType.Comma);
+                yield return new Token(TokenType.BuiltInType, 7);
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("UP");
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("rot_diff");
+                yield return new Token(TokenType.OpAssign);
+                yield return new Token(TokenType.BuiltInFunc, 17);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("rot_help");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("rotation");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("y");
+                yield return new Token(TokenType.OpSub);
+                yield return new IdentifierToken("rotation");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("y");
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("rotation");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("y");
+                yield return new Token(TokenType.OpAssign);
+                yield return new Token(TokenType.BuiltInFunc, 31);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("rotation");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("y");
+                yield return new Token(TokenType.Comma);
+                yield return new IdentifierToken("rot_help");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("rotation");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("y");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new RealVariant(0.2));
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.CfElif);
+                yield return new Token(TokenType.OpNot);
+                yield return new IdentifierToken("spinnies");
+                yield return new Token(TokenType.OpAnd);
+
+            } else {
                 // return the original token
                 yield return token;
             }
