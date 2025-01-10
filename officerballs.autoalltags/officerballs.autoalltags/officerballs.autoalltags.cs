@@ -1,4 +1,4 @@
-﻿using GDWeave.Godot;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -38,6 +38,15 @@ public class AutoTagMod : IScriptMod {
             t => t is IdentifierToken {Name: "_close_tag_menu"},
             t => t.Type is TokenType.ParenthesisOpen,
             t => t.Type is TokenType.ParenthesisClose,
+
+        ]);
+
+        var waiter4 = new MultiTokenWaiter([
+
+            t => t is IdentifierToken {Name: "i"},
+            t => t.Type is TokenType.OpIn,
+            t => t is ConstantToken {Value: IntVariant {Value: 12}},
+            t => t.Type is TokenType.Colon,
 
         ]);
 
@@ -102,7 +111,18 @@ public class AutoTagMod : IScriptMod {
                 yield return new ConstantToken(new BoolVariant(true));
 
             }
-            else
+            else if (waiter4.Check(token))
+            {
+                yield return token;
+                yield return new Token(TokenType.CfBreak);
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.CfFor);
+                yield return new IdentifierToken("i");
+                yield return new Token(TokenType.OpIn);
+                yield return new ConstantToken(new IntVariant(128));
+                yield return new Token(TokenType.Colon);
+
+            } else
             {
                 // return the original token
                 yield return token;
