@@ -1,4 +1,4 @@
-﻿using GDWeave.Godot;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -1189,7 +1189,7 @@ public class StampsBegone3 : IScriptMod {
                 yield return new Token(TokenType.CfReturn);
 
                 yield return new Token(TokenType.Newline, 6);
-                yield return new ConstantToken(new IntVariant(2));
+                yield return new ConstantToken(new IntVariant(3));
                 yield return new Token(TokenType.Colon);
 
                 yield return new Token(TokenType.Newline, 7);
@@ -1233,7 +1233,7 @@ public class StampsBegone3 : IScriptMod {
                 yield return new Token(TokenType.CfReturn);
 
                 yield return new Token(TokenType.Newline, 4);
-                yield return new ConstantToken(new IntVariant(2));
+                yield return new ConstantToken(new IntVariant(1));
                 yield return new Token(TokenType.Colon);
 
                 yield return new Token(TokenType.Newline, 5);
