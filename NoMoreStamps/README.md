@@ -12,5 +12,4 @@ now comes with a full-fledged menu. all settings save after 15 seconds of any ch
 3. alt+scroll wheel to see parameters within a menu--  
 4. alt+e to apply/toggle/etc.  
   
-  
-at this time, settings do not save between game restarts (will come in a later patch) - by default, auto-hide is on for gifs only.
+auto-hide: when a player is added to this list, you will no longer receive chalk updates from them until/unless you manually remove them. these individual settings all default to off and are built in separately from normal hiding/blocking.

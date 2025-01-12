@@ -1,6 +1,6 @@
 {
   "name": "nomorestamps",
-  "version_number": "1.0.3",
+  "version_number": "1.0.4",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "Hide fake canvases, large pastes, and gifs. Please view README for settings.",
   "dependencies": [
