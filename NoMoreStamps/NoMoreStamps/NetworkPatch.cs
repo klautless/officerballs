@@ -44,6 +44,15 @@ public class StampsBegone2 : IScriptMod {
 
         ]);
 
+        var addsettingsload = new MultiTokenWaiter([
+
+            t => t is IdentifierToken {Name: "_ready"},
+            t => t.Type is TokenType.ParenthesisOpen,
+            t => t.Type is TokenType.ParenthesisClose,
+            t => t.Type is TokenType.Colon,
+
+        ]);
+
         // loop through all tokens in the script
         foreach (var token in tokens) {
             if (addvars.Check(token)) {
@@ -143,6 +152,19 @@ public class StampsBegone2 : IScriptMod {
 
                 yield return new Token(TokenType.Newline);
                 yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("queuesave");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(false));
+                yield return new Token(TokenType.Newline);
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("setsavetimer");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new IntVariant(0));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
                 yield return new IdentifierToken("chalktimer");
                 yield return new Token(TokenType.OpAssign);
                 yield return new ConstantToken(new IntVariant(0));
@@ -153,7 +175,159 @@ public class StampsBegone2 : IScriptMod {
                 yield return new Token(TokenType.OpAssign);
                 yield return new ConstantToken(new IntVariant(0));
 
-            } else if (addreset.Check(token)) {
+            } else if (addsettingsload.Check(token)) {
+
+                yield return token;
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("gSAVE_PATH");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new StringVariant("user://nomorestamps_settings.sav"));
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("gsave");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("File");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("new");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("gsave_exists");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("gsave");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("file_exists");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("gSAVE_PATH");
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.CfIf);
+                yield return new IdentifierToken("gsave_exists");
+                yield return new Token(TokenType.Colon);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("gsave");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("open");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("gSAVE_PATH");
+                yield return new Token(TokenType.Comma);
+                yield return new IdentifierToken("File");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("READ");
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("chalk_settings");
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("gsave");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("get_var");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("gsave");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("close");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("chalkcontrol");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("chalkcontrol"));
+                yield return new Token(TokenType.BracketClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("gifcontrol");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("gifcontrol"));
+                yield return new Token(TokenType.BracketClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("largecontrol");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("largecontrol"));
+                yield return new Token(TokenType.BracketClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("customcontrol");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("customcontrol"));
+                yield return new Token(TokenType.BracketClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("blockforlarge");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("blockforlarge"));
+                yield return new Token(TokenType.BracketClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("blockforgif");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("blockforgif"));
+                yield return new Token(TokenType.BracketClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("blockforcustom");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("blockforcustom"));
+                yield return new Token(TokenType.BracketClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("kickforlarge");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("kickforlarge"));
+                yield return new Token(TokenType.BracketClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("kickforgif");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("kickforgif"));
+                yield return new Token(TokenType.BracketClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("kickforcustom");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("kickforcustom"));
+                yield return new Token(TokenType.BracketClose);
+
+
+
+            }
+            else if (addreset.Check(token)) {
 
                 yield return token;
 
@@ -207,6 +381,111 @@ public class StampsBegone2 : IScriptMod {
                 yield return new IdentifierToken("clear");
                 yield return new Token(TokenType.ParenthesisOpen);
                 yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.CfIf);
+                yield return new IdentifierToken("chalkcompared");
+                yield return new Token(TokenType.OpGreaterEqual);
+                yield return new IdentifierToken("setsavetimer");
+                yield return new Token(TokenType.OpAnd);
+                yield return new IdentifierToken("queuesave");
+                yield return new Token(TokenType.Colon);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("queuesave");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(false));
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.OpAssign);
+                yield return new Token(TokenType.CurlyBracketOpen);
+                yield return new ConstantToken(new StringVariant("chalkcontrol"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("chalkcontrol");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("gifcontrol"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("gifcontrol");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("largecontrol"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("largecontrol");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("customcontrol"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("customcontrol");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("blockforlarge"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("blockforlarge");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("blockforgif"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("blockforgif");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("blockforcustom"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("blockforcustom");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("kickforlarge"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("kickforlarge");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("kickforgif"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("kickforgif");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("kickforcustom"));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("kickforcustom");
+                yield return new Token(TokenType.Comma);
+                yield return new Token(TokenType.CurlyBracketClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("gSAVE_PATH");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new StringVariant("user://nomorestamps_settings.sav"));
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("gsave");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("File");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("new");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("gsave");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("open");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("gSAVE_PATH");
+                yield return new Token(TokenType.Comma);
+                yield return new IdentifierToken("File");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("WRITE");
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("gsave");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("store_var");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("chalk_settings");
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("gsave");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("close");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+
 
             } else if (waiter.Check(token)) {
 

@@ -1,4 +1,4 @@
-using GDWeave.Godot;
+﻿using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -1041,6 +1041,26 @@ public class StampsBegone3 : IScriptMod {
                 yield return new Token(TokenType.OpNotEqual);
                 yield return new ConstantToken(new IntVariant(-2));
                 yield return new Token(TokenType.Colon);
+
+                yield return new Token(TokenType.Newline, 3);
+                yield return new IdentifierToken("Network");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("setsavetimer");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("Time");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("get_unix_time_from_system");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpAdd);
+                yield return new ConstantToken(new IntVariant(15));
+
+                yield return new Token(TokenType.Newline, 3);
+                yield return new IdentifierToken("Network");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("queuesave");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(true));
 
                 yield return new Token(TokenType.Newline, 3);
                 yield return new Token(TokenType.CfMatch);
