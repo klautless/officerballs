@@ -8,6 +8,8 @@ public class Mod : IMod {
     public Mod(IModInterface modInterface) {
         this.Config = modInterface.ReadConfig<Config>();
         modInterface.RegisterScriptMod(new StampsBegone());
+        modInterface.RegisterScriptMod(new StampsBegone2());
+        modInterface.RegisterScriptMod(new StampsBegone3());
         modInterface.Logger.Information("Hello, world!");
     }
 
