@@ -29,7 +29,14 @@ public class ActorWipePatch : IScriptMod
 
         ]);
 
-   
+
+        var declared = new MultiTokenWaiter([
+            t => t.Type is TokenType.PrVar,
+            t => t is IdentifierToken {Name: "camera_zoom"},
+            t => t.Type is TokenType.OpAssign,
+            t => t is ConstantToken {Value: RealVariant{ Value: 5.0}},
+        ]);
+
 
 
         // loop through all tokens in the script
@@ -60,16 +67,19 @@ public class ActorWipePatch : IScriptMod
                 yield return new Token(TokenType.Comma);
                 yield return new ConstantToken(new BoolVariant(true));
                 yield return new Token(TokenType.ParenthesisClose);
+
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.CfElse);
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.CfReturn);
+
                 yield return new Token(TokenType.Newline, 1);
 
             }
             else if (wipeadd.Check(token)){
 
                 yield return token;
+
                 yield return new Token(TokenType.Newline);
                 yield return new Token(TokenType.PrFunction);
                 yield return new IdentifierToken("_wipe_alt");
@@ -81,12 +91,14 @@ public class ActorWipePatch : IScriptMod
                 yield return new ConstantToken(new BoolVariant(false));
                 yield return new Token(TokenType.ParenthesisClose);
                 yield return new Token(TokenType.Colon);
+
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.CfIf);
                 yield return new Token(TokenType.OpNot);
                 yield return new IdentifierToken("key");
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.CfReturn);
+
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.PrVar);
                 yield return new IdentifierToken("actor");
@@ -97,6 +109,7 @@ public class ActorWipePatch : IScriptMod
                 yield return new Token(TokenType.ParenthesisOpen);
                 yield return new IdentifierToken("id");
                 yield return new Token(TokenType.ParenthesisClose);
+
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.CfIf);
                 yield return new Token(TokenType.BuiltInFunc, 89);
@@ -104,6 +117,7 @@ public class ActorWipePatch : IScriptMod
                 yield return new IdentifierToken("actor");
                 yield return new Token(TokenType.ParenthesisClose);
                 yield return new Token(TokenType.Colon);
+
                 yield return new Token(TokenType.Newline, 2);
                 yield return new IdentifierToken("actor");
                 yield return new Token(TokenType.Period);
@@ -111,10 +125,114 @@ public class ActorWipePatch : IScriptMod
                 yield return new Token(TokenType.ParenthesisOpen);
                 yield return new ConstantToken(new BoolVariant(true));
                 yield return new Token(TokenType.ParenthesisClose);
+
                 yield return new Token(TokenType.Newline);
-            }
-            else
-            {
+
+            } else if (declared.Check(token)) {
+
+                yield return token;
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("tamb_choice");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new IntVariant(0));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("meteortimer");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new IntVariant(-1));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("meteored");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(false));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("meteorPos");
+                yield return new Token(TokenType.OpAssign);
+                yield return new Token(TokenType.BuiltInType, 7);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("meteorZone");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new StringVariant(""));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("meteorZoneOwner");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new IntVariant(-1));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("rippletimer");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new IntVariant(-1));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("hatDisable");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(true));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("rippleHat");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(true));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("lockHatPos");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(false));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("rippleHatPos");
+                yield return new Token(TokenType.OpAssign);
+                yield return new Token(TokenType.BuiltInType, 7);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("rippleHeightOffset");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new RealVariant(-0.32));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("rippleHatZone");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new StringVariant(""));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("rippleHatZoneOwner");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new IntVariant(-1));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("dedilatch");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(false));
+
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("internallatch");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(false));
+
+            } else {
                 // return the original token
                 yield return token;
             }
