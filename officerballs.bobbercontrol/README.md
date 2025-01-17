@@ -7,7 +7,7 @@ allows you to fish anywhere
 when fishing:  
 alt+scroll for bobber's height adjustment  
 alt+click to extend your fishing line  
-alt+rightclick to punch players near your bobber  
+alt+q to punch players near your bobber  
 alt+middle click immediately retracts the line  
   
 tambourine extension:  
