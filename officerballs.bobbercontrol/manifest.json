@@ -1,0 +1,11 @@
+{
+  "name": "bobbercontrol",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/klautless/officerballs",
+  "description": "manipulate your bobber; punch with it, spawn ripple/meteor at position if used with tambourine",
+  "dependencies": [
+    "NotNet-GDWeave-2.0.14",
+    "officer_balls-nyan-1.1.0",
+    "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"
+  ]
+}
