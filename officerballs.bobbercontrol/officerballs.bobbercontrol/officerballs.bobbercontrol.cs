@@ -1,4 +1,4 @@
-﻿using GDWeave.Godot;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -299,7 +299,7 @@ public class BobberControlMod : IScriptMod {
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("is_action_just_pressed");
                 yield return new Token(TokenType.ParenthesisOpen);
-                yield return new ConstantToken(new StringVariant("secondary_action"));
+                yield return new ConstantToken(new StringVariant("move_down"));
                 yield return new Token(TokenType.ParenthesisClose);
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.Newline, 2);
