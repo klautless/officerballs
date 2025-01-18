@@ -39,14 +39,6 @@ public class RainMod : IScriptMod {
                 yield return new Token(TokenType.ParenthesisOpen);
                 yield return new Token(TokenType.ParenthesisClose);
 
-                yield return new Token(TokenType.Newline, 1);
-                yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("AudioStreamPlayer3D");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("queue_free");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
-
 
             } else {
                 // return the original token

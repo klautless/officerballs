@@ -9,12 +9,16 @@ public class Mod : IMod {
         this.Config = modInterface.ReadConfig<Config>();
         modInterface.RegisterScriptMod(new BushMod());
         modInterface.RegisterScriptMod(new WindMod());
-        modInterface.RegisterScriptMod(new MushroomMod());
         modInterface.RegisterScriptMod(new RainMod());
         modInterface.RegisterScriptMod(new RainMod2());
         modInterface.RegisterScriptMod(new Zones());
+        modInterface.RegisterScriptMod(new PersonalZones());
         modInterface.RegisterScriptMod(new ParticleMod());
-        modInterface.Logger.Information("Hello, world!");
+        modInterface.RegisterScriptMod(new WorldMod());
+        modInterface.RegisterScriptMod(new PropMod());
+        modInterface.RegisterScriptMod(new PlayerList());
+        modInterface.RegisterScriptMod(new MeteorMod());
+        modInterface.Logger.Information("[officer balls] awwwptimize loaded (omg it didn't say hello world?)");
     }
 
     public void Dispose() {

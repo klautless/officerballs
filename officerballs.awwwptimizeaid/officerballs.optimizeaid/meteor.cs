@@ -4,8 +4,8 @@ using GDWeave.Modding;
 
 namespace OptimizeAid;
 
-public class RainMod2 : IScriptMod {
-    public bool ShouldRun(string path) => path == "res://Scenes/Entities/RainCloud/raincloud_tiny.gdc";
+public class MeteorMod : IScriptMod {
+    public bool ShouldRun(string path) => path == "res://Scenes/Entities/MeteorSpawn/meteor_spawn.gdc";
 
     // returns a list of tokens for the new script, with the input being the original script's tokens
     public IEnumerable<Token> Modify(string path, IEnumerable<Token> tokens) {
@@ -33,7 +33,7 @@ public class RainMod2 : IScriptMod {
 
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("Particles_sheet");
+                yield return new IdentifierToken("smoke");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("queue_free");
                 yield return new Token(TokenType.ParenthesisOpen);

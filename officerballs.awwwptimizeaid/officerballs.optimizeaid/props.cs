@@ -4,16 +4,16 @@ using GDWeave.Modding;
 
 namespace OptimizeAid;
 
-public class Zones : IScriptMod {
-    public bool ShouldRun(string path) => path == "res://Scenes/Map/Zones/zone.gdc";
+public class PropMod : IScriptMod {
+    public bool ShouldRun(string path) => path == "res://Scenes/Entities/Props/prop.gdc";
 
     // returns a list of tokens for the new script, with the input being the original script's tokens
     public IEnumerable<Token> Modify(string path, IEnumerable<Token> tokens) {
 
         var waiter = new MultiTokenWaiter([
-            t => t is IdentifierToken {Name: "intro_text"},
-            t => t.Type is TokenType.OpAssign,
-            t => t is ConstantToken {Value: StringVariant {Value: ""}}
+            t => t.Type is TokenType.BuiltInType,
+            t => t.Type is TokenType.Period,
+            t => t is IdentifierToken {Name: "ZERO"},
         ]);
 
         // loop through all tokens in the script
@@ -22,34 +22,9 @@ public class Zones : IScriptMod {
 
                 yield return token;
 
-                yield return new Token(TokenType.Newline);
-                yield return new Token(TokenType.PrFunction);
-                yield return new IdentifierToken("_ready");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
-                yield return new Token(TokenType.Colon);
-
                 yield return new Token(TokenType.Newline, 1);
-                yield return new Token(TokenType.CfIf);
-                yield return new Token(TokenType.Self);
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("get_name");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new ConstantToken(new StringVariant("lake_zone"));
-                yield return new Token(TokenType.ParenthesisClose);
-                yield return new Token(TokenType.Colon);
-
-                yield return new Token(TokenType.Newline, 2);
                 yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("particles");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("queue_free");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
-
-                yield return new Token(TokenType.Newline, 2);
-                yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("shoreline");
+                yield return new IdentifierToken("Particles");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("queue_free");
                 yield return new Token(TokenType.ParenthesisOpen);
@@ -61,17 +36,49 @@ public class Zones : IScriptMod {
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("get_name");
                 yield return new Token(TokenType.ParenthesisOpen);
-                yield return new ConstantToken(new StringVariant("aquarium_zone"));
+                yield return new ConstantToken(new StringVariant("campfire"));
                 yield return new Token(TokenType.ParenthesisClose);
                 yield return new Token(TokenType.Colon);
 
                 yield return new Token(TokenType.Newline, 2);
                 yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("tank");
+                yield return new IdentifierToken("Particles");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("queue_free");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.Dollar);
+                yield return new IdentifierToken("smoke");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("queue_free");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.CfIf);
+                yield return new Token(TokenType.Self);
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("get_name");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new ConstantToken(new StringVariant("mushroom_1"));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Colon);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.Dollar);
+                yield return new IdentifierToken("Particles");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("queue_free");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.Dollar);
+                yield return new IdentifierToken("Area");
                 yield return new Token(TokenType.OpDiv);
-                yield return new IdentifierToken("StaticBody");
-                yield return new Token(TokenType.OpDiv);
-                yield return new IdentifierToken("CollisionShape");
+                yield return new IdentifierToken("bounce_emit");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("queue_free");
                 yield return new Token(TokenType.ParenthesisOpen);
