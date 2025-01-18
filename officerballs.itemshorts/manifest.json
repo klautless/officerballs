@@ -1,8 +1,8 @@
 {
   "name": "itemshorts",
-  "version_number": "1.0.0",
+  "version_number": "1.0.1",
   "website_url": "https://github.com/klautless/officerballs",
-  "description": "allows you to quick-scroll between hotbar equips. includes fishing select, chalk select, and instrument select.",
+  "description": "allows you to quick-scroll between hotbar equips. includes fishing select, chalk select, and instrument select. now includes favorites on 4 and 5.",
   "dependencies": [
     "NotNet-GDWeave-2.0.14"
   ]
