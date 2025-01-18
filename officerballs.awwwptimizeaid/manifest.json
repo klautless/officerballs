@@ -1,6 +1,6 @@
 {
   "name": "awwptimizeaid",
-  "version_number": "1.0.0",
+  "version_number": "1.0.1",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "hides a significant amount of particles, stops rain from being drawn. view readme for full deets.",
   "dependencies": [
