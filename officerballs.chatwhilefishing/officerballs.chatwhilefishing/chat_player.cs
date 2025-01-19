@@ -1,4 +1,4 @@
-﻿using GDWeave.Godot;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -49,6 +49,47 @@ public class PlayerChat : IScriptMod {
             if (replaceFishingFinish.Check(token)) {
 
                 yield return token;
+                yield return new IdentifierToken("showcase_ref");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("ref");
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("temp_held");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("held_item");
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("_equip_item");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.CurlyBracketOpen);
+                yield return new ConstantToken(new StringVariant("ref"));
+                yield return new Token(TokenType.Colon);
+                yield return new ConstantToken(new IntVariant(-1));
+                yield return new Token(TokenType.CurlyBracketClose);
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new BoolVariant(true));
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new BoolVariant(true));
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("_enter_animation");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new ConstantToken(new StringVariant("equip"));
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new BoolVariant(false));
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new BoolVariant(false));
+                yield return new Token(TokenType.Comma);
+                yield return new IdentifierToken("STATES");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("SHOWCASE");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new BoolVariant(false));
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
                 yield return new Token(TokenType.PrVar);
                 yield return new IdentifierToken("size_prefix");
                 yield return new Token(TokenType.OpAssign);
@@ -305,6 +346,35 @@ public class PlayerChat : IScriptMod {
                 yield return new Token(TokenType.ParenthesisOpen);
                 yield return new IdentifierToken("st_bonus");
                 yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.PrYield);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("get_tree");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("create_timer");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new ConstantToken(new RealVariant(2.7));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("timeout"));
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("_enter_state");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("STATES");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("DEFAULT");
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new IdentifierToken("_equip_item");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("temp_held");
                 yield return new Token(TokenType.ParenthesisClose);
 
                 yield return new Token(TokenType.Newline, 2);
