@@ -41,6 +41,15 @@ public class Fishing3Chat : IScriptMod {
                 yield return new Token(TokenType.ParenthesisOpen);
                 yield return new Token(TokenType.ParenthesisClose);
 
+                yield return new Token(TokenType.Newline, 1);
+                yield return new IdentifierToken("main");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("rect_position");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("y");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new IntVariant(220));
+
 
             } else if (reposition.Check(token)){
 
