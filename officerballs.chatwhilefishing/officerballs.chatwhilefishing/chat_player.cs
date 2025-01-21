@@ -49,6 +49,11 @@ public class PlayerChat : IScriptMod {
             if (replaceFishingFinish.Check(token)) {
 
                 yield return token;
+                yield return new IdentifierToken("old_rot");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("rotation");
+
+                yield return new Token(TokenType.Newline, 2);
                 yield return new IdentifierToken("showcase_ref");
                 yield return new Token(TokenType.OpAssign);
                 yield return new IdentifierToken("ref");
