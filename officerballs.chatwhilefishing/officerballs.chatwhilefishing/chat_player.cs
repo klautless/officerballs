@@ -369,11 +369,8 @@ public class PlayerChat : IScriptMod {
                 yield return new Token(TokenType.ParenthesisClose);
 
                 yield return new Token(TokenType.Newline, 2);
-                yield return new IdentifierToken("_enter_state");
+                yield return new IdentifierToken("_exit_showcase");
                 yield return new Token(TokenType.ParenthesisOpen);
-                yield return new IdentifierToken("STATES");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("DEFAULT");
                 yield return new Token(TokenType.ParenthesisClose);
 
                 yield return new Token(TokenType.Newline, 2);
