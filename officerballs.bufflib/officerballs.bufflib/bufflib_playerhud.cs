@@ -1,4 +1,4 @@
-﻿using GDWeave.Godot;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -721,7 +721,7 @@ public class BufflibPlayerHUD : IScriptMod {
                 yield return new Token(TokenType.OpDiv);
                 yield return new IdentifierToken("GridContainer");
                 yield return new Token(TokenType.OpDiv);
-                yield return new IdentifierToken("speedboost_big");
+                yield return new IdentifierToken("speedboost_burst");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("duplicate");
                 yield return new Token(TokenType.ParenthesisOpen);
