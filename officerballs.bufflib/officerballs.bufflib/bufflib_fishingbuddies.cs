@@ -44,6 +44,15 @@ public class BuffBuddies : IScriptMod {
 
         var buff_doublebuddies2 = new MultiTokenWaiter([
 
+            t => t is IdentifierToken {Name: "data"},
+            t => t.Type is TokenType.OpAssign,
+            t => t is IdentifierToken {Name: "Globals"},
+            t => t.Type is TokenType.Period,
+            t => t is IdentifierToken {Name: "item_data"},
+            t => t.Type is TokenType.BracketOpen,
+            t => t is IdentifierToken {Name: "fish_roll"},
+            t => t.Type is TokenType.BracketClose,
+            t => t.Type is TokenType.BracketOpen,
             t => t is ConstantToken {Value: StringVariant {Value: "file"}},
             t => t.Type is TokenType.BracketClose,
 
@@ -54,77 +63,6 @@ public class BuffBuddies : IScriptMod {
             if (buff_speedbuddies.Check(token)) {
 
                 yield return token;
-
-                yield return new Token(TokenType.Newline, 1);
-                yield return new Token(TokenType.CfIf);
-                yield return new IdentifierToken("get_parent");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("controlled");
-                yield return new Token(TokenType.Colon);
-
-                yield return new Token(TokenType.Newline, 2);
-                yield return new Token(TokenType.CfIf);
-                yield return new IdentifierToken("get_parent");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("ob_buffs");
-                yield return new Token(TokenType.BracketOpen);
-                yield return new ConstantToken(new StringVariant("buff_speedbuddies"));
-                yield return new Token(TokenType.BracketClose);
-                yield return new Token(TokenType.OpGreater);
-                yield return new ConstantToken(new IntVariant(0));
-                yield return new Token(TokenType.OpAnd);
-                yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("Interactable");
-                yield return new Token(TokenType.OpDiv);
-                yield return new IdentifierToken("Timer");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("wait_time");
-                yield return new Token(TokenType.OpNotEqual);
-                yield return new ConstantToken(new RealVariant(0.5));
-                yield return new Token(TokenType.Colon);
-                yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("Interactable");
-                yield return new Token(TokenType.OpDiv);
-                yield return new IdentifierToken("Timer");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("wait_time");
-                yield return new Token(TokenType.OpAssign);
-                yield return new ConstantToken(new RealVariant(0.5));
-
-                yield return new Token(TokenType.Newline, 2);
-                yield return new Token(TokenType.CfElif);
-                yield return new IdentifierToken("get_parent");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("ob_buffs");
-                yield return new Token(TokenType.BracketOpen);
-                yield return new ConstantToken(new StringVariant("buff_speedbuddies"));
-                yield return new Token(TokenType.BracketClose);
-                yield return new Token(TokenType.OpLessEqual);
-                yield return new ConstantToken(new IntVariant(0));
-                yield return new Token(TokenType.OpAnd);
-                yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("Interactable");
-                yield return new Token(TokenType.OpDiv);
-                yield return new IdentifierToken("Timer");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("wait_time");
-                yield return new Token(TokenType.OpNotEqual);
-                yield return new ConstantToken(new IntVariant(1));
-                yield return new Token(TokenType.Colon);
-                yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("Interactable");
-                yield return new Token(TokenType.OpDiv);
-                yield return new IdentifierToken("Timer");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("wait_time");
-                yield return new Token(TokenType.OpAssign);
-                yield return new ConstantToken(new IntVariant(1));
 
             } else if (addavar.Check(token)) {
 
@@ -174,8 +112,6 @@ public class BuffBuddies : IScriptMod {
                 yield return new Token(TokenType.ParenthesisClose);
 
                 yield return new Token(TokenType.Newline, 1);
-                yield return new Token(TokenType.CfElse);
-                yield return new Token(TokenType.Colon);
 
             } else if (buff_doublebuddies2.Check(token)) {
 

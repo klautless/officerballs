@@ -109,6 +109,23 @@ public class BufflibPlayer : IScriptMod {
 
         ]);
 
+        var buff_lucky = new MultiTokenWaiter([
+
+            t => t is IdentifierToken {Name:"failed_casts"},
+            t => t.Type is TokenType.OpAssignAdd,
+            t => t is ConstantToken {Value: RealVariant {Value: 0.05}},
+
+        ]);
+
+        var buff_fastbite = new MultiTokenWaiter([
+
+            t => t is IdentifierToken {Name:"fish_timer"},
+            t => t.Type is TokenType.Period,
+            t => t is IdentifierToken {Name:"wait_time"},
+            t => t.Type is TokenType.OpAssign,
+
+        ]);
+
         var boon_trash = new MultiTokenWaiter([
 
             t => t is ConstantToken {Value: StringVariant{Value:"magnet"}},
@@ -133,6 +150,14 @@ public class BufflibPlayer : IScriptMod {
                 yield return new IdentifierToken("ob_buffs");
                 yield return new Token(TokenType.OpAssign);
                 yield return new Token(TokenType.CurlyBracketOpen);
+                yield return new ConstantToken(new StringVariant("buff_lucky"));
+                yield return new Token(TokenType.Colon);
+                yield return new ConstantToken(new IntVariant(0));
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new StringVariant("buff_fastbite"));
+                yield return new Token(TokenType.Colon);
+                yield return new ConstantToken(new IntVariant(0));
+                yield return new Token(TokenType.Comma);
                 yield return new ConstantToken(new StringVariant("buff_small"));
                 yield return new Token(TokenType.Colon);
                 yield return new ConstantToken(new IntVariant(0));
@@ -488,6 +513,20 @@ public class BufflibPlayer : IScriptMod {
                 yield return new ConstantToken(new IntVariant(0));
 
                 yield return new Token(TokenType.Newline, 4);
+                yield return new Token(TokenType.CfIf);
+                yield return new IdentifierToken("buff");
+                yield return new Token(TokenType.OpEqual);
+                yield return new ConstantToken(new StringVariant("buff_large"));
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 5);
+                yield return new IdentifierToken("ob_buffs");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("buff_small"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new IntVariant(0));
+
+                yield return new Token(TokenType.Newline, 4);
                 yield return new IdentifierToken("ob_buffs");
                 yield return new Token(TokenType.BracketOpen);
                 yield return new IdentifierToken("buff");
@@ -615,12 +654,20 @@ public class BufflibPlayer : IScriptMod {
 
                 yield return token;
                 yield return new Token(TokenType.OpOr);
+                yield return new Token(TokenType.ParenthesisOpen);
                 yield return new IdentifierToken("ob_buffs");
                 yield return new Token(TokenType.BracketOpen);
                 yield return new ConstantToken(new StringVariant("buff_double"));
                 yield return new Token(TokenType.BracketClose);
                 yield return new Token(TokenType.OpGreater);
                 yield return new ConstantToken(new IntVariant(0));
+                yield return new Token(TokenType.OpAnd);
+                yield return new Token(TokenType.BuiltInFunc, 39);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpLess);
+                yield return new ConstantToken(new RealVariant(0.15));
+                yield return new Token(TokenType.ParenthesisClose);
                 yield return new Token(TokenType.ParenthesisClose);
 
             } else if (buff_zones.Check(token)) {
@@ -800,6 +847,42 @@ public class BufflibPlayer : IScriptMod {
                 yield return new Token(TokenType.ParenthesisOpen);
                 yield return new ConstantToken(new StringVariant("woah! you found a scratchie."));
                 yield return new Token(TokenType.ParenthesisClose);
+
+            } else if (buff_lucky.Check(token)) {
+
+                yield return token;
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.CfIf);
+                yield return new IdentifierToken("ob_buffs");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("buff_lucky"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.OpGreater);
+                yield return new ConstantToken(new IntVariant(0));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("failed_casts");
+                yield return new Token(TokenType.OpAssignAdd);
+                yield return new ConstantToken(new RealVariant(0.12));
+
+
+            } else if (buff_fastbite.Check(token)) {
+              
+                yield return token;
+                yield return new Token(TokenType.BuiltInFunc, 40);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new ConstantToken(new RealVariant(1.0));
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new RealVariant(2.5));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.CfIf);
+                yield return new IdentifierToken("ob_buffs");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("buff_fastbite"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.OpGreater);
+                yield return new ConstantToken(new IntVariant(0));
+                yield return new Token(TokenType.CfElse);
 
             } else if (boon_trash.Check(token)) {
 
