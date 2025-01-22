@@ -38,7 +38,8 @@ func init_player(player: Actor):
 				else:
 					if not loadedin:
 						plactor = actor
-						_refresh_players()
+						playhighlighted = plactor.owner_id
+						_refresh_players(true)
 						loadedin = true
 	else:
 		yield (get_tree().create_timer(10),"timeout")
@@ -77,12 +78,12 @@ func _get_input():
 			_player_selector(true)
 		if Input.is_action_pressed("move_down") and Input.is_action_pressed("move_walk") and Input.is_action_just_released("zoom_out"):
 			_player_selector()
-		if Input.is_action_pressed("interact") and not Input.is_action_pressed("move_walk") and Input.is_action_just_pressed("secondary_action"):
+		if Input.is_action_pressed("move_down") and not Input.is_action_pressed("move_walk") and Input.is_action_just_pressed("secondary_action"):
 			_roll()
-		elif Input.is_action_pressed("interact") and Input.is_action_pressed("move_walk") and Input.is_action_just_pressed("secondary_action"):
+		elif Input.is_action_pressed("move_down") and Input.is_action_pressed("move_walk") and Input.is_action_just_pressed("secondary_action"):
 			_stats()
 
-func _refresh_players():
+func _refresh_players(first=false):
 	if not PlayerAPI.in_game: return
 	if Network.PLAYING_OFFLINE or Network.STEAM_LOBBY_ID <= 0: return
 	play_options.clear()
