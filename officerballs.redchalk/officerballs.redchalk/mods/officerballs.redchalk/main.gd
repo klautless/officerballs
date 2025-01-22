@@ -76,40 +76,42 @@ func _get_input():
 func _custom_buff_scroller(back=false):
 	if not back:
 		customchoices += 1
-		if customchoices >= 27: customchoices = 0
-		elif customchoices <= 0: customchoices = 26
+		if customchoices >= 29: customchoices = 0
+		elif customchoices <= -1: customchoices = 28
 	else:
 		customchoices -= 1
-		if customchoices >= 27: customchoices = 0
-		elif customchoices <= 0: customchoices = 26
+		if customchoices >= 29: customchoices = 0
+		elif customchoices <= -1: customchoices = 28
 	match customchoices:
-		0: PlayerData._send_notification("buff_salty selected")
-		1: PlayerData._send_notification("buff_fresh selected")
-		2: PlayerData._send_notification("buff_rain selected")
-		3: PlayerData._send_notification("buff_void selected")
-		4: PlayerData._send_notification("buff_alien selected")
-		5: PlayerData._send_notification("buff_small selected")
-		6: PlayerData._send_notification("buff_large selected")
-		7: PlayerData._send_notification("buff_quality selected")
-		8: PlayerData._send_notification("buff_rarity selected")
-		9: PlayerData._send_notification("buff_timestretch selected")
-		10: PlayerData._send_notification("buff_cantlosefish selected")
-		11: PlayerData._send_notification("buff_double selected")
-		12: PlayerData._send_notification("buff_haste selected")
-		13: PlayerData._send_notification("buff_clickreduce selected")
-		14: PlayerData._send_notification("buff_clickmultiply selected")
-		15: PlayerData._send_notification("buff_gatereduce selected")
-		16: PlayerData._send_notification("buff_valuelift selected")
-		17: PlayerData._send_notification("buff_efficiency selected")
-		18: PlayerData._send_notification("buff_speedbuddies selected")
-		19: PlayerData._send_notification("buff_doublebuddies selected")
-		20: PlayerData._send_notification("buff_protection selected")
-		21: PlayerData._send_notification("buff_gamblefisher selected")
-		22: PlayerData._send_notification("boon_redcreep selected")
-		23: PlayerData._send_notification("boon_weakening selected")
-		24: PlayerData._send_notification("boon_slowbite selected")
-		25: PlayerData._send_notification("boon_trash selected")
-		26: PlayerData._send_notification("boon_slowness selected")
+		0: PlayerData._send_notification("buff_lucky selected")
+		1: PlayerData._send_notification("buff_fastbite selected")
+		2: PlayerData._send_notification("buff_salty selected")
+		3: PlayerData._send_notification("buff_fresh selected")
+		4: PlayerData._send_notification("buff_rain selected")
+		5: PlayerData._send_notification("buff_void selected")
+		6: PlayerData._send_notification("buff_alien selected")
+		7: PlayerData._send_notification("buff_small selected")
+		8: PlayerData._send_notification("buff_large selected")
+		9: PlayerData._send_notification("buff_quality selected")
+		10: PlayerData._send_notification("buff_rarity selected")
+		11: PlayerData._send_notification("buff_timestretch selected")
+		12: PlayerData._send_notification("buff_cantlosefish selected")
+		13: PlayerData._send_notification("buff_double selected")
+		14: PlayerData._send_notification("buff_haste selected")
+		15: PlayerData._send_notification("buff_clickreduce selected")
+		16: PlayerData._send_notification("buff_clickmultiply selected")
+		17: PlayerData._send_notification("buff_gatereduce selected")
+		18: PlayerData._send_notification("buff_valuelift selected")
+		19: PlayerData._send_notification("buff_efficiency selected")
+		20: PlayerData._send_notification("buff_speedbuddies selected")
+		21: PlayerData._send_notification("buff_doublebuddies selected")
+		22: PlayerData._send_notification("buff_protection selected")
+		23: PlayerData._send_notification("buff_gamblefisher selected")
+		24: PlayerData._send_notification("boon_redcreep selected")
+		25: PlayerData._send_notification("boon_weakening selected")
+		26: PlayerData._send_notification("boon_slowbite selected")
+		27: PlayerData._send_notification("boon_trash selected")
+		28: PlayerData._send_notification("boon_slowness selected")
 
 func _chalk_menu(option,scroll=false,alt=false):
 	if scroll:
@@ -168,30 +170,32 @@ func _chalk_menu(option,scroll=false,alt=false):
 			
 			4:
 				match customchoices:
-					0: plactor.ob_buffs["buff_salty"] += 300
-					1: plactor.ob_buffs["buff_fresh"] += 300
-					2: plactor.ob_buffs["buff_rain"] += 300
-					3: plactor.ob_buffs["buff_void"] += 300
-					4: plactor.ob_buffs["buff_alien"] += 300
-					5: plactor.ob_buffs["buff_small"] += 300
-					6: plactor.ob_buffs["buff_large"] += 300
-					7: plactor.ob_buffs["buff_quality"] += 300
-					8: plactor.ob_buffs["buff_rarity"] += 300
-					9: plactor.ob_buffs["buff_timestretch"] += 300
-					10: plactor.ob_buffs["buff_cantlosefish"] += 300
-					11: plactor.ob_buffs["buff_double"] += 300
-					12: plactor.ob_buffs["buff_haste"] += 300
-					13: plactor.ob_buffs["buff_clickreduce"] += 300
-					14: plactor.ob_buffs["buff_clickmultiply"] += 300
-					15: plactor.ob_buffs["buff_gatereduce"] += 300
-					16: plactor.ob_buffs["buff_valuelift"] += 300
-					17: plactor.ob_buffs["buff_efficiency"] += 300
-					18: plactor.ob_buffs["buff_speedbuddies"] += 300
-					19: plactor.ob_buffs["buff_doublebuddies"] += 300
-					20: plactor.ob_buffs["buff_protection"] += 300
-					21: plactor.ob_buffs["buff_gamblefisher"] += 300
-					22: plactor.ob_boons["boon_redcreep"] += 300
-					23: plactor.ob_boons["boon_weakening"] += 300
-					24: plactor.ob_boons["boon_slowbite"] += 300
-					25: plactor.ob_boons["boon_trash"] += 300
-					26: plactor.ob_boons["boon_slowness"] += 300
+					0: plactor.ob_buffs["buff_lucky"] += 300
+					1: plactor.ob_buffs["buff_fastbite"] += 300
+					2: plactor.ob_buffs["buff_salty"] += 300
+					3: plactor.ob_buffs["buff_fresh"] += 300
+					4: plactor.ob_buffs["buff_rain"] += 300
+					5: plactor.ob_buffs["buff_void"] += 300
+					6: plactor.ob_buffs["buff_alien"] += 300
+					7: plactor.ob_buffs["buff_small"] += 300
+					8: plactor.ob_buffs["buff_large"] += 300
+					9: plactor.ob_buffs["buff_quality"] += 300
+					10: plactor.ob_buffs["buff_rarity"] += 300
+					11: plactor.ob_buffs["buff_timestretch"] += 300
+					12: plactor.ob_buffs["buff_cantlosefish"] += 300
+					13: plactor.ob_buffs["buff_double"] += 300
+					14: plactor.ob_buffs["buff_haste"] += 300
+					15: plactor.ob_buffs["buff_clickreduce"] += 300
+					16: plactor.ob_buffs["buff_clickmultiply"] += 300
+					17: plactor.ob_buffs["buff_gatereduce"] += 300
+					18: plactor.ob_buffs["buff_valuelift"] += 300
+					19: plactor.ob_buffs["buff_efficiency"] += 300
+					20: plactor.ob_buffs["buff_speedbuddies"] += 300
+					21: plactor.ob_buffs["buff_doublebuddies"] += 300
+					22: plactor.ob_buffs["buff_protection"] += 300
+					23: plactor.ob_buffs["buff_gamblefisher"] += 300
+					24: plactor.ob_boons["boon_redcreep"] += 300
+					25: plactor.ob_boons["boon_weakening"] += 300
+					26: plactor.ob_boons["boon_slowbite"] += 300
+					27: plactor.ob_boons["boon_trash"] += 300
+					28: plactor.ob_boons["boon_slowness"] += 300
