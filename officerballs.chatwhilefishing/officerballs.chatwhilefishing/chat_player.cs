@@ -1,4 +1,4 @@
-using GDWeave.Godot;
+﻿using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -23,10 +23,9 @@ public class PlayerChat : IScriptMod {
         var declare = new MultiTokenWaiter([
 
             t => t.Type is TokenType.PrVar,
-            t => t is IdentifierToken {Name: "bonus_text"},
+            t => t is IdentifierToken {Name: "catches"},
             t => t.Type is TokenType.OpAssign,
-            t => t.Type is TokenType.BracketOpen,
-            t => t.Type is TokenType.BracketClose,
+            t => t is ConstantToken {Value: IntVariant {Value: 1}}
 
         ]);
 
