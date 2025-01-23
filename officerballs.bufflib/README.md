@@ -2,6 +2,9 @@
 adds 24 buffs and 5 boons to enhance gameplay. this does not function standalone but is for myself and other modders if they wish to utilize its functions.  
 now includes new setting: RandomBuffsFromFishing - enable to have a chance to get random buffs/boons while fishing.  
   
+to get a random buff, hold Q while flushing a toilet.  
+to wipe all buffs and boons, hold shift while flushing a toilet.  
+  
 for support/conflicts please create a GitHub issue.  
   
 ## buffs and boons  
