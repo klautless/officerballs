@@ -41,7 +41,9 @@ boon_slowness - slows you down!
 ## to use these in your mods  
 you're welcome to include this as a dependency for your own mods.  
 when referencing the local player, utilize the following commands (using local_player as an example reference):  
-- local_player._add_buff("buff_salty", 60, 3)  
+  
+local_player._add_buff("buff_salty", 60, 3)  
+  
 this would add the "salty" buff at tier 3 for one minute.  
 all buffs except 'cantlosefish' and 'protection' have a tier from 1 to 5.  
   
