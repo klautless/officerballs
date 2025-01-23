@@ -41,6 +41,15 @@ public class BufflibMinigame : IScriptMod {
 
         var buff_haste = new MultiTokenWaiter([
 
+            t => t is IdentifierToken {Name:"params"},
+            t => t.Type is TokenType.BracketOpen,
+            t => t is ConstantToken {Value: StringVariant{Value:"speed"}},
+            t => t.Type is TokenType.BracketClose,
+
+        ]);
+
+        var buff_haste2 = new MultiTokenWaiter([
+
             t => t is ConstantToken {Value: StringVariant{Value:"quick"}},
 
         ]);
@@ -77,15 +86,6 @@ public class BufflibMinigame : IScriptMod {
 
             t => t.Type is TokenType.Comma,
             t => t is ConstantToken {Value: IntVariant {Value: 6}},
-            t => t.Type is TokenType.ParenthesisClose,
-
-        ]);
-
-        var boon_slowbite = new MultiTokenWaiter([
-
-            t => t is ConstantToken {Value: RealVariant {Value: 2.0}},
-            t => t.Type is TokenType.Comma,
-            t => t is ConstantToken {Value: RealVariant {Value: 3.0}},
             t => t.Type is TokenType.ParenthesisClose,
 
         ]);
@@ -139,7 +139,15 @@ public class BufflibMinigame : IScriptMod {
             } else if (buff_haste.Check(token)) {
 
                 yield return token;
-                yield return new Token(TokenType.OpOr);
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("sprinklefuckin");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(false));
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.CfIf);
                 yield return new IdentifierToken("plactor");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("ob_buffs");
@@ -148,6 +156,80 @@ public class BufflibMinigame : IScriptMod {
                 yield return new Token(TokenType.BracketClose);
                 yield return new Token(TokenType.OpGreater);
                 yield return new ConstantToken(new IntVariant(0));
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.CfMatch);
+                yield return new IdentifierToken("plactor");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("ob_buffs_tier");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("buff_haste"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.CfIf);
+                yield return new Token(TokenType.BuiltInFunc, 39);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpLess);
+                yield return new ConstantToken(new RealVariant(0.2));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("sprinklefuckin");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(true));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(2));
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.CfIf);
+                yield return new Token(TokenType.BuiltInFunc, 39);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpLess);
+                yield return new ConstantToken(new RealVariant(0.4));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("sprinklefuckin");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(true));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(3));
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.CfIf);
+                yield return new Token(TokenType.BuiltInFunc, 39);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpLess);
+                yield return new ConstantToken(new RealVariant(0.6));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("sprinklefuckin");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(true));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(4));
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.CfIf);
+                yield return new Token(TokenType.BuiltInFunc, 39);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpLess);
+                yield return new ConstantToken(new RealVariant(0.8));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("sprinklefuckin");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(true));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(5));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("sprinklefuckin");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new BoolVariant(true));
+
+            } else if (buff_haste2.Check(token)) {
+
+                yield return token;
+                yield return new Token(TokenType.OpOr);
+                yield return new IdentifierToken("sprinklefuckin");
 
             } else if (buff_timestretch.Check(token)) {
 
@@ -164,9 +246,45 @@ public class BufflibMinigame : IScriptMod {
                 yield return new Token(TokenType.OpGreater);
                 yield return new ConstantToken(new IntVariant(0));
                 yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.CfMatch);
+                yield return new IdentifierToken("plactor");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("ob_buffs_tier");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("buff_timestretch"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("bad_speed");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(0.8));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(2));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("bad_speed");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(0.7));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(3));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("bad_speed");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(0.6));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(4));
+                yield return new Token(TokenType.Colon);
                 yield return new IdentifierToken("bad_speed");
                 yield return new Token(TokenType.OpAssignMul);
                 yield return new ConstantToken(new RealVariant(0.5));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(5));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("bad_speed");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(0.33));
 
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.CfElif);
@@ -179,9 +297,45 @@ public class BufflibMinigame : IScriptMod {
                 yield return new Token(TokenType.OpGreater);
                 yield return new ConstantToken(new IntVariant(0));
                 yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.CfMatch);
+                yield return new IdentifierToken("plactor");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("ob_boons_tier");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("boon_redcreep"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Colon);
                 yield return new IdentifierToken("bad_speed");
                 yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(1.25));
+                yield return new Token(TokenType.Newline, 3);
                 yield return new ConstantToken(new IntVariant(2));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("bad_speed");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(1.5));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(3));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("bad_speed");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(1.75));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(4));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("bad_speed");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(2));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(5));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("bad_speed");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(2.5));
 
             } else if (buff_clickreduce.Check(token)) {
 
@@ -197,6 +351,42 @@ public class BufflibMinigame : IScriptMod {
                 yield return new Token(TokenType.BracketClose);
                 yield return new Token(TokenType.OpGreater);
                 yield return new ConstantToken(new IntVariant(0));
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.CfMatch);
+                yield return new IdentifierToken("plactor");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("ob_buffs_tier");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("buff_clickreduce"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("total_hp");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(0.9));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(2));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("total_hp");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(0.8));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(3));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("total_hp");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(0.7));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(4));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("total_hp");
+                yield return new Token(TokenType.OpAssignMul);
+                yield return new ConstantToken(new RealVariant(0.6));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(5));
                 yield return new Token(TokenType.Colon);
                 yield return new IdentifierToken("total_hp");
                 yield return new Token(TokenType.OpAssignMul);
@@ -216,6 +406,78 @@ public class BufflibMinigame : IScriptMod {
                 yield return new Token(TokenType.BracketClose);
                 yield return new Token(TokenType.OpGreater);
                 yield return new ConstantToken(new IntVariant(0));
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.CfMatch);
+                yield return new IdentifierToken("plactor");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("ob_buffs_tier");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("buff_clickmultiply"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("ys");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("health");
+                yield return new Token(TokenType.OpAssignSub);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("params");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("damage"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpDiv);
+                yield return new ConstantToken(new IntVariant(5));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(2));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("ys");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("health");
+                yield return new Token(TokenType.OpAssignSub);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("params");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("damage"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpDiv);
+                yield return new ConstantToken(new IntVariant(4));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(3));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("ys");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("health");
+                yield return new Token(TokenType.OpAssignSub);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("params");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("damage"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpDiv);
+                yield return new ConstantToken(new IntVariant(3));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(4));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("ys");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("health");
+                yield return new Token(TokenType.OpAssignSub);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("params");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("damage"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpDiv);
+                yield return new ConstantToken(new IntVariant(2));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(5));
                 yield return new Token(TokenType.Colon);
                 yield return new IdentifierToken("ys");
                 yield return new Token(TokenType.Period);
@@ -237,6 +499,18 @@ public class BufflibMinigame : IScriptMod {
                 yield return new Token(TokenType.OpGreater);
                 yield return new ConstantToken(new IntVariant(0));
                 yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.CfMatch);
+                yield return new IdentifierToken("plactor");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("ob_boons_tier");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("boon_weakening"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Colon);
                 yield return new IdentifierToken("ys");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("health");
@@ -247,8 +521,72 @@ public class BufflibMinigame : IScriptMod {
                 yield return new Token(TokenType.BracketOpen);
                 yield return new ConstantToken(new StringVariant("damage"));
                 yield return new Token(TokenType.BracketClose);
-                yield return new Token(TokenType.OpDiv);
+                yield return new Token(TokenType.OpMul);
+                yield return new ConstantToken(new RealVariant(0.9));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Newline, 3);
                 yield return new ConstantToken(new IntVariant(2));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("ys");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("health");
+                yield return new Token(TokenType.OpAssignAdd);
+                yield return new Token(TokenType.BuiltInFunc, 14);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("params");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("damage"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.OpMul);
+                yield return new ConstantToken(new RealVariant(0.8));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(3));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("ys");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("health");
+                yield return new Token(TokenType.OpAssignAdd);
+                yield return new Token(TokenType.BuiltInFunc, 14);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("params");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("damage"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.OpMul);
+                yield return new ConstantToken(new RealVariant(0.7));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(4));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("ys");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("health");
+                yield return new Token(TokenType.OpAssignAdd);
+                yield return new Token(TokenType.BuiltInFunc, 14);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("params");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("damage"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.OpMul);
+                yield return new ConstantToken(new RealVariant(0.6));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(5));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("ys");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("health");
+                yield return new Token(TokenType.OpAssignAdd);
+                yield return new Token(TokenType.BuiltInFunc, 14);
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("params");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("damage"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.OpMul);
+                yield return new ConstantToken(new RealVariant(0.5));
                 yield return new Token(TokenType.ParenthesisClose);
 
             } else if (buff_gatereduce.Check(token)) {
@@ -266,6 +604,57 @@ public class BufflibMinigame : IScriptMod {
                 yield return new Token(TokenType.OpGreater);
                 yield return new ConstantToken(new IntVariant(0));
                 yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.CfMatch);
+                yield return new IdentifierToken("plactor");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("ob_buffs_tier");
+                yield return new Token(TokenType.BracketOpen);
+                yield return new ConstantToken(new StringVariant("buff_gatereduce"));
+                yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("yank_spots");
+                yield return new Token(TokenType.OpAssign);
+                yield return new Token(TokenType.BuiltInFunc, 53); //clamp
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("yank_spots");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new IntVariant(5));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(2));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("yank_spots");
+                yield return new Token(TokenType.OpAssign);
+                yield return new Token(TokenType.BuiltInFunc, 53); //clamp
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("yank_spots");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new IntVariant(5));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(3));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("yank_spots");
+                yield return new Token(TokenType.OpAssign);
+                yield return new Token(TokenType.BuiltInFunc, 53); //clamp
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("yank_spots");
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new IntVariant(4));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(4));
+                yield return new Token(TokenType.Colon);
                 yield return new IdentifierToken("yank_spots");
                 yield return new Token(TokenType.OpAssign);
                 yield return new Token(TokenType.BuiltInFunc, 53); //clamp
@@ -278,31 +667,20 @@ public class BufflibMinigame : IScriptMod {
                 yield return new Token(TokenType.Comma);
                 yield return new ConstantToken(new IntVariant(3));
                 yield return new Token(TokenType.ParenthesisClose);
-
-            } else if (boon_slowbite.Check(token)) {
-
-                yield return token;
-
-                yield return new Token(TokenType.Newline, 1);
-                yield return new Token(TokenType.CfIf);
-                yield return new IdentifierToken("plactor");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("ob_boons");
-                yield return new Token(TokenType.BracketOpen);
-                yield return new ConstantToken(new StringVariant("boon_slowbite"));
-                yield return new Token(TokenType.BracketClose);
-                yield return new Token(TokenType.OpGreater);
-                yield return new ConstantToken(new IntVariant(0));
+                yield return new Token(TokenType.Newline, 3);
+                yield return new ConstantToken(new IntVariant(5));
                 yield return new Token(TokenType.Colon);
-                yield return new IdentifierToken("fish_timer");
-                yield return new Token(TokenType.Period);
-                yield return new IdentifierToken("wait_time");
-                yield return new Token(TokenType.OpAssignAdd);
-                yield return new Token(TokenType.BuiltInFunc, 40);
+                yield return new IdentifierToken("yank_spots");
+                yield return new Token(TokenType.OpAssign);
+                yield return new Token(TokenType.BuiltInFunc, 53); //clamp
                 yield return new Token(TokenType.ParenthesisOpen);
-                yield return new ConstantToken(new RealVariant(2));
+                yield return new IdentifierToken("yank_spots");
+                yield return new Token(TokenType.OpDiv);
+                yield return new ConstantToken(new IntVariant(2));
                 yield return new Token(TokenType.Comma);
-                yield return new ConstantToken(new RealVariant(3));
+                yield return new ConstantToken(new IntVariant(1));
+                yield return new Token(TokenType.Comma);
+                yield return new ConstantToken(new IntVariant(2));
                 yield return new Token(TokenType.ParenthesisClose);
 
             } else {

@@ -36,6 +36,10 @@ public class BufflibFXBox : IScriptMod {
                 yield return new IdentifierToken("williamwonka");
                 yield return new Token(TokenType.OpAssign);
                 yield return new ConstantToken(new BoolVariant(false));
+                yield return new Token(TokenType.Comma);
+                yield return new IdentifierToken("loisgriffin");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new StringVariant(""));
 
             } else if (checkTheTime.Check(token)) {
             
@@ -43,6 +47,8 @@ public class BufflibFXBox : IScriptMod {
                 yield return new Token(TokenType.CfIf);
                 yield return new IdentifierToken("williamwonka");
                 yield return new Token(TokenType.Colon);
+
+                yield return new Token(TokenType.Newline, 2);
                 yield return new Token(TokenType.Dollar);
                 yield return new IdentifierToken("TooltipNode");
                 yield return new Token(TokenType.Period);
@@ -63,6 +69,14 @@ public class BufflibFXBox : IScriptMod {
                 yield return new Token(TokenType.ParenthesisClose);
                 yield return new Token(TokenType.OpAdd);
                 yield return new ConstantToken(new StringVariant(" min"));
+
+                yield return new Token(TokenType.Newline, 2);
+                yield return new Token(TokenType.Dollar);
+                yield return new IdentifierToken("TooltipNode");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("header");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("loisgriffin");
 
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.CfElse);
