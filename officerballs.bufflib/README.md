@@ -1,5 +1,5 @@
 # buff lib  
-adds 24 buffs and 5 boons to enhance gameplay. this does not function standalone but is for myself and other modders if they wish to utilize its functions.  
+adds 24 buffs and 5 boons to enhance gameplay. functions as a library for other mods to utilize.  
 now includes new setting: RandomBuffsFromFishing - enable to have a chance to get random buffs/boons while fishing.  
   
 to get a random buff, hold Q while flushing a toilet.  
