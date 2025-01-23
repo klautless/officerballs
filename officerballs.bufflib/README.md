@@ -1,5 +1,8 @@
 # buff lib  
-adds 22 buffs and 5 boons to enhance gameplay. this does not function standalone but is for myself and other modders if they wish to utilize its functions. to test them out, use [red chalk](https://thunderstore.io/c/webfishing/p/officer_balls/redchalk/).  
+adds 24 buffs and 5 boons to enhance gameplay. this does not function standalone but is for myself and other modders if they wish to utilize its functions.  
+now includes new setting: RandomBuffsFromFishing - enable to have a chance to get random buffs/boons while fishing.  
+  
+for support/conflicts please create a GitHub issue.  
   
 ## buffs and boons  
 buff_salty - treat nearby water as salt  
@@ -15,7 +18,8 @@ buff_rarity - acts as a gold lure
   
 buff_timestretch - the red bar creeps at 1/2 speed while fishing  
 buff_cantlosefish - the red bar doesn't creep at all while fishing  
-  
+buff_lucky - get more bite chance% per tick while fishing  
+buff_fastbite - fishing tickrate is higher  
 buff_double - acts as a double lure  
 buff_haste - acts as a quick jig (faster reeling)  
 buff_clickreduce - lowers fish health by 50%  
@@ -36,8 +40,14 @@ boon_slowness - slows you down!
   
 ## to use these in your mods  
 you're welcome to include this as a dependency for your own mods.  
-when referencing the local player, local_player.ob_buffs["buff_salty"] += 60 would increase the salty buff by one minute.  
-boons utilize .ob_boons["boon_redcreep"] (example) instead.  
+when referencing the local player, utilize the following commands (using local_player as an example reference):  
+- local_player._add_buff("buff_salty", 60, 3)  
+this would add the "salty" buff at tier 3 for one minute.  
+all buffs except 'cantlosefish' and 'protection' have a tier from 1 to 5.  
   
-
+if you wish to apply a boon, utilize _add_boon instead.  
+_wipe_buff("boon_example") and _wipe_boon("boon_example") will remove buffs.  
+additionally: _random_buff_or_boon(), _wipe_all_buffs() and _wipe_all_boons() are usable.  
+  
+want to support my work? consider buying me a donut at my ko-fi!  
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/S6S519BLBL)
