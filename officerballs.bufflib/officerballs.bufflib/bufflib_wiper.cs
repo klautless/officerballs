@@ -25,6 +25,16 @@ public class Terlet : IScriptMod {
                 yield return token;
 
                 yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("bufflib");
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("get_node");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new ConstantToken(new StringVariant("/root/officerballsbufflib"));
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.CfIf);
                 yield return new IdentifierToken("Input");
                 yield return new Token(TokenType.Period);
@@ -50,6 +60,12 @@ public class Terlet : IScriptMod {
 
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.CfElif);
+                yield return new IdentifierToken("bufflib");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("config");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("RandomBuffsFromBuddies");
+                yield return new Token(TokenType.OpAnd);
                 yield return new IdentifierToken("Input");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("is_action_pressed");

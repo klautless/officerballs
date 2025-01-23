@@ -10,6 +10,14 @@ public class BuffBuddies : IScriptMod {
     // returns a list of tokens for the new script, with the input being the original script's tokens
     public IEnumerable<Token> Modify(string path, IEnumerable<Token> tokens) {
 
+        var uponReady = new MultiTokenWaiter([
+
+            t => t is IdentifierToken {Name: "_ready"},
+            t => t.Type is TokenType.ParenthesisOpen,
+            t => t.Type is TokenType.ParenthesisClose,
+            t => t.Type is TokenType.Colon,
+        ]);
+
         var addavar = new MultiTokenWaiter([
 
             t => t.Type is TokenType.PrVar,
@@ -66,9 +74,7 @@ public class BuffBuddies : IScriptMod {
 
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.CfIf);
-                yield return new IdentifierToken("get_parent");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
+                yield return new IdentifierToken("plactor");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("ob_buffs");
                 yield return new Token(TokenType.BracketOpen);
@@ -79,9 +85,7 @@ public class BuffBuddies : IScriptMod {
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.Newline, 2);
                 yield return new Token(TokenType.CfMatch);
-                yield return new IdentifierToken("get_parent");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
+                yield return new IdentifierToken("plactor");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("ob_buffs_tier");
                 yield return new Token(TokenType.BracketOpen);
@@ -92,7 +96,7 @@ public class BuffBuddies : IScriptMod {
                 yield return new ConstantToken(new IntVariant(1));
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("interactable");
+                yield return new IdentifierToken("Interactable");
                 yield return new Token(TokenType.OpDiv);
                 yield return new IdentifierToken("Timer");
                 yield return new Token(TokenType.Period);
@@ -103,7 +107,7 @@ public class BuffBuddies : IScriptMod {
                 yield return new ConstantToken(new IntVariant(2));
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("interactable");
+                yield return new IdentifierToken("Interactable");
                 yield return new Token(TokenType.OpDiv);
                 yield return new IdentifierToken("Timer");
                 yield return new Token(TokenType.Period);
@@ -114,7 +118,7 @@ public class BuffBuddies : IScriptMod {
                 yield return new ConstantToken(new IntVariant(3));
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("interactable");
+                yield return new IdentifierToken("Interactable");
                 yield return new Token(TokenType.OpDiv);
                 yield return new IdentifierToken("Timer");
                 yield return new Token(TokenType.Period);
@@ -125,7 +129,7 @@ public class BuffBuddies : IScriptMod {
                 yield return new ConstantToken(new IntVariant(4));
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("interactable");
+                yield return new IdentifierToken("Interactable");
                 yield return new Token(TokenType.OpDiv);
                 yield return new IdentifierToken("Timer");
                 yield return new Token(TokenType.Period);
@@ -136,7 +140,7 @@ public class BuffBuddies : IScriptMod {
                 yield return new ConstantToken(new IntVariant(5));
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("interactable");
+                yield return new IdentifierToken("Interactable");
                 yield return new Token(TokenType.OpDiv);
                 yield return new IdentifierToken("Timer");
                 yield return new Token(TokenType.Period);
@@ -146,7 +150,7 @@ public class BuffBuddies : IScriptMod {
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.CfElif);
                 yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("interactable");
+                yield return new IdentifierToken("Interactable");
                 yield return new Token(TokenType.OpDiv);
                 yield return new IdentifierToken("Timer");
                 yield return new Token(TokenType.Period);
@@ -155,7 +159,7 @@ public class BuffBuddies : IScriptMod {
                 yield return new ConstantToken(new IntVariant(1));
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.Dollar);
-                yield return new IdentifierToken("interactable");
+                yield return new IdentifierToken("Interactable");
                 yield return new Token(TokenType.OpDiv);
                 yield return new IdentifierToken("Timer");
                 yield return new Token(TokenType.Period);
@@ -173,15 +177,19 @@ public class BuffBuddies : IScriptMod {
                 yield return new Token(TokenType.OpAssign);
                 yield return new ConstantToken(new BoolVariant(false));
 
+                yield return new Token(TokenType.Newline);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("plactor");
+                yield return new Token(TokenType.OpAssign);
+                yield return new ConstantToken(new NilVariant());
+
             } else if (buff_doublebuddies1.Check(token)) {
                 
                 yield return token;
 
                 yield return new Token(TokenType.Newline, 1);
                 yield return new Token(TokenType.CfIf);
-                yield return new IdentifierToken("get_parent");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
+                yield return new IdentifierToken("plactor");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("ob_buffs");
                 yield return new Token(TokenType.BracketOpen);
@@ -192,9 +200,7 @@ public class BuffBuddies : IScriptMod {
                 yield return new Token(TokenType.Colon);
                 yield return new Token(TokenType.Newline, 2);
                 yield return new Token(TokenType.CfMatch);
-                yield return new IdentifierToken("get_parent");
-                yield return new Token(TokenType.ParenthesisOpen);
-                yield return new Token(TokenType.ParenthesisClose);
+                yield return new IdentifierToken("plactor");
                 yield return new Token(TokenType.Period);
                 yield return new IdentifierToken("ob_buffs_tier");
                 yield return new Token(TokenType.BracketOpen);
@@ -308,6 +314,36 @@ public class BuffBuddies : IScriptMod {
                 yield return new Token(TokenType.ParenthesisClose);
 
                 yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.PrVar);
+                yield return new IdentifierToken("bufflib");
+                yield return new Token(TokenType.Colon);
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("get_node");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new ConstantToken(new StringVariant("/root/officerballsbufflib"));
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.CfIf);
+                yield return new IdentifierToken("bufflib");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("config");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("RandomBuffsFromBuddies");
+                yield return new Token(TokenType.OpAnd);
+                yield return new Token(TokenType.BuiltInFunc, 39); // randf
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.OpLessEqual);
+                yield return new ConstantToken(new RealVariant(0.15));
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("plactor");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("_random_buff_or_boon");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 1);
 
             } else if (buff_doublebuddies2.Check(token)) {
 
@@ -343,6 +379,28 @@ public class BuffBuddies : IScriptMod {
                 yield return new Token(TokenType.BracketOpen);
                 yield return new Token(TokenType.BracketClose);
                 yield return new Token(TokenType.ParenthesisClose);
+
+
+            } else if (uponReady.Check(token)) {
+
+                yield return token;
+
+                yield return new Token(TokenType.Newline, 1);
+                yield return new Token(TokenType.CfFor);
+                yield return new IdentifierToken("flactor");
+                yield return new Token(TokenType.OpIn);
+                yield return new IdentifierToken("get_tree");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("get_nodes_in_group");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new ConstantToken(new StringVariant("controlled_player"));
+                yield return new Token(TokenType.ParenthesisClose);
+                yield return new Token(TokenType.Colon);
+                yield return new IdentifierToken("plactor");
+                yield return new Token(TokenType.OpAssign);
+                yield return new IdentifierToken("flactor");
 
 
             } else {

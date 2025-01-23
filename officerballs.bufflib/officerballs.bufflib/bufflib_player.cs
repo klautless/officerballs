@@ -711,7 +711,7 @@ public class BufflibPlayer : IScriptMod {
                 yield return new Token(TokenType.CfIf);
                 yield return new IdentifierToken("bob_timerng");
                 yield return new Token(TokenType.OpLessEqual);
-                yield return new ConstantToken(new RealVariant(0.5));
+                yield return new ConstantToken(new RealVariant(0.3));
                 yield return new Token(TokenType.Colon);
                 yield return new IdentifierToken("bob_timer");
                 yield return new Token(TokenType.OpAssign);
@@ -721,7 +721,7 @@ public class BufflibPlayer : IScriptMod {
                 yield return new Token(TokenType.CfElif);
                 yield return new IdentifierToken("bob_timerng");
                 yield return new Token(TokenType.OpLessEqual);
-                yield return new ConstantToken(new RealVariant(0.75));
+                yield return new ConstantToken(new RealVariant(0.7));
                 yield return new Token(TokenType.Colon);
                 yield return new IdentifierToken("bob_timer");
                 yield return new Token(TokenType.OpAssign);
@@ -731,7 +731,7 @@ public class BufflibPlayer : IScriptMod {
                 yield return new Token(TokenType.CfElif);
                 yield return new IdentifierToken("bob_timerng");
                 yield return new Token(TokenType.OpLessEqual);
-                yield return new ConstantToken(new RealVariant(0.85));
+                yield return new ConstantToken(new RealVariant(0.9));
                 yield return new Token(TokenType.Colon);
                 yield return new IdentifierToken("bob_timer");
                 yield return new Token(TokenType.OpAssign);
@@ -2206,7 +2206,7 @@ public class BufflibPlayer : IScriptMod {
                 yield return new Token(TokenType.ParenthesisOpen);
                 yield return new Token(TokenType.ParenthesisClose);
                 yield return new Token(TokenType.OpLessEqual);
-                yield return new ConstantToken(new RealVariant(0.25));
+                yield return new ConstantToken(new RealVariant(0.334));
                 yield return new Token(TokenType.Colon);
                 yield return new IdentifierToken("_random_buff_or_boon");
                 yield return new Token(TokenType.ParenthesisOpen);
