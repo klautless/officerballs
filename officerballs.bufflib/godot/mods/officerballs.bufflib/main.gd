@@ -6,7 +6,9 @@ onready var TackleBox := get_node_or_null("/root/TackleBox")
 
 var config: Dictionary
 var default_config: Dictionary = {
-	"RandomBuffsFromFishing": false
+	"RandomBuffsFromFishing": false,
+	"RandomBuffsFromToilets": false,
+	"RandomBuffsFromBuddies": false
 }
 
 func _ready():
