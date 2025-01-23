@@ -48,7 +48,7 @@ this would add the "salty" buff at tier 3 for one minute.
 all buffs except 'cantlosefish' and 'protection' have a tier from 1 to 5.  
   
 if you wish to apply a boon, utilize _add_boon instead.  
-_wipe_buff("boon_example") and _wipe_boon("boon_example") will remove buffs.  
+_wipe_buff("buff_example") and _wipe_boon("boon_example") will remove buffs.  
 additionally: _random_buff_or_boon(), _wipe_all_buffs() and _wipe_all_boons() are usable.  
   
 want to support my work? consider buying me a donut at my ko-fi!  
