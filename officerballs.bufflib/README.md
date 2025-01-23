@@ -1,8 +1,11 @@
 # buff lib  
 adds 24 buffs and 5 boons to enhance gameplay. functions as a library for other mods to utilize.  
-now includes new setting: RandomBuffsFromFishing - enable to have a chance to get random buffs/boons while fishing.  
   
-to get a random buff, hold Q while flushing a toilet.  
+now includes new settings:  
+RandomBuffsFromFishing - enable to have a chance to get random buffs/boons while fishing.  
+RandomBuffsFromBuddies - enable to have a chance to get random buffs/boons from your buddies.  
+RandomBuffsFromToilets - enable to allow you to press Q+E on toilets for random buffs.  
+  
 to wipe all buffs and boons, hold shift while flushing a toilet.  
   
 for support/conflicts please create a GitHub issue.  

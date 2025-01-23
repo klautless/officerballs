@@ -1,8 +1,8 @@
 {
   "name": "bufflib",
-  "version_number": "1.0.7",
+  "version_number": "1.0.8",
   "website_url": "https://github.com/klautless/officerballs",
-  "description": "a library of 24 buffs and 5 boons for my mods and for other modders to utilize.",
+  "description": "a library of 24 buffs and 5 boons for my mods and for other modders to utilize. check config for new settings",
   "dependencies": [
     "NotNet-GDWeave-2.0.14",
     "PuppyGirl-TackleBox-0.5.2"
