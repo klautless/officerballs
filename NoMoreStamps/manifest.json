@@ -1,9 +1,10 @@
 {
   "name": "nomorestamps",
-  "version_number": "1.0.4",
+  "version_number": "1.0.5",
   "website_url": "https://github.com/klautless/officerballs",
-  "description": "Hide fake canvases, large pastes, and gifs. Please view README for settings.",
+  "description": "Hide fake canvases, large pastes, and gifs. Now includes TackleBox settings integration.",
   "dependencies": [
-    "NotNet-GDWeave-2.0.14"
+    "NotNet-GDWeave-2.0.14",
+    "PuppyGirl-TackleBox-0.5.2"
   ]
 }
