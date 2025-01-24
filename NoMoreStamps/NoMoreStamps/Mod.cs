@@ -10,7 +10,7 @@ public class Mod : IMod {
         modInterface.RegisterScriptMod(new StampsBegone());
         modInterface.RegisterScriptMod(new StampsBegone2());
         modInterface.RegisterScriptMod(new StampsBegone3());
-        modInterface.Logger.Information("Hello, world!");
+        modInterface.Logger.Information("[officer balls] NoMoreStamps initialized");
     }
 
     public void Dispose() {
