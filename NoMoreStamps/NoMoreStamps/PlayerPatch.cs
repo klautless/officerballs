@@ -1,4 +1,4 @@
-﻿using GDWeave.Godot;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -353,6 +353,14 @@ public class StampsBegone3 : IScriptMod {
                 yield return new Token(TokenType.BracketOpen);
                 yield return new IdentifierToken("chalkcfg_index");
                 yield return new Token(TokenType.BracketClose);
+                yield return new Token(TokenType.ParenthesisClose);
+
+                yield return new Token(TokenType.Newline, 3);
+                yield return new IdentifierToken("PlayerData");
+                yield return new Token(TokenType.Period);
+                yield return new IdentifierToken("_send_notification");
+                yield return new Token(TokenType.ParenthesisOpen);
+                yield return new IdentifierToken("astring");
                 yield return new Token(TokenType.ParenthesisClose);
 
                 yield return new Token(TokenType.Newline, 3);
