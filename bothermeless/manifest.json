@@ -1,6 +1,6 @@
 {
   "name": "bothermeless",
-  "version_number": "1.0.0",
+  "version_number": "1.0.1",
   "website_url": "https://github.com/klautless/officerballs",
   "description": "micro-patch, removes 'must draw on chalk zone' notification, moves bait warning to notifications, and hides exp bar after level cap.",
   "dependencies": [
