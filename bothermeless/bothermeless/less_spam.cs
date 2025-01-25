@@ -1,4 +1,4 @@
-﻿using GDWeave.Godot;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -25,6 +25,14 @@ public class PlayerMod : IScriptMod {
             t => t is IdentifierToken {Name: "in_zone"},
         ]);
 
+        var baitretiming = new MultiTokenWaiter([
+
+            t => t is IdentifierToken {Name: "bait_warn"},
+            t => t.Type is TokenType.OpAssign,
+            t => t is ConstantToken {Value: IntVariant {Value: 8}},
+
+        ]);
+
         foreach (var token in tokens) {
             if (baitwarn.Check(token)) {
 
@@ -46,6 +54,12 @@ public class PlayerMod : IScriptMod {
                 yield return token;
                 yield return new Token(TokenType.OpAnd);
                 yield return new ConstantToken(new BoolVariant(false));
+
+            } else if (baitretiming.Check(token)) {
+
+                yield return token;
+                yield return new Token(TokenType.OpAdd);
+                yield return new ConstantToken(new IntVariant(22));
 
             } else {
                 yield return token;
