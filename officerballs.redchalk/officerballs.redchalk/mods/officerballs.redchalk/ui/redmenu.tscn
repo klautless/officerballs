@@ -1,0 +1,1192 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://Assets/Materials/rainbow.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Themes/main_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/Themes/main.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Textures/UI/scrollbar.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/UI/checkbox_ui1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/UI/checkbox_ui4.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/UI/checkbox_ui2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Textures/UI/checkbox_ui3.png" type="Texture" id=8]
+[ext_resource path="res://mods/officerballs.redchalk/ui/redmenu.gd" type="Script" id=9]
+[ext_resource path="res://mods/officerballs.redchalk/ui/redbutton.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Singletons/Tooltips/tooltip_node.gd" type="Script" id=11]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.733333, 0.47451, 0.45098, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id=40]
+bg_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxEmpty" id=34]
+
+[sub_resource type="StyleBoxFlat" id=45]
+bg_color = Color( 0.341176, 0.137255, 0.0745098, 1 )
+border_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id=41]
+bg_color = Color( 0.505882, 0.345098, 0.337255, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxEmpty" id=38]
+
+[sub_resource type="StyleBoxFlat" id=30]
+bg_color = Color( 0.611765, 0.568627, 0.290196, 1 )
+border_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id=39]
+bg_color = Color( 0.611765, 0.568627, 0.290196, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.611765, 0.568627, 0.290196, 1 )
+border_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.0627451, 0.109804, 0.192157, 1 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.0627451, 0.109804, 0.192157, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id=20]
+
+[sub_resource type="StyleBoxFlat" id=35]
+
+[sub_resource type="StyleBoxFlat" id=36]
+
+[sub_resource type="StyleBoxFlat" id=37]
+bg_color = Color( 0.443137, 0.360784, 0.329412, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id=33]
+bg_color = Color( 0.737255, 0.580392, 0.376471, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 1, 0.933333, 0.835294, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="ImageTexture" id=24]
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.611765, 0.568627, 0.290196, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+
+[sub_resource type="StyleBoxEmpty" id=26]
+
+[sub_resource type="StyleBoxEmpty" id=27]
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 6.0
+
+[sub_resource type="StyleBoxEmpty" id=29]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_detail = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_detail = 5
+expand_margin_bottom = 2.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+[sub_resource type="Theme" id=42]
+default_font = ExtResource( 2 )
+Button/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_disabled = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/colors/font_color_focus = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/styles/disabled = SubResource( 40 )
+Button/styles/focus = SubResource( 34 )
+Button/styles/hover = SubResource( 45 )
+Button/styles/normal = SubResource( 41 )
+Button/styles/pressed = SubResource( 45 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 0.933333, 0.835294, 1 )
+CheckBox/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+CheckBox/icons/checked = ExtResource( 8 )
+CheckBox/icons/checked_disabled = ExtResource( 6 )
+CheckBox/icons/unchecked = ExtResource( 5 )
+CheckBox/icons/unchecked_disabled = ExtResource( 7 )
+CheckBox/styles/disabled = SubResource( 40 )
+CheckBox/styles/focus = SubResource( 38 )
+CheckBox/styles/hover = SubResource( 30 )
+CheckBox/styles/hover_pressed = SubResource( 39 )
+CheckBox/styles/normal = SubResource( 31 )
+CheckBox/styles/pressed = SubResource( 32 )
+HScrollBar/styles/grabber = SubResource( 18 )
+HScrollBar/styles/grabber_highlight = SubResource( 15 )
+HScrollBar/styles/grabber_pressed = SubResource( 15 )
+HScrollBar/styles/scroll = SubResource( 21 )
+HScrollBar/styles/scroll_focus = SubResource( 20 )
+HSlider/icons/grabber = ExtResource( 4 )
+HSlider/icons/grabber_disabled = ExtResource( 4 )
+HSlider/icons/grabber_highlight = ExtResource( 4 )
+HSlider/styles/grabber_area = SubResource( 35 )
+HSlider/styles/grabber_area_highlight = SubResource( 36 )
+HSlider/styles/slider = SubResource( 37 )
+Label/colors/font_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+LineEdit/colors/cursor_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.835294, 0.666667, 0.45098, 1 )
+LineEdit/styles/focus = SubResource( 33 )
+LineEdit/styles/normal = SubResource( 33 )
+LineEdit/styles/read_only = SubResource( 33 )
+Panel/styles/panel = SubResource( 9 )
+PopupMenu/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/icons/checked = SubResource( 24 )
+PopupMenu/icons/radio_checked = SubResource( 24 )
+PopupMenu/icons/radio_unchecked = SubResource( 24 )
+PopupMenu/icons/submenu = SubResource( 24 )
+PopupMenu/icons/unchecked = SubResource( 24 )
+PopupMenu/styles/hover = SubResource( 25 )
+PopupMenu/styles/labeled_separator_left = SubResource( 26 )
+PopupMenu/styles/labeled_separator_right = SubResource( 27 )
+PopupMenu/styles/panel = SubResource( 28 )
+PopupMenu/styles/panel_disabled = SubResource( 28 )
+PopupMenu/styles/separator = SubResource( 29 )
+ProgressBar/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+ProgressBar/styles/bg = SubResource( 40 )
+ProgressBar/styles/fg = SubResource( 4 )
+RichTextLabel/colors/default_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+TabContainer/colors/font_color_bg = Color( 0.415686, 0.266667, 0.12549, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.611765, 0.0784314, 0.0784314, 1 )
+TabContainer/colors/font_color_fg = Color( 1, 0.933333, 0.835294, 1 )
+TabContainer/styles/panel = SubResource( 8 )
+TabContainer/styles/tab_bg = SubResource( 6 )
+TabContainer/styles/tab_disabled = SubResource( 40 )
+TabContainer/styles/tab_fg = SubResource( 7 )
+Tabs/colors/font_color_bg = Color( 0.835294, 0.666667, 0.45098, 1 )
+Tabs/colors/font_color_fg = Color( 0.835294, 0.666667, 0.45098, 1 )
+TextEdit/colors/caret_color = Color( 1, 0.933333, 0.835294, 1 )
+TextEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/selection_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+TextEdit/styles/completion = SubResource( 23 )
+TextEdit/styles/focus = SubResource( 23 )
+TextEdit/styles/normal = SubResource( 23 )
+TextEdit/styles/read_only = SubResource( 23 )
+VScrollBar/styles/grabber = SubResource( 18 )
+VScrollBar/styles/grabber_highlight = SubResource( 15 )
+VScrollBar/styles/grabber_pressed = SubResource( 15 )
+VScrollBar/styles/scroll = SubResource( 21 )
+VScrollBar/styles/scroll_focus = SubResource( 20 )
+
+[sub_resource type="Theme" id=43]
+default_font = ExtResource( 2 )
+Button/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_disabled = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/colors/font_color_focus = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/styles/disabled = SubResource( 40 )
+Button/styles/focus = SubResource( 34 )
+Button/styles/hover = SubResource( 30 )
+Button/styles/normal = SubResource( 31 )
+Button/styles/pressed = SubResource( 32 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 0.933333, 0.835294, 1 )
+CheckBox/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+CheckBox/icons/checked = ExtResource( 8 )
+CheckBox/icons/checked_disabled = ExtResource( 6 )
+CheckBox/icons/unchecked = ExtResource( 5 )
+CheckBox/icons/unchecked_disabled = ExtResource( 7 )
+CheckBox/styles/disabled = SubResource( 40 )
+CheckBox/styles/focus = SubResource( 38 )
+CheckBox/styles/hover = SubResource( 30 )
+CheckBox/styles/hover_pressed = SubResource( 39 )
+CheckBox/styles/normal = SubResource( 31 )
+CheckBox/styles/pressed = SubResource( 32 )
+HScrollBar/styles/grabber = SubResource( 18 )
+HScrollBar/styles/grabber_highlight = SubResource( 15 )
+HScrollBar/styles/grabber_pressed = SubResource( 15 )
+HScrollBar/styles/scroll = SubResource( 21 )
+HScrollBar/styles/scroll_focus = SubResource( 20 )
+HSlider/icons/grabber = ExtResource( 4 )
+HSlider/icons/grabber_disabled = ExtResource( 4 )
+HSlider/icons/grabber_highlight = ExtResource( 4 )
+HSlider/styles/grabber_area = SubResource( 35 )
+HSlider/styles/grabber_area_highlight = SubResource( 36 )
+HSlider/styles/slider = SubResource( 37 )
+Label/colors/font_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+LineEdit/colors/cursor_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.835294, 0.666667, 0.45098, 1 )
+LineEdit/styles/focus = SubResource( 33 )
+LineEdit/styles/normal = SubResource( 33 )
+LineEdit/styles/read_only = SubResource( 33 )
+Panel/styles/panel = SubResource( 9 )
+PopupMenu/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/icons/checked = SubResource( 24 )
+PopupMenu/icons/radio_checked = SubResource( 24 )
+PopupMenu/icons/radio_unchecked = SubResource( 24 )
+PopupMenu/icons/submenu = SubResource( 24 )
+PopupMenu/icons/unchecked = SubResource( 24 )
+PopupMenu/styles/hover = SubResource( 25 )
+PopupMenu/styles/labeled_separator_left = SubResource( 26 )
+PopupMenu/styles/labeled_separator_right = SubResource( 27 )
+PopupMenu/styles/panel = SubResource( 28 )
+PopupMenu/styles/panel_disabled = SubResource( 28 )
+PopupMenu/styles/separator = SubResource( 29 )
+ProgressBar/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+ProgressBar/styles/bg = SubResource( 40 )
+ProgressBar/styles/fg = SubResource( 4 )
+RichTextLabel/colors/default_color = Color( 0.219608, 0.2, 0.2, 1 )
+TabContainer/colors/font_color_bg = Color( 0.415686, 0.266667, 0.12549, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.611765, 0.0784314, 0.0784314, 1 )
+TabContainer/colors/font_color_fg = Color( 1, 0.933333, 0.835294, 1 )
+TabContainer/styles/panel = SubResource( 8 )
+TabContainer/styles/tab_bg = SubResource( 6 )
+TabContainer/styles/tab_disabled = SubResource( 40 )
+TabContainer/styles/tab_fg = SubResource( 7 )
+Tabs/colors/font_color_bg = Color( 0.835294, 0.666667, 0.45098, 1 )
+Tabs/colors/font_color_fg = Color( 0.835294, 0.666667, 0.45098, 1 )
+TextEdit/colors/caret_color = Color( 1, 0.933333, 0.835294, 1 )
+TextEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/selection_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+TextEdit/styles/completion = SubResource( 23 )
+TextEdit/styles/focus = SubResource( 23 )
+TextEdit/styles/normal = SubResource( 23 )
+TextEdit/styles/read_only = SubResource( 23 )
+VScrollBar/styles/grabber = SubResource( 18 )
+VScrollBar/styles/grabber_highlight = SubResource( 15 )
+VScrollBar/styles/grabber_pressed = SubResource( 15 )
+VScrollBar/styles/scroll = SubResource( 21 )
+VScrollBar/styles/scroll_focus = SubResource( 20 )
+
+[sub_resource type="Theme" id=44]
+default_font = ExtResource( 2 )
+Button/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_disabled = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/colors/font_color_focus = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/styles/disabled = SubResource( 40 )
+Button/styles/focus = SubResource( 34 )
+Button/styles/hover = SubResource( 30 )
+Button/styles/normal = SubResource( 31 )
+Button/styles/pressed = SubResource( 32 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 0.933333, 0.835294, 1 )
+CheckBox/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+CheckBox/icons/checked = ExtResource( 8 )
+CheckBox/icons/checked_disabled = ExtResource( 6 )
+CheckBox/icons/unchecked = ExtResource( 5 )
+CheckBox/icons/unchecked_disabled = ExtResource( 7 )
+CheckBox/styles/disabled = SubResource( 40 )
+CheckBox/styles/focus = SubResource( 38 )
+CheckBox/styles/hover = SubResource( 30 )
+CheckBox/styles/hover_pressed = SubResource( 39 )
+CheckBox/styles/normal = SubResource( 31 )
+CheckBox/styles/pressed = SubResource( 32 )
+HScrollBar/styles/grabber = SubResource( 18 )
+HScrollBar/styles/grabber_highlight = SubResource( 15 )
+HScrollBar/styles/grabber_pressed = SubResource( 15 )
+HScrollBar/styles/scroll = SubResource( 21 )
+HScrollBar/styles/scroll_focus = SubResource( 20 )
+HSlider/icons/grabber = ExtResource( 4 )
+HSlider/icons/grabber_disabled = ExtResource( 4 )
+HSlider/icons/grabber_highlight = ExtResource( 4 )
+HSlider/styles/grabber_area = SubResource( 35 )
+HSlider/styles/grabber_area_highlight = SubResource( 36 )
+HSlider/styles/slider = SubResource( 37 )
+Label/colors/font_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+LineEdit/colors/cursor_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.835294, 0.666667, 0.45098, 1 )
+LineEdit/styles/focus = SubResource( 33 )
+LineEdit/styles/normal = SubResource( 33 )
+LineEdit/styles/read_only = SubResource( 33 )
+Panel/styles/panel = SubResource( 9 )
+PopupMenu/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/icons/checked = SubResource( 24 )
+PopupMenu/icons/radio_checked = SubResource( 24 )
+PopupMenu/icons/radio_unchecked = SubResource( 24 )
+PopupMenu/icons/submenu = SubResource( 24 )
+PopupMenu/icons/unchecked = SubResource( 24 )
+PopupMenu/styles/hover = SubResource( 25 )
+PopupMenu/styles/labeled_separator_left = SubResource( 26 )
+PopupMenu/styles/labeled_separator_right = SubResource( 27 )
+PopupMenu/styles/panel = SubResource( 28 )
+PopupMenu/styles/panel_disabled = SubResource( 28 )
+PopupMenu/styles/separator = SubResource( 29 )
+ProgressBar/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+ProgressBar/styles/bg = SubResource( 40 )
+ProgressBar/styles/fg = SubResource( 4 )
+RichTextLabel/colors/default_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+TabContainer/colors/font_color_bg = Color( 0.415686, 0.266667, 0.12549, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.611765, 0.0784314, 0.0784314, 1 )
+TabContainer/colors/font_color_fg = Color( 1, 0.933333, 0.835294, 1 )
+TabContainer/styles/panel = SubResource( 8 )
+TabContainer/styles/tab_bg = SubResource( 6 )
+TabContainer/styles/tab_disabled = SubResource( 40 )
+TabContainer/styles/tab_fg = SubResource( 7 )
+Tabs/colors/font_color_bg = Color( 0.835294, 0.666667, 0.45098, 1 )
+Tabs/colors/font_color_fg = Color( 0.835294, 0.666667, 0.45098, 1 )
+TextEdit/colors/caret_color = Color( 1, 0.933333, 0.835294, 1 )
+TextEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/selection_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+TextEdit/styles/completion = SubResource( 23 )
+TextEdit/styles/focus = SubResource( 23 )
+TextEdit/styles/normal = SubResource( 23 )
+TextEdit/styles/read_only = SubResource( 23 )
+VScrollBar/styles/grabber = SubResource( 18 )
+VScrollBar/styles/grabber_highlight = SubResource( 15 )
+VScrollBar/styles/grabber_pressed = SubResource( 15 )
+VScrollBar/styles/scroll = SubResource( 21 )
+VScrollBar/styles/scroll_focus = SubResource( 20 )
+
+[node name="redmenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1080.0
+margin_bottom = 1080.0
+script = ExtResource( 9 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.586
+anchor_top = 0.093
+anchor_right = 0.894
+anchor_bottom = 0.932
+margin_left = 0.880005
+margin_top = -0.440002
+margin_right = 0.519897
+margin_bottom = 0.439941
+custom_styles/panel = SubResource( 1 )
+
+[node name="maincontainer" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 0.993
+margin_left = 15.0
+margin_top = 13.0
+margin_right = -18.0
+margin_bottom = -11.1281
+
+[node name="normalbuttons" type="HBoxContainer" parent="Panel/maincontainer"]
+margin_right = 568.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="col1" type="VBoxContainer" parent="Panel/maincontainer/normalbuttons"]
+margin_right = 180.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 180, 0 )
+theme = ExtResource( 3 )
+
+[node name="shrink" type="Button" parent="Panel/maincontainer/normalbuttons/col1"]
+margin_right = 180.0
+margin_bottom = 34.0
+theme = SubResource( 42 )
+text = "shrink"
+
+[node name="grow" type="Button" parent="Panel/maincontainer/normalbuttons/col1"]
+margin_top = 38.0
+margin_right = 180.0
+margin_bottom = 72.0
+theme = SubResource( 42 )
+text = "grow"
+
+[node name="VSeparator" type="VSeparator" parent="Panel/maincontainer/normalbuttons"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+material = ExtResource( 1 )
+margin_left = 184.0
+margin_right = 185.0
+margin_bottom = 72.0
+custom_constants/separation = 1
+
+[node name="col2" type="VBoxContainer" parent="Panel/maincontainer/normalbuttons"]
+margin_left = 189.0
+margin_right = 369.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 180, 0 )
+theme = ExtResource( 3 )
+
+[node name="catchboost" type="Button" parent="Panel/maincontainer/normalbuttons/col2"]
+margin_right = 180.0
+margin_bottom = 34.0
+theme = SubResource( 42 )
+text = "catching boost"
+
+[node name="booze" type="Button" parent="Panel/maincontainer/normalbuttons/col2"]
+margin_top = 38.0
+margin_right = 180.0
+margin_bottom = 72.0
+theme = SubResource( 42 )
+text = "booze"
+
+[node name="VSeparator2" type="VSeparator" parent="Panel/maincontainer/normalbuttons"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+material = ExtResource( 1 )
+margin_left = 373.0
+margin_right = 374.0
+margin_bottom = 72.0
+custom_constants/separation = 1
+
+[node name="col3" type="VBoxContainer" parent="Panel/maincontainer/normalbuttons"]
+margin_left = 378.0
+margin_right = 558.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 180, 0 )
+theme = ExtResource( 3 )
+
+[node name="movespeed" type="Button" parent="Panel/maincontainer/normalbuttons/col3"]
+margin_right = 180.0
+margin_bottom = 34.0
+theme = SubResource( 42 )
+text = "speed boost"
+
+[node name="jumpboost" type="Button" parent="Panel/maincontainer/normalbuttons/col3"]
+margin_top = 38.0
+margin_right = 180.0
+margin_bottom = 72.0
+theme = SubResource( 42 )
+text = "jump boost"
+
+[node name="A1" type="HBoxContainer" parent="Panel/maincontainer"]
+margin_top = 76.0
+margin_right = 568.0
+margin_bottom = 184.0
+
+[node name="A2" type="VBoxContainer" parent="Panel/maincontainer/A1"]
+margin_right = 560.0
+margin_bottom = 108.0
+
+[node name="duration" type="RichTextLabel" parent="Panel/maincontainer/A1/A2"]
+margin_right = 560.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+theme = SubResource( 43 )
+text = "duration: 5 minutes"
+scroll_active = false
+
+[node name="timeslider" type="HSlider" parent="Panel/maincontainer/A1/A2"]
+margin_top = 44.0
+margin_right = 560.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 560, 0 )
+theme = SubResource( 44 )
+min_value = 5.0
+max_value = 60.0
+step = 5.0
+value = 5.0
+rounded = true
+
+[node name="custombuttons" type="HBoxContainer" parent="Panel/maincontainer"]
+margin_top = 188.0
+margin_right = 568.0
+margin_bottom = 772.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="col1" type="VBoxContainer" parent="Panel/maincontainer/custombuttons"]
+margin_right = 274.0
+margin_bottom = 584.0
+rect_min_size = Vector2( 274, 0 )
+theme = ExtResource( 3 )
+
+[node name="salty" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_right = 274.0
+margin_bottom = 34.0
+theme = SubResource( 42 )
+text = "salty"
+script = ExtResource( 10 )
+buff = "buff_salty"
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/salty"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "salty"
+body = "chance of getting salted fish"
+
+[node name="fresh" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 38.0
+margin_right = 274.0
+margin_bottom = 72.0
+theme = SubResource( 42 )
+text = "funky fresh"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/fresh"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "funky fresh"
+body = "chance of getting fresh fish"
+
+[node name="microboost" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 76.0
+margin_right = 274.0
+margin_bottom = 110.0
+theme = SubResource( 42 )
+text = "microboost"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/microboost"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "microboost"
+body = "increased chance to catch small fish"
+
+[node name="quality_boost" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 114.0
+margin_right = 274.0
+margin_bottom = 148.0
+theme = SubResource( 42 )
+text = "quality boost"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/quality_boost"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "quality boost"
+body = "increased chance to catch higher quality fish"
+
+[node name="doubles_boost" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 152.0
+margin_right = 274.0
+margin_bottom = 186.0
+theme = SubResource( 42 )
+text = "doubles boost"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/doubles_boost"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "doubles boost"
+body = "chance to catch in doubles"
+
+[node name="timestretch" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 190.0
+margin_right = 274.0
+margin_bottom = 224.0
+theme = SubResource( 42 )
+text = "timestretch"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/timestretch"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "timestretch"
+body = "the red bar will catch up slower while reeling"
+
+[node name="intimidation" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 228.0
+margin_right = 274.0
+margin_bottom = 262.0
+theme = SubResource( 42 )
+text = "intimidation"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/intimidation"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "intimidation"
+body = "lowers fish total health"
+
+[node name="wall_breaker" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 266.0
+margin_right = 274.0
+margin_bottom = 300.0
+theme = SubResource( 42 )
+text = "wall breaker"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/wall_breaker"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "wall breaker"
+body = "reduces the amount of fishing gates"
+
+[node name="prosperous" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 304.0
+margin_right = 274.0
+margin_bottom = 338.0
+theme = SubResource( 42 )
+text = "prosperous"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/prosperous"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "prosperous"
+body = "your fish are temporarily worth extra to shopkeepers"
+
+[node name="speed_buddies" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 342.0
+margin_right = 274.0
+margin_bottom = 376.0
+theme = SubResource( 42 )
+text = "speed buddies"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/speed_buddies"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "speed buddies"
+body = "your fishing buddies work faster"
+
+[node name="protection" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 380.0
+margin_right = 274.0
+margin_bottom = 414.0
+theme = SubResource( 42 )
+text = "protection"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/protection"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "protection"
+body = "you cannot be afflicted with boons"
+
+[node name="lucky" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 418.0
+margin_right = 274.0
+margin_bottom = 452.0
+theme = SubResource( 42 )
+text = "lucky"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/lucky"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "lucky"
+body = "brings up the chance that fish will bite"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/maincontainer/custombuttons/col1"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+margin_top = 456.0
+margin_right = 274.0
+margin_bottom = 470.0
+custom_constants/separation = 14
+
+[node name="blood_curse" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 474.0
+margin_right = 274.0
+margin_bottom = 508.0
+theme = SubResource( 42 )
+text = "blood curse"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/blood_curse"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "blood curse"
+body = "the red bar will creep faster"
+
+[node name="unattractive" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 512.0
+margin_right = 274.0
+margin_bottom = 546.0
+theme = SubResource( 42 )
+text = "unattractive"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/unattractive"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "unattractive"
+body = "fish seem to be biting slower..."
+
+[node name="slowed" type="Button" parent="Panel/maincontainer/custombuttons/col1"]
+margin_top = 550.0
+margin_right = 274.0
+margin_bottom = 584.0
+theme = SubResource( 42 )
+text = "slowed"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col1/slowed"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "slowed"
+body = "just feelin slow today!"
+
+[node name="VSeparator" type="VSeparator" parent="Panel/maincontainer/custombuttons"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+material = ExtResource( 1 )
+margin_left = 278.0
+margin_right = 282.0
+margin_bottom = 584.0
+
+[node name="col2" type="VBoxContainer" parent="Panel/maincontainer/custombuttons"]
+margin_left = 286.0
+margin_right = 560.0
+margin_bottom = 584.0
+rect_min_size = Vector2( 274, 0 )
+theme = ExtResource( 3 )
+
+[node name="wet" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_right = 274.0
+margin_bottom = 34.0
+theme = SubResource( 42 )
+text = "wet"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/wet"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "wet"
+body = "you have a chance to catch rain fish anywhere"
+
+[node name="alienlover" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 38.0
+margin_right = 274.0
+margin_bottom = 72.0
+theme = SubResource( 42 )
+text = "alienlover"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/alienlover"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "alienlover"
+body = "you have a chance to catch alien fish anywhere"
+
+[node name="voidkissed" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 76.0
+margin_right = 274.0
+margin_bottom = 110.0
+theme = SubResource( 42 )
+text = "voidkissed"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/voidkissed"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "voidkissed"
+body = "you have a chance to catch void fish anywhere"
+
+[node name="macroboost" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 114.0
+margin_right = 274.0
+margin_bottom = 148.0
+theme = SubResource( 42 )
+text = "macroboost"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/macroboost"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "macroboost"
+body = "increased chance to catch large fish"
+
+[node name="rarity_boost" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 152.0
+margin_right = 274.0
+margin_bottom = 186.0
+theme = SubResource( 42 )
+text = "rarity boost"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/rarity_boost"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "rarity boost"
+body = "increased chance to catch higher rarity fish"
+
+[node name="haste" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 190.0
+margin_right = 274.0
+margin_bottom = 224.0
+theme = SubResource( 42 )
+text = "haste"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/haste"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "haste"
+body = "increases your speed while reeling"
+
+[node name="fish_trapper" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 228.0
+margin_right = 274.0
+margin_bottom = 262.0
+theme = SubResource( 42 )
+text = "fish trapper"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/fish_trapper"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "fish trapper"
+body = "impossible! the fish cannot escape."
+
+[node name="force_multiplier" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 266.0
+margin_right = 274.0
+margin_bottom = 300.0
+theme = SubResource( 42 )
+text = "force multiplier"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/force_multiplier"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "force multiplier"
+body = "when reeling, clicks deal more damage"
+
+[node name="efficient" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 304.0
+margin_right = 274.0
+margin_bottom = 338.0
+theme = SubResource( 42 )
+text = "efficient"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/efficient"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "efficient"
+body = "you have a chance to save your bait when fishing"
+
+[node name="double_buddies" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 342.0
+margin_right = 274.0
+margin_bottom = 376.0
+theme = SubResource( 42 )
+text = "double buddies"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/double_buddies"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "double buddies"
+body = "your fishing buddies have a chance to double their yield"
+
+[node name="gamblers_blessing" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 380.0
+margin_right = 274.0
+margin_bottom = 414.0
+theme = SubResource( 42 )
+text = "gambler's blessing"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/gamblers_blessing"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "gambler's blessing"
+body = "fish you catch may have scratch-offs in their mouth"
+
+[node name="attractive" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 418.0
+margin_right = 274.0
+margin_bottom = 452.0
+theme = SubResource( 42 )
+text = "attractive"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/attractive"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "attractive"
+body = "brings up the speed that fish will bite"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/maincontainer/custombuttons/col2"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+margin_top = 456.0
+margin_right = 274.0
+margin_bottom = 470.0
+custom_constants/separation = 14
+
+[node name="weakening" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 474.0
+margin_right = 274.0
+margin_bottom = 508.0
+theme = SubResource( 42 )
+text = "weakening"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/weakening"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "weakening"
+body = "you're afflicted with weakness"
+
+[node name="friend_of_new_jersey" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 512.0
+margin_right = 274.0
+margin_bottom = 546.0
+theme = SubResource( 42 )
+text = "friend of new jersey"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/friend_of_new_jersey"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 4.0
+script = ExtResource( 11 )
+header = "friend of new jersey"
+body = "there's trash everywhere!"
+
+[node name="clear_all" type="Button" parent="Panel/maincontainer/custombuttons/col2"]
+margin_top = 550.0
+margin_right = 274.0
+margin_bottom = 584.0
+theme = SubResource( 42 )
+text = "clear all buffs/boons"
+script = ExtResource( 10 )
+
+[node name="TooltipNode" type="Control" parent="Panel/maincontainer/custombuttons/col2/clear_all"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+header = "clear all buffs/boons"
+body = "crying emoji"
+
+[node name="VSeparator2" type="VSeparator" parent="Panel/maincontainer/custombuttons"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+material = ExtResource( 1 )
+margin_left = 564.0
+margin_right = 568.0
+margin_bottom = 584.0
+
+[node name="B1" type="HBoxContainer" parent="Panel/maincontainer"]
+margin_top = 776.0
+margin_right = 568.0
+margin_bottom = 884.0
+
+[node name="B2" type="VBoxContainer" parent="Panel/maincontainer/B1"]
+margin_right = 560.0
+margin_bottom = 108.0
+
+[node name="tier" type="RichTextLabel" parent="Panel/maincontainer/B1/B2"]
+margin_right = 560.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+theme = SubResource( 43 )
+text = "tier i"
+scroll_active = false
+
+[node name="tierslider" type="HSlider" parent="Panel/maincontainer/B1/B2"]
+margin_top = 44.0
+margin_right = 560.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 560, 0 )
+theme = SubResource( 44 )
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+
+[connection signal="pressed" from="Panel/maincontainer/normalbuttons/col1/shrink" to="." method="_on_shrink_pressed"]
+[connection signal="pressed" from="Panel/maincontainer/normalbuttons/col1/grow" to="." method="_on_grow_pressed"]
+[connection signal="pressed" from="Panel/maincontainer/normalbuttons/col2/catchboost" to="." method="_on_catchboost_pressed"]
+[connection signal="pressed" from="Panel/maincontainer/normalbuttons/col2/booze" to="." method="_on_booze_pressed"]
+[connection signal="pressed" from="Panel/maincontainer/normalbuttons/col3/movespeed" to="." method="_on_movespeed_pressed"]
+[connection signal="pressed" from="Panel/maincontainer/normalbuttons/col3/jumpboost" to="." method="_on_jumpboost_pressed"]
+[connection signal="value_changed" from="Panel/maincontainer/A1/A2/timeslider" to="." method="_on_timeslider_value_changed"]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/salty" to="." method="_bufflib_button" binds= [ "buff_salty", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/fresh" to="." method="_bufflib_button" binds= [ "buff_fresh", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/microboost" to="." method="_bufflib_button" binds= [ "buff_small", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/quality_boost" to="." method="_bufflib_button" binds= [ "buff_quality", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/doubles_boost" to="." method="_bufflib_button" binds= [ "buff_double", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/timestretch" to="." method="_bufflib_button" binds= [ "buff_timestretch", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/intimidation" to="." method="_bufflib_button" binds= [ "buff_clickreduce", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/wall_breaker" to="." method="_bufflib_button" binds= [ "buff_gatereduce", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/prosperous" to="." method="_bufflib_button" binds= [ "buff_valuelift", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/speed_buddies" to="." method="_bufflib_button" binds= [ "buff_speedbuddies", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/protection" to="." method="_bufflib_button" binds= [ "buff_protection", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/lucky" to="." method="_bufflib_button" binds= [ "buff_lucky", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/blood_curse" to="." method="_bufflib_button" binds= [ "", "boon_redcreep" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/unattractive" to="." method="_bufflib_button" binds= [ "", "boon_slowbite" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col1/slowed" to="." method="_bufflib_button" binds= [ "", "boon_slowness" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/wet" to="." method="_bufflib_button" binds= [ "buff_rain", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/alienlover" to="." method="_bufflib_button" binds= [ "buff_alien", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/voidkissed" to="." method="_bufflib_button" binds= [ "buff_void", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/macroboost" to="." method="_bufflib_button" binds= [ "buff_large", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/rarity_boost" to="." method="_bufflib_button" binds= [ "buff_rarity", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/haste" to="." method="_bufflib_button" binds= [ "buff_haste", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/fish_trapper" to="." method="_bufflib_button" binds= [ "buff_cantlosefish", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/force_multiplier" to="." method="_bufflib_button" binds= [ "buff_clickmultiply", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/efficient" to="." method="_bufflib_button" binds= [ "buff_efficiency", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/double_buddies" to="." method="_bufflib_button" binds= [ "buff_doublebuddies", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/gamblers_blessing" to="." method="_bufflib_button" binds= [ "buff_gamblefisher", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/attractive" to="." method="_bufflib_button" binds= [ "buff_fastbite", "" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/weakening" to="." method="_bufflib_button" binds= [ "", "boon_weakening" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/friend_of_new_jersey" to="." method="_bufflib_button" binds= [ "", "boon_trash" ]]
+[connection signal="pressed" from="Panel/maincontainer/custombuttons/col2/clear_all" to="." method="_bufflib_button" binds= [ "", "" ]]
+[connection signal="value_changed" from="Panel/maincontainer/B1/B2/tierslider" to="." method="_on_tierslider_value_changed"]
