@@ -65,6 +65,7 @@ func _process(delta):
 		self.rect_position.x = lerp(self.rect_position.x, 1920, delta*10)
 	elif $Panel.visible == true:
 		$Panel.visible = false
+		open = false
 
 func _mail_proxy():
 	if timeTarget > internal:
