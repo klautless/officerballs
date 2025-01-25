@@ -1,4 +1,4 @@
-﻿using GDWeave.Godot;
+using GDWeave.Godot;
 using GDWeave.Godot.Variants;
 using GDWeave.Modding;
 
@@ -997,9 +997,9 @@ public class BufflibPlayer : IScriptMod {
                 yield return new Token(TokenType.ParenthesisOpen);
                 yield return new IdentifierToken("boon_rng");
                 yield return new Token(TokenType.Comma);
-                yield return new IdentifierToken("boon_rng");
+                yield return new IdentifierToken("bob_timer");
                 yield return new Token(TokenType.Comma);
-                yield return new IdentifierToken("boon_rng");
+                yield return new IdentifierToken("bob_tier");
                 yield return new Token(TokenType.ParenthesisClose);
 
 
