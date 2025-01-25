@@ -1,8 +1,8 @@
 {
   "name": "fecompanion",
-  "version_number": "2.0.0",
+  "version_number": "2.0.1",
   "website_url": "https://github.com/klautless/officerballs",
-  "description": "*2.0 update now with UI menu* a companion mod for fish exchange to make gamba'ing faster. view the readme.",
+  "description": "*2.0 update now with UI menu* a companion mod for fish exchange to make gamba'ing faster. equip hand labeler and press q.",
   "dependencies": [
     "NotNet-GDWeave-2.0.14",
     "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2",
