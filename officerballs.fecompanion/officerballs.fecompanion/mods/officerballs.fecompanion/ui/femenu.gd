@@ -1,5 +1,7 @@
 extends Control
 
+var open = false
+
 var timecheck = 0
 var loadedin = false
 var plactor = null
@@ -54,9 +56,10 @@ func _process(delta):
 	elif not PlayerAPI.in_game: return
 	elif PlayerAPI.in_game and plactor != null:
 		timeTarget = Time.get_unix_time_from_system()
-	if plactor.held_item["id"] == "hand_labeler" and Input.is_action_just_pressed("move_down") and $Panel.visible == false and not plactor.busy:
-		$Panel.visible = true
-	elif plactor.held_item["id"] == "hand_labeler" and Input.is_action_pressed("move_down") and not plactor.busy:
+	if plactor.held_item["id"] == "hand_labeler" and Input.is_action_just_pressed("move_down") and not plactor.busy:
+		open = not open
+		if open and not $Panel.visible: $Panel.visible = true
+	elif plactor.held_item["id"] == "hand_labeler" and open:
 		self.rect_position.x = lerp(self.rect_position.x, 0, delta*10)
 	elif self.rect_position.x < 1910:
 		self.rect_position.x = lerp(self.rect_position.x, 1920, delta*10)
