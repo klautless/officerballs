@@ -1,0 +1,697 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://Assets/Themes/main_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Textures/UI/scrollbar.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Textures/UI/checkbox_ui1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Textures/UI/checkbox_ui4.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/UI/checkbox_ui2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/UI/checkbox_ui3.png" type="Texture" id=6]
+[ext_resource path="res://mods/officerballs.fecompanion/ui/femenu.gd" type="Script" id=7]
+
+[sub_resource type="StyleBoxFlat" id=40]
+bg_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxEmpty" id=34]
+
+[sub_resource type="StyleBoxFlat" id=30]
+bg_color = Color( 0.290196, 0.309804, 0.611765, 1 )
+border_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+expand_margin_left = 3.0
+expand_margin_right = 3.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.156863, 0.172549, 0.4, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxEmpty" id=38]
+
+[sub_resource type="StyleBoxFlat" id=39]
+bg_color = Color( 0.611765, 0.568627, 0.290196, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.611765, 0.568627, 0.290196, 1 )
+border_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.0627451, 0.109804, 0.192157, 1 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.0627451, 0.109804, 0.192157, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id=20]
+
+[sub_resource type="StyleBoxFlat" id=35]
+
+[sub_resource type="StyleBoxFlat" id=36]
+
+[sub_resource type="StyleBoxFlat" id=37]
+bg_color = Color( 0.443137, 0.360784, 0.329412, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id=33]
+bg_color = Color( 0.737255, 0.580392, 0.376471, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=41]
+bg_color = Color( 0.458824, 0.513726, 0.678431, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="ImageTexture" id=24]
+
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.611765, 0.568627, 0.290196, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+
+[sub_resource type="StyleBoxEmpty" id=26]
+
+[sub_resource type="StyleBoxEmpty" id=27]
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 6.0
+
+[sub_resource type="StyleBoxEmpty" id=29]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_detail = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_detail = 5
+expand_margin_bottom = 2.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+[sub_resource type="Theme" id=42]
+default_font = ExtResource( 1 )
+Button/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_disabled = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/colors/font_color_focus = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/styles/disabled = SubResource( 40 )
+Button/styles/focus = SubResource( 34 )
+Button/styles/hover = SubResource( 30 )
+Button/styles/normal = SubResource( 31 )
+Button/styles/pressed = SubResource( 32 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 0.933333, 0.835294, 1 )
+CheckBox/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+CheckBox/icons/checked = ExtResource( 6 )
+CheckBox/icons/checked_disabled = ExtResource( 4 )
+CheckBox/icons/unchecked = ExtResource( 3 )
+CheckBox/icons/unchecked_disabled = ExtResource( 5 )
+CheckBox/styles/disabled = SubResource( 40 )
+CheckBox/styles/focus = SubResource( 38 )
+CheckBox/styles/hover = SubResource( 30 )
+CheckBox/styles/hover_pressed = SubResource( 39 )
+CheckBox/styles/normal = SubResource( 31 )
+CheckBox/styles/pressed = SubResource( 32 )
+HScrollBar/styles/grabber = SubResource( 18 )
+HScrollBar/styles/grabber_highlight = SubResource( 15 )
+HScrollBar/styles/grabber_pressed = SubResource( 15 )
+HScrollBar/styles/scroll = SubResource( 21 )
+HScrollBar/styles/scroll_focus = SubResource( 20 )
+HSlider/icons/grabber = ExtResource( 2 )
+HSlider/icons/grabber_disabled = ExtResource( 2 )
+HSlider/icons/grabber_highlight = ExtResource( 2 )
+HSlider/styles/grabber_area = SubResource( 35 )
+HSlider/styles/grabber_area_highlight = SubResource( 36 )
+HSlider/styles/slider = SubResource( 37 )
+Label/colors/font_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+LineEdit/colors/cursor_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.835294, 0.666667, 0.45098, 1 )
+LineEdit/styles/focus = SubResource( 33 )
+LineEdit/styles/normal = SubResource( 33 )
+LineEdit/styles/read_only = SubResource( 33 )
+Panel/styles/panel = SubResource( 41 )
+PopupMenu/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/icons/checked = SubResource( 24 )
+PopupMenu/icons/radio_checked = SubResource( 24 )
+PopupMenu/icons/radio_unchecked = SubResource( 24 )
+PopupMenu/icons/submenu = SubResource( 24 )
+PopupMenu/icons/unchecked = SubResource( 24 )
+PopupMenu/styles/hover = SubResource( 25 )
+PopupMenu/styles/labeled_separator_left = SubResource( 26 )
+PopupMenu/styles/labeled_separator_right = SubResource( 27 )
+PopupMenu/styles/panel = SubResource( 28 )
+PopupMenu/styles/panel_disabled = SubResource( 28 )
+PopupMenu/styles/separator = SubResource( 29 )
+ProgressBar/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+ProgressBar/styles/bg = SubResource( 40 )
+ProgressBar/styles/fg = SubResource( 4 )
+RichTextLabel/colors/default_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+TabContainer/colors/font_color_bg = Color( 0.415686, 0.266667, 0.12549, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.611765, 0.0784314, 0.0784314, 1 )
+TabContainer/colors/font_color_fg = Color( 1, 0.933333, 0.835294, 1 )
+TabContainer/styles/panel = SubResource( 8 )
+TabContainer/styles/tab_bg = SubResource( 6 )
+TabContainer/styles/tab_disabled = SubResource( 40 )
+TabContainer/styles/tab_fg = SubResource( 7 )
+Tabs/colors/font_color_bg = Color( 0.835294, 0.666667, 0.45098, 1 )
+Tabs/colors/font_color_fg = Color( 0.835294, 0.666667, 0.45098, 1 )
+TextEdit/colors/caret_color = Color( 1, 0.933333, 0.835294, 1 )
+TextEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/selection_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+TextEdit/styles/completion = SubResource( 23 )
+TextEdit/styles/focus = SubResource( 23 )
+TextEdit/styles/normal = SubResource( 23 )
+TextEdit/styles/read_only = SubResource( 23 )
+VScrollBar/styles/grabber = SubResource( 18 )
+VScrollBar/styles/grabber_highlight = SubResource( 15 )
+VScrollBar/styles/grabber_pressed = SubResource( 15 )
+VScrollBar/styles/scroll = SubResource( 21 )
+VScrollBar/styles/scroll_focus = SubResource( 20 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.933333, 0.933333, 0.933333, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="Theme" id=47]
+default_font = ExtResource( 1 )
+Button/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_disabled = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/colors/font_color_focus = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/styles/disabled = SubResource( 40 )
+Button/styles/focus = SubResource( 34 )
+Button/styles/hover = SubResource( 30 )
+Button/styles/normal = SubResource( 31 )
+Button/styles/pressed = SubResource( 32 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 0.933333, 0.835294, 1 )
+CheckBox/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+CheckBox/icons/checked = ExtResource( 6 )
+CheckBox/icons/checked_disabled = ExtResource( 4 )
+CheckBox/icons/unchecked = ExtResource( 3 )
+CheckBox/icons/unchecked_disabled = ExtResource( 5 )
+CheckBox/styles/disabled = SubResource( 40 )
+CheckBox/styles/focus = SubResource( 38 )
+CheckBox/styles/hover = SubResource( 30 )
+CheckBox/styles/hover_pressed = SubResource( 39 )
+CheckBox/styles/normal = SubResource( 31 )
+CheckBox/styles/pressed = SubResource( 32 )
+HScrollBar/styles/grabber = SubResource( 18 )
+HScrollBar/styles/grabber_highlight = SubResource( 15 )
+HScrollBar/styles/grabber_pressed = SubResource( 15 )
+HScrollBar/styles/scroll = SubResource( 21 )
+HScrollBar/styles/scroll_focus = SubResource( 20 )
+HSlider/icons/grabber = ExtResource( 2 )
+HSlider/icons/grabber_disabled = ExtResource( 2 )
+HSlider/icons/grabber_highlight = ExtResource( 2 )
+HSlider/styles/grabber_area = SubResource( 35 )
+HSlider/styles/grabber_area_highlight = SubResource( 36 )
+HSlider/styles/slider = SubResource( 37 )
+Label/colors/font_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+LineEdit/colors/cursor_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.835294, 0.666667, 0.45098, 1 )
+LineEdit/styles/focus = SubResource( 33 )
+LineEdit/styles/normal = SubResource( 33 )
+LineEdit/styles/read_only = SubResource( 33 )
+Panel/styles/panel = SubResource( 9 )
+PopupMenu/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/icons/checked = SubResource( 24 )
+PopupMenu/icons/radio_checked = SubResource( 24 )
+PopupMenu/icons/radio_unchecked = SubResource( 24 )
+PopupMenu/icons/submenu = SubResource( 24 )
+PopupMenu/icons/unchecked = SubResource( 24 )
+PopupMenu/styles/hover = SubResource( 25 )
+PopupMenu/styles/labeled_separator_left = SubResource( 26 )
+PopupMenu/styles/labeled_separator_right = SubResource( 27 )
+PopupMenu/styles/panel = SubResource( 28 )
+PopupMenu/styles/panel_disabled = SubResource( 28 )
+PopupMenu/styles/separator = SubResource( 29 )
+ProgressBar/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+ProgressBar/styles/bg = SubResource( 40 )
+ProgressBar/styles/fg = SubResource( 4 )
+RichTextLabel/colors/default_color = Color( 0.882353, 0.886275, 0.937255, 1 )
+TabContainer/colors/font_color_bg = Color( 0.415686, 0.266667, 0.12549, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.611765, 0.0784314, 0.0784314, 1 )
+TabContainer/colors/font_color_fg = Color( 1, 0.933333, 0.835294, 1 )
+TabContainer/styles/panel = SubResource( 8 )
+TabContainer/styles/tab_bg = SubResource( 6 )
+TabContainer/styles/tab_disabled = SubResource( 40 )
+TabContainer/styles/tab_fg = SubResource( 7 )
+Tabs/colors/font_color_bg = Color( 0.835294, 0.666667, 0.45098, 1 )
+Tabs/colors/font_color_fg = Color( 0.835294, 0.666667, 0.45098, 1 )
+TextEdit/colors/caret_color = Color( 1, 0.933333, 0.835294, 1 )
+TextEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/selection_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+TextEdit/styles/completion = SubResource( 23 )
+TextEdit/styles/focus = SubResource( 23 )
+TextEdit/styles/normal = SubResource( 23 )
+TextEdit/styles/read_only = SubResource( 23 )
+VScrollBar/styles/grabber = SubResource( 18 )
+VScrollBar/styles/grabber_highlight = SubResource( 15 )
+VScrollBar/styles/grabber_pressed = SubResource( 15 )
+VScrollBar/styles/scroll = SubResource( 21 )
+VScrollBar/styles/scroll_focus = SubResource( 20 )
+
+[sub_resource type="StyleBoxFlat" id=43]
+bg_color = Color( 0.756863, 0.843137, 0.858824, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="Theme" id=48]
+default_font = ExtResource( 1 )
+Button/colors/font_color = Color( 0.156863, 0.188235, 0.384314, 1 )
+Button/colors/font_color_disabled = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/colors/font_color_focus = Color( 0.0784314, 0.0901961, 0.25098, 1 )
+Button/colors/font_color_hover = Color( 0.105882, 0.129412, 0.239216, 1 )
+Button/colors/font_color_pressed = Color( 0.188235, 0.247059, 0.627451, 1 )
+Button/styles/disabled = SubResource( 40 )
+Button/styles/focus = SubResource( 34 )
+Button/styles/hover = SubResource( 30 )
+Button/styles/normal = SubResource( 43 )
+Button/styles/pressed = SubResource( 32 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 0.933333, 0.835294, 1 )
+CheckBox/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+CheckBox/icons/checked = ExtResource( 6 )
+CheckBox/icons/checked_disabled = ExtResource( 4 )
+CheckBox/icons/unchecked = ExtResource( 3 )
+CheckBox/icons/unchecked_disabled = ExtResource( 5 )
+CheckBox/styles/disabled = SubResource( 40 )
+CheckBox/styles/focus = SubResource( 38 )
+CheckBox/styles/hover = SubResource( 30 )
+CheckBox/styles/hover_pressed = SubResource( 39 )
+CheckBox/styles/normal = SubResource( 31 )
+CheckBox/styles/pressed = SubResource( 32 )
+HScrollBar/styles/grabber = SubResource( 18 )
+HScrollBar/styles/grabber_highlight = SubResource( 15 )
+HScrollBar/styles/grabber_pressed = SubResource( 15 )
+HScrollBar/styles/scroll = SubResource( 21 )
+HScrollBar/styles/scroll_focus = SubResource( 20 )
+HSlider/icons/grabber = ExtResource( 2 )
+HSlider/icons/grabber_disabled = ExtResource( 2 )
+HSlider/icons/grabber_highlight = ExtResource( 2 )
+HSlider/styles/grabber_area = SubResource( 35 )
+HSlider/styles/grabber_area_highlight = SubResource( 36 )
+HSlider/styles/slider = SubResource( 37 )
+Label/colors/font_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+LineEdit/colors/cursor_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.835294, 0.666667, 0.45098, 1 )
+LineEdit/styles/focus = SubResource( 33 )
+LineEdit/styles/normal = SubResource( 33 )
+LineEdit/styles/read_only = SubResource( 33 )
+Panel/styles/panel = SubResource( 9 )
+PopupMenu/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/icons/checked = SubResource( 24 )
+PopupMenu/icons/radio_checked = SubResource( 24 )
+PopupMenu/icons/radio_unchecked = SubResource( 24 )
+PopupMenu/icons/submenu = SubResource( 24 )
+PopupMenu/icons/unchecked = SubResource( 24 )
+PopupMenu/styles/hover = SubResource( 25 )
+PopupMenu/styles/labeled_separator_left = SubResource( 26 )
+PopupMenu/styles/labeled_separator_right = SubResource( 27 )
+PopupMenu/styles/panel = SubResource( 28 )
+PopupMenu/styles/panel_disabled = SubResource( 28 )
+PopupMenu/styles/separator = SubResource( 29 )
+ProgressBar/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+ProgressBar/styles/bg = SubResource( 40 )
+ProgressBar/styles/fg = SubResource( 4 )
+RichTextLabel/colors/default_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+TabContainer/colors/font_color_bg = Color( 0.415686, 0.266667, 0.12549, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.611765, 0.0784314, 0.0784314, 1 )
+TabContainer/colors/font_color_fg = Color( 1, 0.933333, 0.835294, 1 )
+TabContainer/styles/panel = SubResource( 8 )
+TabContainer/styles/tab_bg = SubResource( 6 )
+TabContainer/styles/tab_disabled = SubResource( 40 )
+TabContainer/styles/tab_fg = SubResource( 7 )
+Tabs/colors/font_color_bg = Color( 0.835294, 0.666667, 0.45098, 1 )
+Tabs/colors/font_color_fg = Color( 0.835294, 0.666667, 0.45098, 1 )
+TextEdit/colors/caret_color = Color( 1, 0.933333, 0.835294, 1 )
+TextEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/selection_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+TextEdit/styles/completion = SubResource( 23 )
+TextEdit/styles/focus = SubResource( 23 )
+TextEdit/styles/normal = SubResource( 23 )
+TextEdit/styles/read_only = SubResource( 23 )
+VScrollBar/styles/grabber = SubResource( 18 )
+VScrollBar/styles/grabber_highlight = SubResource( 15 )
+VScrollBar/styles/grabber_pressed = SubResource( 15 )
+VScrollBar/styles/scroll = SubResource( 21 )
+VScrollBar/styles/scroll_focus = SubResource( 20 )
+
+[sub_resource type="StyleBoxFlat" id=45]
+bg_color = Color( 0.321569, 0.34902, 0.517647, 1 )
+border_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="Theme" id=46]
+default_font = ExtResource( 1 )
+Button/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_disabled = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/colors/font_color_focus = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+Button/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+Button/styles/disabled = SubResource( 40 )
+Button/styles/focus = SubResource( 34 )
+Button/styles/hover = SubResource( 30 )
+Button/styles/normal = SubResource( 45 )
+Button/styles/pressed = SubResource( 32 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 0.933333, 0.835294, 1 )
+CheckBox/colors/font_color_pressed = Color( 0.835294, 0.666667, 0.45098, 1 )
+CheckBox/icons/checked = ExtResource( 6 )
+CheckBox/icons/checked_disabled = ExtResource( 4 )
+CheckBox/icons/unchecked = ExtResource( 3 )
+CheckBox/icons/unchecked_disabled = ExtResource( 5 )
+CheckBox/styles/disabled = SubResource( 40 )
+CheckBox/styles/focus = SubResource( 38 )
+CheckBox/styles/hover = SubResource( 30 )
+CheckBox/styles/hover_pressed = SubResource( 39 )
+CheckBox/styles/normal = SubResource( 31 )
+CheckBox/styles/pressed = SubResource( 32 )
+HScrollBar/styles/grabber = SubResource( 18 )
+HScrollBar/styles/grabber_highlight = SubResource( 15 )
+HScrollBar/styles/grabber_pressed = SubResource( 15 )
+HScrollBar/styles/scroll = SubResource( 21 )
+HScrollBar/styles/scroll_focus = SubResource( 20 )
+HSlider/icons/grabber = ExtResource( 2 )
+HSlider/icons/grabber_disabled = ExtResource( 2 )
+HSlider/icons/grabber_highlight = ExtResource( 2 )
+HSlider/styles/grabber_area = SubResource( 35 )
+HSlider/styles/grabber_area_highlight = SubResource( 36 )
+HSlider/styles/slider = SubResource( 37 )
+Label/colors/font_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+LineEdit/colors/cursor_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.835294, 0.666667, 0.45098, 1 )
+LineEdit/styles/focus = SubResource( 33 )
+LineEdit/styles/normal = SubResource( 33 )
+LineEdit/styles/read_only = SubResource( 33 )
+Panel/styles/panel = SubResource( 9 )
+PopupMenu/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/colors/font_color_hover = Color( 1, 0.933333, 0.835294, 1 )
+PopupMenu/icons/checked = SubResource( 24 )
+PopupMenu/icons/radio_checked = SubResource( 24 )
+PopupMenu/icons/radio_unchecked = SubResource( 24 )
+PopupMenu/icons/submenu = SubResource( 24 )
+PopupMenu/icons/unchecked = SubResource( 24 )
+PopupMenu/styles/hover = SubResource( 25 )
+PopupMenu/styles/labeled_separator_left = SubResource( 26 )
+PopupMenu/styles/labeled_separator_right = SubResource( 27 )
+PopupMenu/styles/panel = SubResource( 28 )
+PopupMenu/styles/panel_disabled = SubResource( 28 )
+PopupMenu/styles/separator = SubResource( 29 )
+ProgressBar/colors/font_color = Color( 1, 0.933333, 0.835294, 1 )
+ProgressBar/styles/bg = SubResource( 40 )
+ProgressBar/styles/fg = SubResource( 4 )
+RichTextLabel/colors/default_color = Color( 0.835294, 0.666667, 0.45098, 1 )
+TabContainer/colors/font_color_bg = Color( 0.415686, 0.266667, 0.12549, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.611765, 0.0784314, 0.0784314, 1 )
+TabContainer/colors/font_color_fg = Color( 1, 0.933333, 0.835294, 1 )
+TabContainer/styles/panel = SubResource( 8 )
+TabContainer/styles/tab_bg = SubResource( 6 )
+TabContainer/styles/tab_disabled = SubResource( 40 )
+TabContainer/styles/tab_fg = SubResource( 7 )
+Tabs/colors/font_color_bg = Color( 0.835294, 0.666667, 0.45098, 1 )
+Tabs/colors/font_color_fg = Color( 0.835294, 0.666667, 0.45098, 1 )
+TextEdit/colors/caret_color = Color( 1, 0.933333, 0.835294, 1 )
+TextEdit/colors/font_color = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.415686, 0.266667, 0.12549, 1 )
+TextEdit/colors/selection_color = Color( 0.352941, 0.458824, 0.352941, 1 )
+TextEdit/styles/completion = SubResource( 23 )
+TextEdit/styles/focus = SubResource( 23 )
+TextEdit/styles/normal = SubResource( 23 )
+TextEdit/styles/read_only = SubResource( 23 )
+VScrollBar/styles/grabber = SubResource( 18 )
+VScrollBar/styles/grabber_highlight = SubResource( 15 )
+VScrollBar/styles/grabber_pressed = SubResource( 15 )
+VScrollBar/styles/scroll = SubResource( 21 )
+VScrollBar/styles/scroll_focus = SubResource( 20 )
+
+[node name="companionmenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.552
+anchor_top = 0.754
+anchor_right = 1.022
+anchor_bottom = 0.931
+margin_left = -0.840088
+margin_top = -47.32
+margin_right = -0.240112
+margin_bottom = -47.48
+theme = SubResource( 42 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+anchor_left = 0.024
+anchor_top = 0.047
+anchor_right = 0.936
+anchor_bottom = 0.953
+margin_left = 0.327999
+margin_top = -0.0270004
+margin_right = -0.208069
+margin_bottom = 0.0269775
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
+margin_right = 640.0
+margin_bottom = 182.0
+rect_min_size = Vector2( 640, 0 )
+
+[node name="host" type="RichTextLabel" parent="Panel/HBoxContainer/VBoxContainer"]
+margin_right = 640.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+theme = SubResource( 47 )
+text = "select gambling host:"
+scroll_active = false
+
+[node name="playertomail" type="OptionButton" parent="Panel/HBoxContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 640.0
+margin_bottom = 70.0
+theme = SubResource( 48 )
+
+[node name="HSeparator" type="HSeparator" parent="Panel/HBoxContainer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+margin_top = 74.0
+margin_right = 640.0
+margin_bottom = 78.0
+custom_constants/separation = 4
+
+[node name="quantity" type="RichTextLabel" parent="Panel/HBoxContainer/VBoxContainer"]
+margin_top = 82.0
+margin_right = 640.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 0, 32 )
+theme = SubResource( 47 )
+text = "fish to gamble: 1"
+scroll_active = false
+
+[node name="fishcount" type="HSlider" parent="Panel/HBoxContainer/VBoxContainer"]
+margin_top = 118.0
+margin_right = 640.0
+margin_bottom = 182.0
+min_value = 1.0
+max_value = 20.0
+value = 1.0
+
+[node name="VSeparator" type="VSeparator" parent="Panel/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 644.0
+margin_right = 648.0
+margin_bottom = 182.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/HBoxContainer"]
+margin_left = 652.0
+margin_right = 814.0
+margin_bottom = 182.0
+rect_min_size = Vector2( 160, 0 )
+
+[node name="invsize" type="RichTextLabel" parent="Panel/HBoxContainer/VBoxContainer2"]
+margin_right = 162.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 0, 68 )
+theme = SubResource( 47 )
+text = "unlocked fish in inv:"
+scroll_active = false
+
+[node name="HSeparator" type="HSeparator" parent="Panel/HBoxContainer/VBoxContainer2"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+margin_top = 72.0
+margin_right = 162.0
+margin_bottom = 101.0
+custom_constants/separation = 29
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/VBoxContainer2"]
+margin_top = 105.0
+margin_right = 162.0
+margin_bottom = 165.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="gamba" type="Button" parent="Panel/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 75.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 75, 0 )
+theme = SubResource( 46 )
+text = "gamba"
+
+[node name="VSeparator" type="VSeparator" parent="Panel/HBoxContainer/VBoxContainer2/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 79.0
+margin_right = 83.0
+margin_bottom = 60.0
+
+[node name="stats" type="Button" parent="Panel/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 87.0
+margin_right = 162.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 75, 0 )
+theme = SubResource( 46 )
+text = "stats"
+
+[connection signal="item_selected" from="Panel/HBoxContainer/VBoxContainer/playertomail" to="." method="_selectbutton"]
+[connection signal="value_changed" from="Panel/HBoxContainer/VBoxContainer/fishcount" to="." method="_on_fishcount_value_changed"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer2/HBoxContainer/gamba" to="." method="_roll"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer2/HBoxContainer/stats" to="." method="_stats"]
