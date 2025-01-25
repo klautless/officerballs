@@ -1,11 +1,11 @@
 {
   "name": "redchalk",
-  "version_number": "1.0.2",
+  "version_number": "2.0.0",
   "website_url": "https://github.com/klautless/officerballs",
-  "description": "adds a buff menu to red chalk. equip, then alt+scroll for options, alt+e and alt+q to apply.",
+  "description": "completely re-vamped version 2. adds a buff menu to red chalk. equip red chalk then hold q. alt+click removes a selected buff.",
   "dependencies": [
     "NotNet-GDWeave-2.0.14",
-    "officer_balls-nyan-1.0.9",
-    "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2"
+    "BlueberryWolfi-BlueberryWolfiAPIs-1.0.2",
+    "officer_balls-bufflib-1.0.9"
   ]
 }
